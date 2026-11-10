@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Extract — Shadow DOM</title>
+<style>
+  body { margin: 0; background-color: #ffffff; }
+  .light { color: #111111; }
+</style>
+</head>
+<body>
+<p id="light" class="light">Light DOM</p>
+<div id="host">
+  <template shadowrootmode="open">
+    <style>
+      .shadow-text { color: #aa00aa; font-size: 20px; padding: 12px; }
+      .shadow-btn { background-color: #00aaaa; border-radius: 6px; border: 0; }
+    </style>
+    <p class="shadow-text">Texto dentro del shadow DOM</p>
+    <button class="shadow-btn">Botón en shadow</button>
+  </template>
+</div>
+</body>
+</html>

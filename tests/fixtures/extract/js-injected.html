@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Extract — Inyectado por JS</title>
+<style>
+  body { margin: 0; background-color: #ffffff; }
+  .static { color: #111111; }
+  .injected { color: #cc5500; font-size: 18px; padding: 20px; }
+</style>
+</head>
+<body>
+<p id="static" class="static">Contenido estático</p>
+<div id="root"></div>
+<script>
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      var el = document.createElement("p");
+      el.id = "injected";
+      el.className = "injected";
+      el.textContent = "Contenido inyectado después de la carga";
+      document.getElementById("root").appendChild(el);
+    }, 200);
+  });
+</script>
+</body>
+</html>

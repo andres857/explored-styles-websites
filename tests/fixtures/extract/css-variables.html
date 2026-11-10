@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Extract — Variables CSS</title>
+<style>
+  :root {
+    --color-brand: #0055ff;
+    --color-surface: #fafafa;
+    --space-md: 16px;
+    --radius-sm: 4px;
+    --font-body: "Helvetica Neue", Arial, sans-serif;
+  }
+  body { margin: 0; background-color: var(--color-surface); font-family: var(--font-body); }
+  .title { color: var(--color-brand); padding: var(--space-md); border-radius: var(--radius-sm); }
+  .scoped { --local-only: #123456; color: var(--local-only); }
+</style>
+</head>
+<body>
+<h1 class="title">Variables</h1>
+<p class="scoped">Texto con variable local</p>
+</body>
+</html>

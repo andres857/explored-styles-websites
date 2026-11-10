@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Extract — Ocultos</title>
+<style>
+  body { margin: 0; background-color: #ffffff; color: #111111; }
+  .visible { color: #00aa00; padding: 8px; }
+  .display-none { display: none; color: #ff0001; }
+  .visibility-hidden { visibility: hidden; color: #ff0002; }
+  .size-zero { width: 0; height: 0; overflow: hidden; background-color: #ff0003; }
+  .child { color: #ff0004; }
+</style>
+</head>
+<body>
+<p id="visible" class="visible">Visible</p>
+<p id="display-none" class="display-none">display:none</p>
+<p id="visibility-hidden" class="visibility-hidden">visibility:hidden</p>
+<div id="size-zero" class="size-zero"></div>
+<div id="hidden-parent" class="display-none"><span id="hidden-child" class="child">Hijo de un padre oculto</span></div>
+</body>
+</html>
