@@ -1,0 +1,98 @@
+/* Generado por el Explorador de estilos web. No editar a mano. */
+:root {
+  /* color */
+  --color-palette-1: #0000001a; /* color.palette.1 · usos: 9 */
+  --color-palette-10: #46a758; /* color.palette.10 · usos: 4 */
+  --color-palette-11: #c1c1c1; /* color.palette.11 · usos: 76 */
+  --color-palette-12: #cecece; /* color.palette.12 · usos: 11 */
+  --color-palette-13: #dcdcdc; /* color.palette.13 · usos: 212 */
+  --color-palette-14: #efefef; /* color.palette.14 · usos: 68 */
+  --color-palette-15: #efefefcc; /* color.palette.15 · usos: 16 */
+  --color-palette-16: #f6f6f6; /* color.palette.16 · usos: 147 */
+  --color-palette-17: #fbfbfa; /* color.palette.17 · usos: 17 */
+  --color-palette-18: #ffffff33; /* color.palette.18 · usos: 4 */
+  --color-palette-19: #ffffffd9; /* color.palette.19 · usos: 1 */
+  --color-palette-2: #202020; /* color.palette.2 · usos: 179 */
+  --color-palette-3: #001d52; /* color.palette.3 · usos: 4 */
+  --color-palette-4: #0204a4; /* color.palette.4 · usos: 7 */
+  --color-palette-5: #052de1; /* color.palette.5 · usos: 2 */
+  --color-palette-6: #4d4d4d; /* color.palette.6 · usos: 352 */
+  --color-palette-7: #034bff; /* color.palette.7 · usos: 10 */
+  --color-palette-8: #9640ff; /* color.palette.8 · usos: 5 */
+  --color-palette-9: #808080; /* color.palette.9 · usos: 45 */
+  --color-primary: #00276d; /* color.primary · usos: 36 */
+  --color-surface: #ffffff; /* color.surface · usos: 630 */
+  --color-text-primary: #000000; /* color.text.primary · usos: 982 */
+  --color-text-secondary: #666666; /* color.text.secondary · usos: 518 */
+
+  /* font */
+  --font-family-1: Inter, system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* font.family.1 · usos: 1125 */
+  --font-family-body: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; /* font.family.body · usos: 1224 */
+  --font-letter-spacing-1: -0.5px; /* font.letterSpacing.1 · usos: 8 */
+  --font-letter-spacing-2: -0.2px; /* font.letterSpacing.2 · usos: 36 */
+  --font-letter-spacing-3: -0.1px; /* font.letterSpacing.3 · usos: 682 */
+  --font-letter-spacing-4: 0.1px; /* font.letterSpacing.4 · usos: 11 */
+  --font-letter-spacing-5: 0.3px; /* font.letterSpacing.5 · usos: 9 */
+  --font-letter-spacing-6: 0.6px; /* font.letterSpacing.6 · usos: 1 */
+  --font-line-height-1: 12px; /* font.lineHeight.1 · usos: 14 */
+  --font-line-height-2: 13.3px; /* font.lineHeight.2 · usos: 6 */
+  --font-line-height-3: 16px; /* font.lineHeight.3 · usos: 99 */
+  --font-line-height-4: 16.5px; /* font.lineHeight.4 · usos: 1 */
+  --font-line-height-5: 18px; /* font.lineHeight.5 · usos: 376 */
+  --font-line-height-6: 20px; /* font.lineHeight.6 · usos: 677 */
+  --font-line-height-7: 24px; /* font.lineHeight.7 · usos: 1168 */
+  --font-line-height-8: 28.8px; /* font.lineHeight.8 · usos: 4 */
+  --font-line-height-9: 32px; /* font.lineHeight.9 · usos: 4 */
+  --font-size-100: 10px; /* font.size.100 · usos: 20 */
+  --font-size-200: 12px; /* font.size.200 · usos: 469 */
+  --font-size-300: 14px; /* font.size.300 · usos: 682 */
+  --font-size-400: 16px; /* font.size.400 · usos: 1170 */
+  --font-size-500: 24px; /* font.size.500 · usos: 8 */
+  --font-weight-400: 400; /* font.weight.400 · usos: 1715 */
+  --font-weight-500: 500; /* font.weight.500 · usos: 129 */
+  --font-weight-600: 600; /* font.weight.600 · usos: 490 */
+  --font-weight-700: 700; /* font.weight.700 · usos: 15 */
+
+  /* radius */
+  --radius-1: 2px; /* radius.1 · usos: 20 */
+  --radius-2: 4px; /* radius.2 · usos: 123 */
+  --radius-3: 6px; /* radius.3 · usos: 1 */
+  --radius-4: 8px; /* radius.4 · usos: 193 */
+  --radius-5: 12px; /* radius.5 · usos: 59 */
+  --radius-6: 16px; /* radius.6 · usos: 1 */
+  --radius-7: 18px; /* radius.7 · usos: 1 */
+  --radius-full: 9999px; /* radius.full · usos: 27 */
+
+  /* shadow */
+  --shadow-1: 0px 0px 0px 0px #00000000, 0px 0px 0px 0px #00000000, 0px 0px 0px 0px #00000000; /* shadow.1 · usos: 5 */
+  --shadow-2: 0px 0px 0px 0px #ffffff inset, 0px 0px 0px 2px #00000000 inset, 0px 0px 0px 0px #00000000; /* shadow.2 · usos: 1 */
+  --shadow-3: 0px 0px 0px 0px #ffffff, 0px 0px 0px 2px #00000000, 0px 0px 0px 0px #00000000; /* shadow.3 · usos: 2 */
+  --shadow-4: 0px 0px 0px 0px #00000000, 0px 0px 0px 0px #00000000, 0px 4px 6px -1px #0000001a, 0px 2px 4px -2px #0000001a; /* shadow.4 · usos: 5 */
+  --shadow-5: 0px 0px 0px 0px #00000000, 0px 0px 0px 0px #00000000, 0px 2px 8px 0px #0000000a; /* shadow.5 · usos: 87 */
+
+  /* space */
+  --space-1: 1px; /* space.1 · usos: 48 */
+  --space-10: 18px; /* space.10 · usos: 5 */
+  --space-11: 20px; /* space.11 · usos: 10 */
+  --space-12: 24px; /* space.12 · usos: 12 */
+  --space-13: 32px; /* space.13 · usos: 8 */
+  --space-14: 34px; /* space.14 · usos: 8 */
+  --space-15: 40px; /* space.15 · usos: 1 */
+  --space-16: 42px; /* space.16 · usos: 5 */
+  --space-17: 44px; /* space.17 · usos: 1 */
+  --space-18: 58px; /* space.18 · usos: 19 */
+  --space-19: 64px; /* space.19 · usos: 1 */
+  --space-2: 2px; /* space.2 · usos: 49 */
+  --space-20: 96px; /* space.20 · usos: 2 */
+  --space-21: 109px; /* space.21 · usos: 1 */
+  --space-22: 128px; /* space.22 · usos: 1 */
+  --space-23: 222px; /* space.23 · usos: 1 */
+  --space-24: 294px; /* space.24 · usos: 4 */
+  --space-3: 4px; /* space.3 · usos: 278 */
+  --space-4: 6px; /* space.4 · usos: 62 */
+  --space-5: 8px; /* space.5 · usos: 246 */
+  --space-6: 10px; /* space.6 · usos: 57 */
+  --space-7: 12px; /* space.7 · usos: 122 */
+  --space-8: 14px; /* space.8 · usos: 1 */
+  --space-9: 16px; /* space.9 · usos: 203 */
+}

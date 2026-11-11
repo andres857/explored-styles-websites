@@ -1,0 +1,1223 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proyectos · Espacio de trabajo</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+/* ------------------------------------------------------------------
+   Propiedades propias de la vista: maquetación, tamaños de control,
+   grosores, duraciones. Todo lo demás sale de tokens.css.
+   ------------------------------------------------------------------ */
+:root {
+  /* maquetación */
+  --layout-rail-width: 60px;
+  --layout-panel-width: 272px;
+  --layout-header-height: 56px;
+  --layout-content-max: 968px;
+  --layout-card-min: 280px;
+  --layout-card-min-height: 160px;
+
+  /* tamaños medidos de los controles */
+  --size-rail-item: 36px;
+  --size-row: var(--space-13);
+  --size-control-sm: var(--space-12);
+  --size-input: var(--space-15);
+  --size-tab: var(--space-14);
+  --size-icon: var(--space-9);
+  --size-icon-sm: var(--space-8);
+  --size-icon-xs: var(--space-7);
+  --size-icon-box: var(--space-11);
+  --size-avatar: var(--space-12);
+  --size-badge: var(--space-9);
+  --size-rail-divider: 28px;
+  --size-thumb-box: var(--space-20);
+  --size-thumb-sheet: 80px;
+  --size-thumb-badge: 28px;
+
+  /* grosores */
+  --border-width: var(--space-1);
+  --border-width-strong: var(--space-2);
+  --ring-width: var(--space-2);
+  --ring-width-input: var(--space-1);
+
+  /* movimiento */
+  --duration-panel: 0.2s;
+  --ease-panel: cubic-bezier(0, 0, 0.2, 1);
+  --duration-control: 0.15s;
+  --ease-control: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* capas */
+  --layer-scrim: 2;
+  --layer-panel: 3;
+  --layer-rail: 4;
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-400);
+  font-weight: var(--font-weight-400);
+  line-height: var(--font-line-height-7);
+}
+
+h1, h2, p, ul, ol { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+[hidden] { display: none !important; }
+a { color: inherit; text-decoration: none; }
+
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+
+svg.icon {
+  display: block;
+  flex-shrink: 0;
+  width: var(--size-icon);
+  height: var(--size-icon);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+svg.icon--sm { width: var(--size-icon-sm); height: var(--size-icon-sm); }
+svg.icon--xs { width: var(--size-icon-xs); height: var(--size-icon-xs); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Foco por teclado: anillo de 2 px. El azul medido no tiene token; se usa el más cercano. */
+a:focus-visible,
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--ring-width) var(--color-palette-7);
+}
+
+/* ------------------------------------------------------------------
+   Maquetación general
+   ------------------------------------------------------------------ */
+.app {
+  display: flex;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------
+   Carril de iconos (nav-1)
+   ------------------------------------------------------------------ */
+.rail {
+  position: relative;
+  z-index: var(--layer-rail);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: var(--layout-rail-width);
+  padding-top: var(--space-7);
+  overflow: hidden;
+  background-color: var(--color-surface);
+  border-right: var(--border-width) solid var(--color-palette-15);
+  box-shadow: var(--shadow-1);
+}
+
+.rail__main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.rail__group { display: flex; flex-direction: column; }
+.rail li { display: flex; justify-content: center; }
+
+.rail__group + .rail__group::before {
+  content: "";
+  display: block;
+  width: var(--size-rail-divider);
+  height: var(--border-width);
+  margin: var(--space-4) 0 var(--space-4) var(--space-9);
+  background-color: var(--color-palette-14);
+}
+
+.rail__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 100%;
+  height: var(--size-rail-item);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-300);
+  letter-spacing: var(--font-letter-spacing-3);
+  line-height: var(--font-line-height-6);
+}
+
+.rail__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-rail-item);
+  height: var(--size-rail-item);
+  border-radius: var(--radius-4);
+}
+
+.rail__item:hover { color: var(--color-palette-2); }
+
+.rail__item[aria-current="page"] {
+  color: var(--color-palette-2);
+  font-weight: var(--font-weight-500);
+}
+/* Suposición: el paquete solo mide el cambio de color del elemento elegido. */
+.rail__item[aria-current="page"] .rail__box { background-color: var(--color-palette-16); }
+
+/* El carril recorta lo que sobresale: el anillo va en la caja interior de 36 px. */
+.rail__item:focus-visible { box-shadow: none; }
+.rail__item:focus-visible .rail__box { box-shadow: 0 0 0 var(--ring-width) var(--color-palette-7); }
+
+.rail__utilities {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: var(--space-2);
+  padding: var(--space-6) 0;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-avatar);
+  height: var(--size-avatar);
+  overflow: hidden;
+  border-radius: var(--radius-full);
+  background-color: var(--color-palette-8);
+  color: var(--color-surface);
+  font-size: var(--font-size-100);
+  font-weight: var(--font-weight-700);
+  letter-spacing: var(--font-letter-spacing-4);
+  line-height: var(--font-line-height-1);
+  text-transform: uppercase;
+}
+
+/* Botón de 36 × 36 (button-6) que abre y cierra el panel */
+.rail__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: var(--size-rail-item);
+  height: var(--size-rail-item);
+  border-radius: var(--radius-4);
+  color: var(--color-text-secondary);
+}
+.rail__toggle:hover,
+.rail__toggle:active {
+  background-color: var(--color-palette-17);
+  color: var(--color-palette-2);
+}
+.rail__toggle[aria-pressed="true"] { color: var(--color-palette-2); }
+
+/* ------------------------------------------------------------------
+   Panel secundario (nav-2)
+   ------------------------------------------------------------------ */
+.panel {
+  flex-shrink: 0;
+  width: var(--layout-panel-width);
+  overflow: hidden;
+  background-color: var(--color-surface);
+  border-right: var(--border-width) solid var(--color-palette-15);
+  transition:
+    width var(--duration-panel) var(--ease-panel),
+    transform var(--duration-panel) var(--ease-panel),
+    visibility 0s linear 0s;
+}
+
+.app[data-panel="closed"] .panel {
+  width: 0;
+  border-right-width: 0;
+  visibility: hidden;
+  transition:
+    width var(--duration-panel) var(--ease-panel),
+    transform var(--duration-panel) var(--ease-panel),
+    visibility 0s linear var(--duration-panel);
+}
+
+.panel__inner {
+  display: flex;
+  flex-direction: column;
+  width: var(--layout-panel-width);
+  max-width: 100%;
+  height: 100%;
+}
+
+.panel__head {
+  flex-shrink: 0;
+  padding: var(--space-5) var(--space-6);
+  border-bottom: var(--border-width) solid var(--color-palette-15);
+}
+
+.panel__head-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: var(--size-row);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-4);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-300);
+  letter-spacing: var(--font-letter-spacing-3);
+  line-height: var(--font-line-height-6);
+}
+
+.panel__title {
+  display: flex;
+  align-items: center;
+  flex: 1 1 0%;
+  gap: var(--space-4);
+  min-width: 0;
+  font-size: inherit;
+  font-weight: var(--font-weight-400);
+  line-height: inherit;
+}
+
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--size-icon-box);
+  height: var(--size-icon-box);
+}
+
+.truncate {
+  flex: 1 1 0%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Etiqueta pequeña en mayúsculas (medida dentro de header-2) */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: var(--size-badge);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-1);
+  background-color: var(--color-palette-14);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-100);
+  font-weight: var(--font-weight-700);
+  letter-spacing: var(--font-letter-spacing-5);
+  line-height: var(--font-line-height-1);
+  text-transform: uppercase;
+}
+
+/* Botón de icono de 24 × 24 (button-2) */
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--size-control-sm);
+  height: var(--size-control-sm);
+  border-radius: var(--radius-2);
+  color: var(--color-palette-6);
+  font-size: var(--font-size-200);
+  font-weight: var(--font-weight-600);
+  line-height: var(--font-line-height-5);
+  transition: background-color var(--duration-control) var(--ease-control), color var(--duration-control) var(--ease-control);
+}
+.icon-button:hover { background-color: var(--color-palette-13); }
+.icon-button:active { background-color: var(--color-palette-14); }
+
+.panel__search { flex-shrink: 0; padding: var(--space-6) var(--space-6) 0; }
+
+/* Campo de texto (input-1) */
+.input {
+  display: block;
+  width: 100%;
+  height: var(--size-input);
+  padding: 0 var(--space-5);
+  border: var(--border-width) solid var(--color-palette-13);
+  border-radius: var(--radius-2);
+  background-color: var(--color-surface);
+  color: var(--color-palette-2);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-300);
+  font-weight: var(--font-weight-400);
+  letter-spacing: var(--font-letter-spacing-3);
+  line-height: var(--font-line-height-6);
+  appearance: none;
+}
+.input::placeholder { color: var(--color-text-secondary); opacity: 1; }
+.input::-webkit-search-cancel-button { appearance: none; }
+.input:focus {
+  outline: none;
+  border-color: var(--color-palette-7);
+  box-shadow: 0 0 0 var(--ring-width-input) var(--color-palette-7);
+}
+
+.panel__scroll {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+  padding: var(--space-6);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.panel__group { display: flex; flex-direction: column; }
+.panel__group[hidden] { display: none; }
+
+.panel__group-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: var(--size-row);
+  padding: var(--space-3) var(--space-3) var(--space-3) 0;
+}
+
+.group-toggle {
+  display: flex;
+  align-items: center;
+  height: var(--size-control-sm);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-4);
+  color: var(--color-palette-6);
+  font-size: var(--font-size-200);
+  font-weight: var(--font-weight-500);
+  line-height: var(--font-line-height-5);
+}
+.group-toggle:hover { background-color: var(--color-palette-17); }
+.group-toggle svg {
+  margin-right: var(--space-3);
+  color: var(--color-palette-9);
+  transition: transform var(--duration-control) var(--ease-control);
+}
+.group-toggle[aria-expanded="false"] svg { transform: rotate(-90deg); }
+
+.panel__list { display: flex; flex-direction: column; }
+.panel__list[hidden] { display: none; }
+
+/* Elemento de subnavegación (link-3) */
+.subnav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: var(--size-row);
+  padding: var(--space-3) var(--space-6);
+  overflow: hidden;
+  border-radius: var(--radius-4);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-300);
+  letter-spacing: var(--font-letter-spacing-3);
+  line-height: var(--font-line-height-6);
+}
+.subnav-item:hover { background-color: var(--color-palette-17); }
+.subnav-item[aria-current="page"] {
+  background-color: var(--color-palette-16);
+  color: var(--color-palette-2);
+  font-weight: var(--font-weight-500);
+}
+/* El anillo exterior lo recortaría el área con desplazamiento: va por dentro. */
+.subnav-item:focus-visible { box-shadow: inset 0 0 0 var(--ring-width) var(--color-palette-7); }
+
+.note {
+  padding-left: var(--space-5);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-5);
+}
+.note[hidden] { display: none; }
+
+.scrim { display: none; }
+
+/* ------------------------------------------------------------------
+   Zona principal
+   ------------------------------------------------------------------ */
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+/* Cabecera (header-1) */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  gap: var(--space-5);
+  height: var(--layout-header-height);
+  padding: 0 var(--space-7);
+  background-color: var(--color-surface);
+  border-bottom: var(--border-width) solid var(--color-palette-15);
+}
+
+.topbar__place {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  min-width: 0;
+  color: var(--color-palette-2);
+  font-size: var(--font-size-300);
+  font-weight: var(--font-weight-500);
+  letter-spacing: var(--font-letter-spacing-3);
+  line-height: var(--font-line-height-6);
+}
+
+.topbar__mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--size-row);
+  height: var(--size-row);
+  border: var(--border-width) solid var(--color-palette-14);
+  border-radius: var(--radius-4);
+  background-color: var(--color-surface);
+  color: var(--color-palette-6);
+}
+
+.topbar__section { flex-shrink: 0; }
+
+/* Separador vertical (separator-1) */
+.separator {
+  display: block;
+  flex-shrink: 0;
+  width: var(--border-width);
+  height: var(--space-9);
+  margin: 0 var(--space-5) 0 var(--space-3);
+  border: 0;
+  background-color: var(--color-palette-14);
+}
+
+.topbar__sub {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-400);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Botón principal de 32 px (medido dentro de header-1) */
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: var(--space-4);
+  height: var(--size-row);
+  padding: 0 var(--space-6);
+  border-radius: var(--radius-4);
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  font-size: var(--font-size-300);
+  font-weight: var(--font-weight-600);
+  letter-spacing: var(--font-letter-spacing-3);
+  line-height: var(--font-line-height-6);
+  white-space: nowrap;
+  transition: background-color var(--duration-control) var(--ease-control);
+}
+.button:hover,
+.button:active { background-color: var(--color-palette-3); }
+
+/* Botón pequeño de 24 px (button-1) */
+.button--sm {
+  gap: 0;
+  height: var(--size-control-sm);
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-2);
+  font-family: var(--font-family-1);
+  font-size: var(--font-size-200);
+  letter-spacing: normal;
+  line-height: var(--font-line-height-5);
+}
+.button--sm svg { margin-left: var(--space-3); }
+
+.main__scroll {
+  flex-grow: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.content {
+  width: 100%;
+  max-width: var(--layout-content-max);
+  margin: 0 auto;
+}
+
+.content__head { padding: var(--space-9) var(--space-9) var(--space-7); }
+
+/* Título (heading-1) */
+.heading {
+  padding: var(--space-3) var(--space-5);
+  color: var(--color-palette-2);
+  font-size: var(--font-size-500);
+  font-weight: var(--font-weight-600);
+  letter-spacing: var(--font-letter-spacing-1);
+  line-height: var(--font-line-height-9);
+}
+
+/* Pestañas (tabs-1) */
+.tabs {
+  display: flex;
+  align-items: center;
+  height: var(--size-tab);
+  padding: 0 var(--space-9) 0 var(--space-12);
+  border-bottom: var(--border-width) solid var(--color-palette-14);
+}
+.tabs__list { display: flex; gap: var(--space-11); }
+
+.tab {
+  display: block;
+  height: var(--size-tab);
+  margin-bottom: calc(0px - var(--border-width));
+  border-top: var(--border-width-strong) solid transparent;
+  border-bottom: var(--border-width-strong) solid transparent;
+  color: var(--color-palette-2);
+  font-size: var(--font-size-200);
+  font-weight: var(--font-weight-600);
+  line-height: var(--font-line-height-5);
+}
+.tab[aria-selected="true"] { border-bottom-color: var(--color-palette-7); }
+.tab__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0 calc(0px - var(--space-5)) var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-2);
+}
+.tab:focus-visible { box-shadow: none; }
+.tab:focus-visible .tab__label { box-shadow: 0 0 0 var(--ring-width) var(--color-palette-7); }
+
+.cards-panel { padding: var(--space-9); }
+.cards-panel:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 var(--ring-width) var(--color-palette-7);
+}
+
+/* Lista de tarjetas (list-1) */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--layout-card-min), 100%), 1fr));
+  gap: var(--space-5);
+}
+
+.card {
+  display: flex;
+  gap: var(--space-7);
+  height: 100%;
+  min-height: var(--layout-card-min-height);
+  padding: var(--space-9);
+  border: var(--border-width) solid var(--color-palette-13);
+  border-radius: var(--radius-5);
+  background-color: var(--color-surface);
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.card__title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  max-width: 100%;
+}
+
+/* Párrafos paragraph-1 y paragraph-2 */
+.card__title {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--color-palette-2);
+  font-weight: var(--font-weight-600);
+  letter-spacing: var(--font-letter-spacing-2);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.card__text {
+  display: -webkit-box;
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-7);
+  overflow: hidden;
+  color: var(--color-palette-6);
+  font-size: var(--font-size-200);
+  line-height: var(--font-line-height-3);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.card__action { margin-top: auto; }
+
+/* Miniatura: tres hojas apiladas, como en la referencia de list-1 */
+.card__thumb {
+  position: relative;
+  flex-shrink: 0;
+  width: var(--size-thumb-box);
+}
+.card__sheet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-thumb-sheet);
+  height: calc(100% - var(--space-9));
+  border: var(--border-width) solid var(--color-palette-11);
+  border-radius: var(--radius-4);
+  background-color: var(--color-palette-17);
+}
+.card__sheet:nth-child(1) { top: var(--space-9); left: var(--space-9); }
+.card__sheet:nth-child(2) { top: var(--space-5); left: var(--space-5); }
+.card__sheet-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-thumb-badge);
+  height: var(--size-thumb-badge);
+  border: var(--border-width) solid var(--color-palette-13);
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface);
+  color: var(--color-palette-6);
+}
+
+/* ------------------------------------------------------------------
+   Ventanas estrechas: el panel flota sobre el contenido.
+   700 px es uno de los cortes que usa el sitio (min-width: 700px).
+   ------------------------------------------------------------------ */
+@media (max-width: 699px) {
+  .panel {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: var(--layout-rail-width);
+    z-index: var(--layer-panel);
+    width: min(var(--layout-panel-width), calc(100vw - var(--layout-rail-width)));
+    box-shadow: var(--shadow-4);
+  }
+  .app[data-panel="closed"] .panel {
+    width: min(var(--layout-panel-width), calc(100vw - var(--layout-rail-width)));
+    border-right-width: var(--border-width);
+    transform: translateX(-100%);
+  }
+  .scrim {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: var(--layout-rail-width);
+    z-index: var(--layer-scrim);
+    background-color: var(--color-palette-1);
+  }
+  .app[data-panel="open"] .scrim { display: block; }
+  .topbar__section, .topbar .separator { display: none; }
+  .topbar__sub { color: var(--color-palette-2); font-weight: var(--font-weight-500); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel, .app[data-panel="closed"] .panel, .button, .icon-button, .group-toggle svg { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Iconos genéricos propios: trazo de 1,5 sobre una rejilla de 16 -->
+<svg width="0" height="0" class="visually-hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="ico-home" viewBox="0 0 16 16"><path d="M2.5 7.5 8 3l5.5 4.5V13a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z"/><path d="M6.5 13.5v-4h3v4"/></symbol>
+    <symbol id="ico-folder" viewBox="0 0 16 16"><path d="M2 4.5a1 1 0 0 1 1-1h3L7.5 5H13a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="ico-chart" viewBox="0 0 16 16"><path d="M2.5 13.5h11M4.5 11V8M8 11V4M11.5 11V6.5"/></symbol>
+    <symbol id="ico-users" viewBox="0 0 16 16"><circle cx="6" cy="5.5" r="2.25"/><path d="M2 13c0-2.2 1.8-3.5 4-3.5s4 1.3 4 3.5M10.5 3.5a2.25 2.25 0 0 1 0 4.2M11.5 9.7c1.5.4 2.5 1.5 2.5 3.3"/></symbol>
+    <symbol id="ico-calendar" viewBox="0 0 16 16"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/></symbol>
+    <symbol id="ico-zap" viewBox="0 0 16 16"><path d="M9 2 3.5 9H8l-1 5 5.5-7H8z"/></symbol>
+    <symbol id="ico-archive" viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="3" rx=".75"/><path d="M3 6v6a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6M6.5 9h3"/></symbol>
+    <symbol id="ico-search" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.25"/><path d="m10.2 10.2 3.3 3.3"/></symbol>
+    <symbol id="ico-bell" viewBox="0 0 16 16"><path d="M4 7a4 4 0 0 1 8 0c0 3 1.5 4 1.5 4h-11S4 10 4 7zM6.5 13.5a1.6 1.6 0 0 0 3 0"/></symbol>
+    <symbol id="ico-help" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M6.3 6.4a1.8 1.8 0 1 1 2.5 1.7c-.5.3-.8.6-.8 1.2M8 11.3v.2"/></symbol>
+    <symbol id="ico-sliders" viewBox="0 0 16 16"><path d="M2.5 5h6M11.5 5h2M2.5 11h2M7.5 11h6"/><circle cx="10" cy="5" r="1.5"/><circle cx="6" cy="11" r="1.5"/></symbol>
+    <symbol id="ico-sidebar" viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M6 3v10"/></symbol>
+    <symbol id="ico-chevron" viewBox="0 0 16 16"><path d="m4 6 4 4 4-4"/></symbol>
+    <symbol id="ico-chevrons-left" viewBox="0 0 16 16"><path d="m8 4-4 4 4 4M12.5 4l-4 4 4 4"/></symbol>
+    <symbol id="ico-doc" viewBox="0 0 16 16"><path d="M4 2.5h5l3 3V13a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5z"/><path d="M9 2.5v3h3"/></symbol>
+    <symbol id="ico-list" viewBox="0 0 16 16"><path d="M5.5 4.5h8M5.5 8h8M5.5 11.5h8M2.5 4.5h.01M2.5 8h.01M2.5 11.5h.01"/></symbol>
+    <symbol id="ico-star" viewBox="0 0 16 16"><path d="m8 2.5 1.7 3.5 3.8.5-2.8 2.7.7 3.8L8 11.2 4.6 13l.7-3.8L2.5 6.5l3.8-.5z"/></symbol>
+    <symbol id="ico-clock" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.75"/><path d="M8 5v3l2 1.5"/></symbol>
+    <symbol id="ico-tag" viewBox="0 0 16 16"><path d="M2.5 8V3.5a1 1 0 0 1 1-1H8l5.5 5.5-5 5z"/><circle cx="5.5" cy="5.5" r=".75"/></symbol>
+    <symbol id="ico-plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></symbol>
+    <symbol id="ico-check" viewBox="0 0 16 16"><path d="m3 8.5 3.2 3L13 4.5"/></symbol>
+    <symbol id="ico-grid" viewBox="0 0 16 16"><rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="9" y="2.5" width="4.5" height="4.5" rx="1"/><rect x="2.5" y="9" width="4.5" height="4.5" rx="1"/><rect x="9" y="9" width="4.5" height="4.5" rx="1"/></symbol>
+  </defs>
+</svg>
+
+<div class="app" id="app" data-panel="open">
+
+  <!-- Carril de iconos -->
+  <nav class="rail" aria-label="Principal">
+    <div class="rail__main">
+      <ul class="rail__group" aria-label="General">
+        <li><a class="rail__item" href="#/inicio" data-section="inicio" aria-label="Inicio" title="Inicio"><span class="rail__box"><svg class="icon" aria-hidden="true"><use href="#ico-home"/></svg></span></a></li>
+        <li><a class="rail__item" href="#/proyectos" data-section="proyectos" aria-label="Proyectos" title="Proyectos"><span class="rail__box"><svg class="icon" aria-hidden="true"><use href="#ico-folder"/></svg></span></a></li>
+        <li><a class="rail__item" href="#/informes" data-section="informes" aria-label="Informes" title="Informes"><span class="rail__box"><svg class="icon" aria-hidden="true"><use href="#ico-chart"/></svg></span></a></li>
+      </ul>
+      <ul class="rail__group" aria-label="Trabajo">
+        <li><a class="rail__item" href="#/clientes" data-section="clientes" aria-label="Clientes" title="Clientes"><span class="rail__box"><svg class="icon" aria-hidden="true"><use href="#ico-users"/></svg></span></a></li>
+        <li><a class="rail__item" href="#/calendario" data-section="calendario" aria-label="Calendario" title="Calendario"><span class="rail__box"><svg class="icon" aria-hidden="true"><use href="#ico-calendar"/></svg></span></a></li>
+        <li><a class="rail__item" href="#/automatizaciones" data-section="automatizaciones" aria-label="Automatizaciones" title="Automatizaciones"><span class="rail__box"><svg class="icon" aria-hidden="true"><use href="#ico-zap"/></svg></span></a></li>
+      </ul>
+      <ul class="rail__group" aria-label="Histórico">
+        <li><a class="rail__item" href="#/archivo" data-section="archivo" aria-label="Archivo" title="Archivo"><span class="rail__box"><svg class="icon" aria-hidden="true"><use href="#ico-archive"/></svg></span></a></li>
+      </ul>
+    </div>
+
+    <ul class="rail__utilities" aria-label="Utilidades">
+      <li><button class="rail__item" type="button" id="search-shortcut" aria-label="Buscar en la sección" title="Buscar en la sección"><span class="rail__box"><svg class="icon icon--sm" aria-hidden="true"><use href="#ico-search"/></svg></span></button></li>
+      <li><a class="rail__item" href="#/avisos" data-section="avisos" aria-label="Avisos" title="Avisos"><span class="rail__box"><svg class="icon icon--sm" aria-hidden="true"><use href="#ico-bell"/></svg></span></a></li>
+      <li><a class="rail__item" href="#/ayuda" data-section="ayuda" aria-label="Ayuda" title="Ayuda"><span class="rail__box"><svg class="icon icon--sm" aria-hidden="true"><use href="#ico-help"/></svg></span></a></li>
+      <li><a class="rail__item" href="#/ajustes" data-section="ajustes" aria-label="Ajustes" title="Ajustes"><span class="rail__box"><svg class="icon icon--sm" aria-hidden="true"><use href="#ico-sliders"/></svg></span></a></li>
+      <li><a class="rail__item" href="#/cuenta" data-section="cuenta" aria-label="Cuenta" title="Cuenta"><span class="rail__box"><span class="avatar" aria-hidden="true">ab</span></span></a></li>
+      <li><button class="rail__toggle" type="button" id="panel-toggle" aria-controls="panel" aria-pressed="true" aria-label="Mostrar u ocultar el panel de sección" title="Mostrar u ocultar el panel"><svg class="icon" aria-hidden="true"><use href="#ico-sidebar"/></svg></button></li>
+    </ul>
+  </nav>
+
+  <!-- Panel secundario -->
+  <nav class="panel" id="panel" aria-label="Sección">
+    <div class="panel__inner">
+      <div class="panel__head">
+        <div class="panel__head-row">
+          <h2 class="panel__title">
+            <span class="icon-box"><svg class="icon" aria-hidden="true"><use id="panel-icon" href="#ico-folder"/></svg></span>
+            <span class="truncate" id="panel-title">Proyectos</span>
+            <span class="badge" id="panel-badge" hidden>Beta</span>
+          </h2>
+          <button class="icon-button" type="button" id="panel-close" aria-label="Ocultar el panel" title="Ocultar el panel"><svg class="icon" aria-hidden="true"><use href="#ico-chevrons-left"/></svg></button>
+        </div>
+      </div>
+      <div class="panel__search">
+        <label class="visually-hidden" for="panel-search">Buscar en la sección</label>
+        <input class="input" id="panel-search" type="search" placeholder="Buscar" autocomplete="off" spellcheck="false">
+      </div>
+      <div class="panel__scroll">
+        <div id="panel-groups"></div>
+        <p class="note" id="panel-empty" role="status" hidden></p>
+      </div>
+    </div>
+  </nav>
+
+  <div class="scrim" id="scrim"></div>
+
+  <!-- Zona principal -->
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar__place">
+        <span class="topbar__mark" aria-hidden="true"><svg class="icon"><use href="#ico-grid"/></svg></span>
+        <span class="topbar__section" id="crumb-section">Proyectos</span>
+        <hr class="separator">
+        <span class="topbar__sub" id="crumb-sub">Activos</span>
+      </div>
+      <button class="button" type="button" id="new-item"><svg class="icon" aria-hidden="true"><use href="#ico-plus"/></svg>Nuevo</button>
+    </header>
+
+    <main class="main__scroll">
+      <div class="content">
+        <div class="content__head">
+          <h1 class="heading" id="page-title">Proyectos</h1>
+          <p class="note" id="page-note"></p>
+        </div>
+
+        <div class="tabs">
+          <div class="tabs__list" role="tablist" aria-label="Filtrar tarjetas" id="tablist">
+            <button class="tab" type="button" role="tab" id="tab-todos" data-tab="todos" aria-selected="true" aria-controls="cards-panel"><span class="tab__label">Todos</span></button>
+            <button class="tab" type="button" role="tab" id="tab-activos" data-tab="activos" aria-selected="false" aria-controls="cards-panel" tabindex="-1"><span class="tab__label">Activos</span></button>
+            <button class="tab" type="button" role="tab" id="tab-archivados" data-tab="archivados" aria-selected="false" aria-controls="cards-panel" tabindex="-1"><span class="tab__label">Archivados</span></button>
+          </div>
+        </div>
+
+        <div class="cards-panel" id="cards-panel" role="tabpanel" aria-labelledby="tab-todos" tabindex="0">
+          <ol class="cards" id="cards"></ol>
+          <p class="note" id="cards-empty" hidden>No hay tarjetas en este filtro.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <p class="visually-hidden" role="status" id="live"></p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------------- Datos de relleno ---------------- */
+  var SECTIONS = {
+    inicio: { name: 'Inicio', icon: 'home', groups: [
+      { name: 'Resumen', items: [['panorama', 'Panorama', 'grid'], ['actividad', 'Actividad reciente', 'clock'], ['destacados', 'Destacados', 'star']] },
+      { name: 'Atajos', items: [['pendientes', 'Pendientes', 'list'], ['borradores', 'Borradores', 'doc']] }
+    ] },
+    proyectos: { name: 'Proyectos', icon: 'folder', groups: [
+      { name: 'Vistas', items: [['activos', 'Activos', 'folder'], ['en-revision', 'En revisión', 'clock'], ['plantillas', 'Plantillas', 'doc'], ['destacados', 'Destacados', 'star']] },
+      { name: 'Equipos', items: [['diseno', 'Diseño', 'tag'], ['producto', 'Producto', 'tag'], ['operaciones', 'Operaciones', 'tag']] }
+    ] },
+    informes: { name: 'Informes', icon: 'chart', groups: [
+      { name: 'Periodos', items: [['semanal', 'Semanal', 'calendar'], ['mensual', 'Mensual', 'calendar'], ['trimestral', 'Trimestral', 'calendar']] },
+      { name: 'Guardados', items: [['rendimiento', 'Rendimiento', 'chart'], ['uso', 'Uso', 'chart']] }
+    ] },
+    clientes: { name: 'Clientes', icon: 'users', groups: [
+      { name: 'Listas', items: [['todos', 'Todos', 'users'], ['recientes', 'Recientes', 'clock'], ['destacados', 'Destacados', 'star']] },
+      { name: 'Segmentos', items: [['empresas', 'Empresas', 'tag'], ['particulares', 'Particulares', 'tag']] }
+    ] },
+    calendario: { name: 'Calendario', icon: 'calendar', groups: [
+      { name: 'Vistas', items: [['hoy', 'Hoy', 'calendar'], ['semana', 'Semana', 'calendar'], ['mes', 'Mes', 'calendar']] },
+      { name: 'Agendas', items: [['equipo', 'Equipo', 'users'], ['entregas', 'Entregas', 'list']] }
+    ] },
+    automatizaciones: { name: 'Automatizaciones', icon: 'zap', badge: true, groups: [
+      { name: 'Flujos', items: [['en-marcha', 'En marcha', 'zap'], ['pausados', 'Pausados', 'clock'], ['borradores', 'Borradores', 'doc']] },
+      { name: 'Registro', items: [['ejecuciones', 'Ejecuciones', 'list'], ['errores', 'Errores', 'help']] }
+    ] },
+    archivo: { name: 'Archivo', icon: 'archive', groups: [
+      { name: 'Contenido', items: [['proyectos', 'Proyectos cerrados', 'folder'], ['informes', 'Informes antiguos', 'chart']] },
+      { name: 'Papelera', items: [['eliminados', 'Eliminados', 'archive']] }
+    ] },
+    avisos: { name: 'Avisos', icon: 'bell', groups: [
+      { name: 'Bandeja', items: [['sin-leer', 'Sin leer', 'bell'], ['menciones', 'Menciones', 'users'], ['todos', 'Todos', 'list']] }
+    ] },
+    ayuda: { name: 'Ayuda', icon: 'help', groups: [
+      { name: 'Recursos', items: [['guias', 'Guías', 'doc'], ['novedades', 'Novedades', 'star'], ['contacto', 'Contacto', 'users']] }
+    ] },
+    ajustes: { name: 'Ajustes', icon: 'sliders', groups: [
+      { name: 'Espacio', items: [['general', 'General', 'sliders'], ['miembros', 'Miembros', 'users'], ['etiquetas', 'Etiquetas', 'tag']] },
+      { name: 'Sistema', items: [['integraciones', 'Integraciones', 'zap'], ['registro', 'Registro', 'list']] }
+    ] },
+    cuenta: { name: 'Cuenta', icon: 'users', groups: [
+      { name: 'Perfil', items: [['datos', 'Datos', 'doc'], ['preferencias', 'Preferencias', 'sliders'], ['sesiones', 'Sesiones', 'clock']] }
+    ] }
+  };
+  var DEFAULT_SECTION = 'proyectos';
+  var CARD_TITLES = ['Plan trimestral', 'Renovación web', 'Panel de métricas', 'Guía de estilo', 'Migración de datos', 'Encuesta interna'];
+  var CARD_TEXTS = [
+    'Objetivos, responsables y fechas del siguiente periodo.',
+    'Rediseño de las páginas principales y sus plantillas.',
+    'Indicadores clave reunidos en una sola vista.',
+    'Criterios comunes de redacción y de diseño.',
+    'Traslado ordenado de los registros al nuevo sistema.',
+    'Preguntas y resultados de la última ronda.'
+  ];
+  var TAB_LABELS = { todos: 'Todos', activos: 'Activos', archivados: 'Archivados' };
+
+  /* ---------------- Referencias ---------------- */
+  function byId(id) { return document.getElementById(id); }
+  var app = byId('app');
+  var panel = byId('panel');
+  var panelToggle = byId('panel-toggle');
+  var panelClose = byId('panel-close');
+  var panelSearch = byId('panel-search');
+  var panelGroups = byId('panel-groups');
+  var panelEmpty = byId('panel-empty');
+  var tablist = byId('tablist');
+  var cardsPanel = byId('cards-panel');
+  var cardsList = byId('cards');
+  var cardsEmpty = byId('cards-empty');
+  var live = byId('live');
+  var narrow = window.matchMedia('(max-width: 699px)');
+
+  /* ---------------- Estado ---------------- */
+  var state = { section: DEFAULT_SECTION, item: '', tab: 'todos', query: '', open: !narrow.matches };
+  var collapsed = {};   // grupos plegados, por "sección/grupo"
+  var cardStore = {};   // tarjetas por "sección/elemento"
+  var created = 0;
+
+  function icon(name, extra) {
+    return '<svg class="icon' + (extra ? ' ' + extra : '') + '" aria-hidden="true"><use href="#ico-' + name + '"/></svg>';
+  }
+  function normalize(text) {
+    return text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+  function announce(text) { live.textContent = text; }
+
+  function firstItem(sectionId) { return SECTIONS[sectionId].groups[0].items[0][0]; }
+  function findItem(sectionId, itemId) {
+    var found = null;
+    SECTIONS[sectionId].groups.forEach(function (group) {
+      group.items.forEach(function (entry) { if (entry[0] === itemId) found = entry; });
+    });
+    return found;
+  }
+
+  function cardsFor(key) {
+    if (!cardStore[key]) {
+      var offset = key.length % CARD_TITLES.length;
+      cardStore[key] = CARD_TITLES.map(function (_, index) {
+        var pick = (index + offset) % CARD_TITLES.length;
+        return { title: CARD_TITLES[pick], text: CARD_TEXTS[pick], archived: index % 3 === 2, pinned: false };
+      });
+    }
+    return cardStore[key];
+  }
+
+  /* ---------------- Panel: abrir y cerrar ---------------- */
+  function setPanel(open) {
+    state.open = open;
+    app.dataset.panel = open ? 'open' : 'closed';
+    panel.inert = !open;
+    panelToggle.setAttribute('aria-pressed', String(open));
+  }
+
+  /* ---------------- Pintado ---------------- */
+  function renderRail() {
+    document.querySelectorAll('.rail [data-section]').forEach(function (link) {
+      if (link.dataset.section === state.section) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+  }
+
+  function renderPanel() {
+    var section = SECTIONS[state.section];
+    byId('panel-icon').setAttribute('href', '#ico-' + section.icon);
+    byId('panel-title').textContent = section.name;
+    byId('panel-badge').hidden = !section.badge;
+    panelSearch.placeholder = 'Buscar en ' + section.name;
+
+    var query = normalize(state.query.trim());
+    var matches = 0;
+    var html = section.groups.map(function (group, groupIndex) {
+      var groupKey = state.section + '/' + groupIndex;
+      var listId = 'group-list-' + groupIndex;
+      var items = group.items.filter(function (entry) { return !query || normalize(entry[1]).indexOf(query) !== -1; });
+      matches += items.length;
+      if (items.length === 0) return '';
+      var expanded = query ? true : !collapsed[groupKey];
+      return '<section class="panel__group">' +
+        '<div class="panel__group-head">' +
+          '<button class="group-toggle" type="button" data-group="' + groupKey + '" aria-expanded="' + expanded + '" aria-controls="' + listId + '">' +
+            icon('chevron', 'icon--xs') + group.name +
+          '</button>' +
+        '</div>' +
+        '<ul class="panel__list" id="' + listId + '"' + (expanded ? '' : ' hidden') + '>' +
+          items.map(function (entry) {
+            var current = entry[0] === state.item ? ' aria-current="page"' : '';
+            return '<li><a class="subnav-item" href="#/' + state.section + '/' + entry[0] + '"' + current + '>' +
+              '<span class="icon-box">' + icon(entry[2]) + '</span>' +
+              '<span class="truncate">' + entry[1] + '</span></a></li>';
+          }).join('') +
+        '</ul></section>';
+    }).join('');
+    panelGroups.innerHTML = html;
+
+    panelEmpty.hidden = matches > 0;
+    panelEmpty.textContent = matches > 0 ? '' : 'Sin resultados en ' + section.name + '.';
+  }
+
+  function renderMain() {
+    var section = SECTIONS[state.section];
+    var entry = findItem(state.section, state.item);
+    byId('crumb-section').textContent = section.name;
+    byId('crumb-sub').textContent = entry[1];
+    byId('page-title').textContent = entry[1];
+    document.title = entry[1] + ' · ' + section.name;
+
+    var all = cardsFor(state.section + '/' + state.item);
+    var visible = all.filter(function (card) {
+      if (state.tab === 'activos') return !card.archived;
+      if (state.tab === 'archivados') return card.archived;
+      return true;
+    });
+    byId('page-note').textContent = section.name + ' · ' + visible.length + ' de ' + all.length + ' tarjetas';
+
+    tablist.querySelectorAll('[role="tab"]').forEach(function (tab) {
+      var selected = tab.dataset.tab === state.tab;
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+      if (selected) cardsPanel.setAttribute('aria-labelledby', tab.id);
+    });
+
+    cardsList.innerHTML = visible.map(function (card) {
+      var index = all.indexOf(card);
+      return '<li><article class="card">' +
+        '<div class="card__body">' +
+          '<div class="card__title-row"><p class="card__title">' + card.title + '</p>' +
+            (card.pinned ? '<span class="badge">Fijada</span>' : '') + '</div>' +
+          '<p class="card__text">' + card.text + '</p>' +
+          '<button class="button button--sm card__action" type="button" data-card="' + index + '" aria-pressed="' + card.pinned + '" aria-label="' + (card.pinned ? 'Soltar' : 'Fijar') + ': ' + card.title + '">' +
+            (card.pinned ? 'Soltar' : 'Fijar') + icon(card.pinned ? 'check' : 'star', 'icon--xs') +
+          '</button>' +
+        '</div>' +
+        '<div class="card__thumb" aria-hidden="true">' +
+          '<span class="card__sheet"></span><span class="card__sheet"></span>' +
+          '<span class="card__sheet"><span class="card__sheet-mark">' + icon(card.archived ? 'archive' : 'doc') + '</span></span>' +
+        '</div>' +
+      '</article></li>';
+    }).join('');
+    cardsList.hidden = visible.length === 0;
+    cardsEmpty.hidden = visible.length > 0;
+  }
+
+  function render() { renderRail(); renderPanel(); renderMain(); }
+
+  /* ---------------- Rutas: #/seccion/elemento ---------------- */
+  function route() {
+    var parts = window.location.hash.replace(/^#\/?/, '').split('/');
+    var sectionId = SECTIONS[parts[0]] ? parts[0] : DEFAULT_SECTION;
+    var itemId = parts[1] && findItem(sectionId, parts[1]) ? parts[1] : firstItem(sectionId);
+    if (sectionId !== state.section) {
+      state.query = '';
+      panelSearch.value = '';
+    }
+    if (sectionId !== state.section || itemId !== state.item) state.tab = 'todos';
+    state.section = sectionId;
+    state.item = itemId;
+    render();
+  }
+
+  /* ---------------- Eventos ---------------- */
+  window.addEventListener('hashchange', route);
+
+  // Elegir una sección en el carril abre siempre el panel.
+  document.querySelectorAll('.rail [data-section]').forEach(function (link) {
+    link.addEventListener('click', function () { setPanel(true); });
+  });
+
+  panelToggle.addEventListener('click', function () { setPanel(!state.open); });
+  panelClose.addEventListener('click', function () { setPanel(false); panelToggle.focus(); });
+  byId('scrim').addEventListener('click', function () { setPanel(false); });
+
+  byId('search-shortcut').addEventListener('click', function () {
+    setPanel(true);
+    panelSearch.focus();
+    panelSearch.select();
+  });
+
+  panelSearch.addEventListener('input', function () {
+    state.query = panelSearch.value;
+    renderPanel();
+  });
+  panelSearch.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+      var first = panelGroups.querySelector('.subnav-item');
+      if (first) { event.preventDefault(); first.focus(); first.click(); }
+    } else if (event.key === 'Escape' && panelSearch.value) {
+      event.stopPropagation();
+      panelSearch.value = '';
+      state.query = '';
+      renderPanel();
+    }
+  });
+
+  panelGroups.addEventListener('click', function (event) {
+    var toggle = event.target.closest('.group-toggle');
+    if (toggle) {
+      if (state.query.trim()) return; // con búsqueda activa los grupos se muestran siempre
+      var key = toggle.dataset.group;
+      collapsed[key] = !collapsed[key];
+      toggle.setAttribute('aria-expanded', String(!collapsed[key]));
+      byId(toggle.getAttribute('aria-controls')).hidden = collapsed[key];
+      return;
+    }
+    // En ventanas estrechas el panel se cierra al elegir destino.
+    if (event.target.closest('.subnav-item') && narrow.matches) setPanel(false);
+  });
+
+  // Escape cierra el panel cuando flota (ventana estrecha) o cuando el foco está dentro.
+  document.addEventListener('keydown', function (event) {
+    if (event.key !== 'Escape' || !state.open) return;
+    if (narrow.matches || panel.contains(document.activeElement)) {
+      setPanel(false);
+      panelToggle.focus();
+    }
+  });
+
+  narrow.addEventListener('change', function () { setPanel(!narrow.matches); });
+
+  // Pestañas: clic, flechas, Inicio y Fin.
+  tablist.addEventListener('click', function (event) {
+    var tab = event.target.closest('[role="tab"]');
+    if (!tab) return;
+    state.tab = tab.dataset.tab;
+    renderMain();
+  });
+  tablist.addEventListener('keydown', function (event) {
+    var tabs = Array.prototype.slice.call(tablist.querySelectorAll('[role="tab"]'));
+    var index = tabs.indexOf(document.activeElement);
+    if (index === -1) return;
+    var next = index;
+    if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+    else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+    else if (event.key === 'Home') next = 0;
+    else if (event.key === 'End') next = tabs.length - 1;
+    else return;
+    event.preventDefault();
+    state.tab = tabs[next].dataset.tab;
+    renderMain();
+    tabs[next].focus();
+  });
+
+  // Tarjetas: fijar y soltar.
+  cardsList.addEventListener('click', function (event) {
+    var button = event.target.closest('[data-card]');
+    if (!button) return;
+    var index = Number(button.dataset.card);
+    var card = cardsFor(state.section + '/' + state.item)[index];
+    card.pinned = !card.pinned;
+    renderMain();
+    var again = cardsList.querySelector('[data-card="' + index + '"]');
+    if (again) again.focus();
+    announce(card.title + (card.pinned ? ': fijada.' : ': suelta.'));
+  });
+
+  // Nuevo: añade una tarjeta de relleno al principio de la vista actual.
+  byId('new-item').addEventListener('click', function () {
+    created += 1;
+    var title = 'Elemento nuevo ' + created;
+    cardsFor(state.section + '/' + state.item).unshift({
+      title: title, text: 'Tarjeta de relleno creada en esta sesión.', archived: false, pinned: false
+    });
+    if (state.tab === 'archivados') state.tab = 'todos';
+    renderMain();
+    announce(title + ': añadido a ' + TAB_LABELS[state.tab] + '.');
+  });
+
+  /* ---------------- Arranque ---------------- */
+  setPanel(state.open);
+  route();
+})();
+</script>
+</body>
+</html>

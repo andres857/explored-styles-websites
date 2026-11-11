@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Botón · referencia</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* Cada referencia parte de cero: solo cuentan los estilos escritos en cada elemento. */
+.ref, .ref * { all: unset; }
+.ref { display: block; }
+.ref .ref-media { outline: 1px dashed currentColor; outline-offset: -1px; }
+body { margin: 0; padding: 24px; font-family: system-ui, sans-serif; background: #fff; color: #111; }
+.sheet-title { font-size: 20px; margin: 0 0 4px; }
+.sheet-note { font-size: 13px; color: #555; margin: 0 0 24px; }
+.variant { margin: 0 0 32px; }
+.variant-title { font-size: 13px; font-weight: 600; margin: 0 0 8px; color: #333; }
+.stage { padding: 16px; border: 1px dashed #bbb; overflow: auto; }
+/* Estados leídos de las hojas de estilo del sitio. */
+[data-ref="button-1"]:active {
+  background-color: var(--color-palette-3) !important;
+}
+[data-ref="button-1"]:disabled {
+  background-color: var(--color-palette-16) !important;
+  color: var(--color-palette-2) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="button-1"]:hover {
+  background-color: var(--color-palette-3) !important;
+}
+[data-ref="button-2"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="button-2"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="button-3"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="button-3"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="button-3"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="button-3"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="button-3"]:hover {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="button-4"]:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.45 !important;
+}
+[data-ref="button-4"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+  outline-color: rgba(0, 0, 0, 0) !important;
+  outline-offset: 2px !important;
+  outline-style: solid !important;
+  outline-width: 2px !important;
+}
+[data-ref="button-5"][data-disabled] {
+  cursor: not-allowed !important;
+  opacity: 0.45 !important;
+}
+[data-ref="button-5"][data-state="inactive"] {
+  color: var(--color-text-secondary) !important;
+}
+[data-ref="button-6"]:active {
+  background-color: var(--color-palette-17) !important;
+}
+[data-ref="button-6"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="button-6"]:hover {
+  background-color: var(--color-palette-17) !important;
+  color: var(--color-palette-2) !important;
+}
+</style>
+</head>
+<body>
+<h1 class="sheet-title">Botón</h1>
+<p class="sheet-note">Referencia generada con estilos medidos. Los recuadros punteados sustituyen a iconos e imágenes.</p>
+<section class="variant">
+<h2 class="variant-title">button-1 · 32 usos · 101 × 24 px</h2>
+<div class="stage"><div class="ref">
+  <button data-ref="button-1" aria-label="Lorem ipsum dolor sit amet c" type="button" style="align-items: center; background-color: var(--color-primary); border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); box-sizing: border-box; color: var(--color-surface); cursor: pointer; display: flex; flex-shrink: 0; font-family: var(--font-family-1); font-size: var(--font-size-200); font-style: normal; font-weight: var(--font-weight-600); height: 24px; justify-content: center; letter-spacing: normal; line-height: var(--font-line-height-5); padding-left: var(--space-5); padding-right: var(--space-5); position: relative; text-align: center; text-transform: none; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: normal; width: 101px">
+    Lorem ipsuma
+    <div style="box-sizing: border-box; display: block; flex-shrink: 0; height: 12px; margin-left: var(--space-3); width: 12px">
+      <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 12px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 12px"></span>
+    </div>
+  </button>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">button-2 · 28 usos · 24 × 24 px</h2>
+<div class="stage"><div class="ref">
+  <button data-ref="button-2" aria-expanded="false" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-family: var(--font-family-body); font-size: var(--font-size-200); font-style: normal; font-weight: var(--font-weight-600); height: 24px; justify-content: center; letter-spacing: normal; line-height: var(--font-line-height-5); position: relative; text-align: center; text-transform: none; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 24px">
+    <span style="bottom: 12.5px; box-sizing: border-box; display: block; height: 1px; left: 12.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 12.5px; top: 12.5px; width: 1px">
+      Lorem ipsum dolor s
+    </span>
+    <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; transition-duration: 0.15s; transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); vertical-align: middle; width: 16px"></span>
+  </button>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">button-3 · 25 usos · 60 × 36 px</h2>
+<div class="stage"><div class="ref">
+  <button data-ref="button-3" type="button" style="align-items: center; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-family: var(--font-family-body); font-size: var(--font-size-300); font-style: normal; font-weight: var(--font-weight-400); height: 36px; justify-content: flow-start; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; text-align: left; text-transform: none; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); white-space: normal; width: 60px">
+    <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+      <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+        <span style="bottom: 0px; box-sizing: border-box; display: block; height: 16px; left: 0px; position: relative; right: 0px; top: 0px; width: 16px">
+          <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+        </span>
+      </span>
+    </span>
+  </button>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">button-4 · 12 usos · 295 × 34 px</h2>
+<div class="stage"><div class="ref">
+  <button data-ref="button-4" type="button" style="align-items: center; background-color: var(--color-surface); border-bottom-color: rgba(0, 0, 0, 0); border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-bottom-style: solid; border-bottom-width: 1px; border-left-color: rgba(0, 0, 0, 0); border-left-style: solid; border-left-width: 1px; border-right-color: rgba(0, 0, 0, 0); border-right-style: solid; border-right-width: 1px; border-top-color: rgba(0, 0, 0, 0); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); border-top-style: solid; border-top-width: 1px; box-sizing: border-box; color: var(--color-text-primary); cursor: pointer; display: inline-flex; font-family: var(--font-family-1); font-size: var(--font-size-400); font-style: normal; font-weight: var(--font-weight-400); gap: var(--space-3); height: 34px; letter-spacing: normal; line-height: var(--font-line-height-7); padding-bottom: var(--space-3); padding-left: var(--space-5); padding-right: var(--space-7); padding-top: var(--space-3); position: relative; text-align: left; text-transform: none; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: normal; width: 295px">
+    <span style="align-items: center; box-sizing: border-box; color: var(--color-palette-6); display: flex; flex-shrink: 0; height: 24px; justify-content: center; width: 24px">
+      <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+    </span>
+    <span style="align-items: center; box-sizing: border-box; display: flex; font-size: var(--font-size-200); height: 16px; line-height: var(--font-line-height-3); width: 245px">
+      <span style="box-sizing: border-box; color: var(--color-palette-6); display: block; font-weight: var(--font-weight-500); height: 16px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; width: 245px">
+        Lorem ipsum dolor sit amet consectetur a
+      </span>
+      <span class="ref-media" data-media="svg" style="box-sizing: border-box; color: var(--color-palette-6); display: block; flex-shrink: 0; height: 12px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 12px"></span>
+    </span>
+  </button>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">button-5 · 9 usos · 51 × 34 px</h2>
+<div class="stage"><div class="ref">
+  <button data-ref="button-5" aria-selected="true" data-state="active" role="tab" type="button" style="border-bottom-color: var(--color-palette-7); border-bottom-style: solid; border-bottom-width: 2px; border-top-color: rgba(0, 0, 0, 0); border-top-style: solid; border-top-width: 2px; box-sizing: border-box; color: var(--color-palette-2); cursor: pointer; display: block; font-family: var(--font-family-body); font-size: var(--font-size-200); font-style: normal; font-weight: var(--font-weight-600); height: 34px; letter-spacing: normal; line-height: var(--font-line-height-5); text-align: center; text-transform: none; white-space: normal; width: 51px">
+    <div style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); box-sizing: border-box; display: flex; gap: var(--space-3); height: 26px; margin-bottom: var(--space-3); margin-left: -8px; margin-right: -8px; padding-bottom: var(--space-3); padding-left: var(--space-5); padding-right: var(--space-5); padding-top: var(--space-3); width: 67px">
+      Lorem i
+    </div>
+  </button>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">button-6 · 5 usos · 36 × 36 px</h2>
+<div class="stage"><div class="ref">
+  <button data-ref="button-6" aria-label="Lorem ipsuma" aria-pressed="false" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-family: var(--font-family-body); font-size: var(--font-size-400); font-style: normal; font-weight: var(--font-weight-400); height: 36px; justify-content: center; letter-spacing: normal; line-height: var(--font-line-height-7); text-align: center; text-transform: none; white-space: normal; width: 36px">
+    <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+  </button>
+</div></div>
+</section>
+</body>
+</html>

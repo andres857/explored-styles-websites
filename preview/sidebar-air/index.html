@@ -1,0 +1,1160 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sidebar de ejemplo · tokens extraídos</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+/* ==========================================================================
+   EXCEPCIONES DOCUMENTADAS (ver COMO-SE-HIZO.md, "Valores fuera de los tokens")
+   ========================================================================== */
+
+/* 1. Variables CSS del sitio (report.json -> cssVariables) sin token equivalente. */
+:root {
+  --site-main-side-nav-width: 60px;    /* --main-side-nav-width: 60px (5 de 5 páginas) */
+  --site-sidebar-content-width: 272px; /* --sidebar-content-width: 272px (5 de 5); --sidebar-width: 272px en 1 página */
+  --site-focus-ring: #0563e9;          /* --air-focus-ring: #0563e9 (no coincide con ningún token) */
+}
+
+/* 2. Valores leídos en nombres de clase dentro de los selectores de report.json.
+      No son variables ni tokens: son pistas, y la conversión a px supone la escala
+      habitual de 4 px por unidad. */
+:root {
+  --class-rail-expanded-width: 232px;  /* clase w-58 en el nav del carril (58 x 4 px, supuesto) */
+  --class-rail-item-height: 36px;      /* clase h-9 en los enlaces del carril (9 x 4 px, supuesto) */
+  --class-header-height: 56px;         /* clase ui2026:h-14 en header (14 x 4 px, supuesto) */
+  --class-duration-200: 200ms;         /* clase duration-200 en el carril, sus enlaces, el velo y las secciones plegables */
+  --class-duration-150: 150ms;         /* clases duration-150 y animation-duration-150 */
+  --class-ease-out: cubic-bezier(0, 0, 0.2, 1); /* clase ease-out (curva por defecto de esa clase, supuesta) */
+}
+
+/* 3. Solo maquetación. */
+:root {
+  --layout-menu-width: 208px;
+  --layout-content-max: 960px;
+  --layout-card-min: 208px;
+  --layout-card-height: 128px;
+  --layout-legend-source-min: 180px;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  padding: var(--space-3);
+  background: var(--color-palette-14);
+  color: var(--color-palette-2);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-300);
+  line-height: var(--font-line-height-6);
+  letter-spacing: var(--font-letter-spacing-3);
+  font-weight: var(--font-weight-400);
+  overflow: hidden;
+}
+button, input { font: inherit; letter-spacing: inherit; color: inherit; }
+button { border: 0; background: transparent; padding: 0; margin: 0; cursor: pointer; text-align: left; }
+ul { list-style: none; margin: 0; padding: 0; }
+h1, h2, h3, p { margin: 0; }
+svg.icon {
+  width: var(--space-9); height: var(--space-9); flex: none;
+  fill: none; stroke: currentColor; stroke-width: var(--space-2);
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.sr-only {
+  position: absolute; width: var(--space-1); height: var(--space-1); overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+.sprite { position: absolute; }
+:focus { outline: none; }
+/* Foco: anillo interior de 2 px (clases focus-visible:ring-2 + ring-inset + ring-focus). */
+:focus-visible { box-shadow: inset 0 0 0 var(--space-2) var(--site-focus-ring); }
+
+.skip {
+  position: absolute; left: var(--space-5); top: var(--space-5); z-index: 100;
+  padding: var(--space-5) var(--space-7); border-radius: var(--radius-4);
+  background: var(--color-primary); color: var(--color-surface);
+  font-weight: var(--font-weight-600); text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip:focus-visible { transform: none; }
+
+/* ==========================================================================
+   Marco de la aplicación
+   ========================================================================== */
+.app {
+  position: relative; height: 100%; overflow: hidden;
+  display: flex; flex-direction: column;
+  background: var(--color-surface); border-radius: var(--radius-5);
+}
+.topbar {
+  position: relative; z-index: 60; flex: none;
+  height: var(--class-header-height);
+  display: flex; align-items: center; gap: var(--space-5);
+  padding-right: var(--space-7);
+  border-bottom: var(--space-1) solid var(--color-palette-15);
+  background: var(--color-surface);
+}
+.body { position: relative; flex: 1; min-height: 0; display: flex; }
+
+/* Cambio de espacio de trabajo: distintivo sobre la columna del carril y nombre a su derecha. */
+.ws { position: relative; min-width: 0; }
+.ws-trigger {
+  display: flex; align-items: center; min-width: 0; max-width: 100%;
+  height: var(--space-15); padding-right: var(--space-5);
+  border-radius: var(--radius-4);
+  font-weight: var(--font-weight-500); color: var(--color-palette-2);
+}
+.ws-badge-cell { width: var(--site-main-side-nav-width); flex: none; display: flex; justify-content: center; }
+.ws-badge {
+  width: var(--space-13); height: var(--space-13); border-radius: var(--radius-4);
+  display: grid; place-items: center;
+  background: var(--color-primary); color: var(--color-surface);
+  font-size: var(--font-size-200); line-height: var(--font-line-height-3); font-weight: var(--font-weight-600);
+}
+.ws-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-left: calc(var(--space-3) * -1); }
+/* La flecha aparece al pasar el ratón, al enfocar o con el menú abierto
+   (clases group-hover:w-3.5, group-focus-visible:w-3.5, group-data-[state=open]:w-3.5). */
+.ws-chevron {
+  display: flex; align-items: center; flex: none; overflow: hidden;
+  width: 0; height: var(--space-8); margin-left: 0; opacity: 0;
+  color: var(--color-palette-9);
+  transition: margin var(--class-duration-150) var(--class-ease-out),
+              opacity var(--class-duration-150) var(--class-ease-out),
+              width var(--class-duration-150) var(--class-ease-out);
+}
+.ws-chevron svg { width: var(--space-8); height: var(--space-8); }
+.ws-trigger:hover .ws-chevron,
+.ws-trigger:focus-visible .ws-chevron,
+.ws-trigger[data-state="open"] .ws-chevron { width: var(--space-8); margin-left: var(--space-3); opacity: 1; }
+
+.topbar-spacer { flex: 1; }
+.example-badge {
+  flex: none; height: var(--space-9); padding: 0 var(--space-4);
+  display: inline-flex; align-items: center;
+  border-radius: var(--radius-full);
+  background: var(--color-palette-14); color: var(--color-text-secondary);
+  font-size: var(--font-size-100); line-height: var(--font-line-height-1);
+  letter-spacing: var(--font-letter-spacing-5); font-weight: var(--font-weight-700);
+  text-transform: uppercase; white-space: nowrap;
+}
+.btn {
+  flex: none; height: var(--space-13); padding: 0 var(--space-7);
+  display: inline-flex; align-items: center; gap: var(--space-4);
+  border: var(--space-1) solid var(--color-palette-13); border-radius: var(--radius-4);
+  background: var(--color-palette-16); color: var(--color-palette-6);
+  font-weight: var(--font-weight-600); white-space: nowrap;
+  transition: background-color var(--class-duration-150) var(--class-ease-out),
+              border-color var(--class-duration-150) var(--class-ease-out);
+}
+.btn:hover { background: var(--color-palette-14); border-color: var(--color-palette-11); }
+.btn[aria-pressed="true"] { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-surface); }
+.btn[aria-pressed="true"]:hover { background: var(--color-palette-3); border-color: var(--color-palette-3); }
+.icon-btn {
+  flex: none; width: var(--space-13); height: var(--space-13);
+  display: grid; place-items: center; border-radius: var(--radius-4);
+  color: var(--color-text-secondary);
+  transition: background-color var(--class-duration-150) var(--class-ease-out), color var(--class-duration-150) var(--class-ease-out);
+}
+.icon-btn:hover { background: var(--color-palette-14); color: var(--color-palette-2); }
+.icon-btn[aria-pressed="true"] { background: var(--color-palette-16); color: var(--color-palette-2); }
+.drawer-toggle { display: none; margin-left: var(--space-5); }
+
+/* ==========================================================================
+   Sidebar = carril + panel secundario
+   ========================================================================== */
+.sidebar { display: flex; flex: none; min-height: 0; }
+
+/* --- Carril ------------------------------------------------------------ */
+.rail-slot {
+  position: relative; z-index: 50; flex: none; height: 100%;
+  width: var(--site-main-side-nav-width);
+  transition: width var(--class-duration-200) var(--class-ease-out);
+}
+.rail-slot:is([data-pinned], [data-wide]) { width: var(--class-rail-expanded-width); }
+.rail {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  width: var(--site-main-side-nav-width);
+  display: flex; flex-direction: column; overflow: hidden;
+  padding-top: var(--space-7);
+  background: var(--color-surface);
+  border-right: var(--space-1) solid var(--color-palette-15);
+  box-shadow: none;
+  transition: width var(--class-duration-200) var(--class-ease-out),
+              box-shadow var(--class-duration-200) var(--class-ease-out),
+              border-radius var(--class-duration-200) var(--class-ease-out);
+}
+/* Expandido: por hover, por foco de teclado, fijado, o con un menú abierto dentro. */
+.rail-slot:is([data-hover-expand], [data-focus-expand], [data-pinned], [data-wide], :has([data-state="open"])) .rail {
+  width: var(--class-rail-expanded-width);
+}
+/* Expandido sin fijar: flota sobre el contenido. La sombra "popover" del sitio no se
+   extrajo; se usa la sombra de elementos flotantes (shadow.4). */
+.rail-slot:not([data-pinned], [data-wide]):is([data-hover-expand], [data-focus-expand], :has([data-state="open"])) .rail {
+  border-top-right-radius: var(--radius-5); border-bottom-right-radius: var(--radius-5);
+  box-shadow: var(--shadow-4);
+}
+.rail-scroll {
+  flex: 1; min-height: 0; width: var(--class-rail-expanded-width);
+  display: flex; flex-direction: column;
+  overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+.rail-group { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-6) 0; }
+.rail-scroll .rail-group:first-child { padding-top: 0; }
+.rail-utils { flex: none; width: var(--class-rail-expanded-width); }
+/* Separador entre grupos: línea corta centrada en el carril. */
+.rail-sep {
+  flex: none; height: var(--space-1); margin: 0 var(--space-10);
+  width: calc(var(--site-main-side-nav-width) - 2 * var(--space-10));
+  background: var(--color-palette-14);
+  transition: width var(--class-duration-200) var(--class-ease-out);
+}
+.rail-slot:is([data-hover-expand], [data-focus-expand], [data-pinned], [data-wide], :has([data-state="open"])) .rail-sep {
+  width: calc(var(--class-rail-expanded-width) - 2 * var(--space-10));
+}
+
+.rail-item {
+  position: relative; z-index: 0; flex: none;
+  display: flex; align-items: center; justify-content: flex-start; overflow: hidden;
+  width: var(--site-main-side-nav-width); height: var(--class-rail-item-height);
+  color: var(--color-text-secondary); font-weight: var(--font-weight-400);
+  transition: color var(--class-duration-200) var(--class-ease-out);
+}
+.rail-slot:is([data-hover-expand], [data-focus-expand], [data-pinned], [data-wide], :has([data-state="open"])) .rail-item { width: 100%; }
+.rail-item::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: var(--space-7); right: var(--space-7); z-index: -1;
+  border-radius: var(--radius-4); opacity: 0; pointer-events: none;
+  transition: opacity var(--class-duration-150) var(--class-ease-out);
+}
+.rail-item:hover { color: var(--color-palette-2); }
+.rail-item:hover::before { background: var(--color-palette-14); opacity: 1; }
+.rail-item:is([aria-current="page"], [data-state="open"], [aria-pressed="true"]) { color: var(--color-palette-2); font-weight: var(--font-weight-500); }
+.rail-item:is([aria-current="page"], [data-state="open"], [aria-pressed="true"])::before { background: var(--color-palette-16); opacity: 1; }
+.rail-icon { width: var(--site-main-side-nav-width); flex: none; display: flex; align-items: center; justify-content: center; }
+.rail-label {
+  position: relative; min-width: 0; max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0;
+  display: flex; align-items: center; gap: var(--space-4);
+}
+.rail-slot:is([data-hover-expand], [data-focus-expand], [data-pinned], [data-wide], :has([data-state="open"])) .rail-label {
+  margin-left: calc(var(--space-7) * -1); max-width: 100%; flex: 1; padding-right: var(--space-7); opacity: 1;
+}
+.rail-label > span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.pill {
+  flex: none; height: var(--space-9); padding: 0 var(--space-4);
+  display: inline-flex; align-items: center; border-radius: var(--radius-full);
+  background: var(--color-palette-14); color: var(--color-text-secondary);
+  font-size: var(--font-size-100); line-height: var(--font-line-height-1);
+  letter-spacing: var(--font-letter-spacing-5); font-weight: var(--font-weight-700); text-transform: uppercase;
+}
+
+/* Avatar y menú de usuario */
+.avatar-box { width: var(--class-rail-item-height); height: var(--class-rail-item-height); display: grid; place-items: center; }
+.avatar-ring { border-radius: var(--radius-full); display: block; }
+.account[data-state="open"] .avatar-ring {
+  box-shadow: 0 0 0 var(--space-2) color-mix(in srgb, var(--site-focus-ring) 30%, transparent);
+}
+.avatar {
+  width: var(--space-12); height: var(--space-12); border-radius: var(--radius-full);
+  display: grid; place-items: center;
+  background: var(--color-palette-8); color: var(--color-surface);
+  font-size: var(--font-size-100); line-height: var(--font-line-height-1);
+  letter-spacing: var(--font-letter-spacing-4); font-weight: var(--font-weight-700); text-transform: uppercase;
+}
+.account { margin-bottom: var(--space-5); }
+.account::before { display: none; }
+
+/* --- Panel secundario -------------------------------------------------- */
+.panel-slot {
+  position: relative; z-index: 30; flex: none; height: 100%; width: 0;
+  transition: width var(--class-duration-150) var(--class-ease-out);
+}
+.panel {
+  position: absolute; top: 0; bottom: 0; left: 0; width: 0; overflow: hidden;
+  background: var(--color-surface);
+  visibility: hidden;
+  transition: width var(--class-duration-150) var(--class-ease-out),
+              visibility 0s linear var(--class-duration-150),
+              box-shadow var(--class-duration-150) var(--class-ease-out);
+}
+.app[data-panel="open"] .panel {
+  width: var(--site-sidebar-content-width); visibility: visible;
+  transition-delay: 0s;
+}
+.app[data-panel="open"][data-panel-pinned] .panel-slot { width: var(--site-sidebar-content-width); }
+.app[data-panel="open"]:not([data-panel-pinned]) .panel {
+  border-top-right-radius: var(--radius-5); border-bottom-right-radius: var(--radius-5);
+  box-shadow: var(--shadow-4);
+}
+.panel-inner {
+  width: var(--site-sidebar-content-width); height: 100%;
+  display: flex; flex-direction: column;
+  border-right: var(--space-1) solid var(--color-palette-15);
+}
+.panel-head {
+  flex: none; display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-5) var(--space-5) 0 var(--space-10);
+}
+.panel-title {
+  flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: var(--font-size-300); line-height: var(--font-line-height-6); font-weight: var(--font-weight-600);
+}
+.panel-search {
+  flex: none; display: flex; align-items: center; gap: var(--space-5);
+  margin: var(--space-5) var(--space-6); padding: 0 var(--space-6);
+  height: var(--space-13);
+  border: var(--space-1) solid var(--color-palette-13); border-radius: var(--radius-4);
+  color: var(--color-text-secondary);
+  transition: border-color var(--class-duration-150) var(--class-ease-out);
+}
+.panel-search:hover { border-color: var(--color-palette-11); }
+.panel-search:focus-within { box-shadow: inset 0 0 0 var(--space-2) var(--site-focus-ring); }
+.panel-search input {
+  flex: 1; min-width: 0; height: 100%; border: 0; background: transparent; padding: 0;
+  color: var(--color-palette-2);
+}
+.panel-search input:focus-visible { box-shadow: none; }
+.panel-search input::placeholder { color: var(--color-text-secondary); opacity: 1; }
+.panel-body {
+  flex: 1; min-height: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
+  padding: var(--space-6); border-top: var(--space-1) solid var(--color-palette-15);
+  scrollbar-width: thin;
+}
+.sub-header {
+  display: flex; align-items: center; gap: var(--space-3);
+  min-height: var(--space-12); padding: var(--space-3) var(--space-3) var(--space-3) 0;
+}
+.sub-toggle {
+  display: inline-flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3) var(--space-4); border-radius: var(--radius-2);
+  color: var(--color-palette-6);
+  font-size: var(--font-size-200); line-height: var(--font-line-height-5); font-weight: var(--font-weight-600);
+}
+.sub-toggle:hover { background: var(--color-palette-14); }
+.sub-toggle svg { width: var(--space-7); height: var(--space-7); transition: transform var(--class-duration-200) var(--class-ease-out); }
+.sub-toggle[aria-expanded="false"] svg { transform: rotate(-90deg); }
+/* Acciones de la cabecera: ocultas hasta hover o foco dentro
+   (clases group-hover/sub-side-nav-section-header:opacity-100 y group-focus-within). */
+.sub-actions { margin-left: auto; display: flex; align-items: center; gap: var(--space-2); opacity: 0; transition: opacity var(--class-duration-150) var(--class-ease-out); }
+.sub-header:hover .sub-actions, .sub-header:focus-within .sub-actions { opacity: 1; }
+.sub-actions .icon-btn { width: var(--space-12); height: var(--space-12); border-radius: var(--radius-2); }
+/* Sección plegable: clases grid + transition-[grid-template-rows] duration-200 ease-out, 1fr <-> 0fr. */
+.sub-collapse { display: grid; grid-template-rows: 1fr; transition: grid-template-rows var(--class-duration-200) var(--class-ease-out); }
+.sub-collapse[data-collapsed] { grid-template-rows: 0fr; }
+.sub-collapse > ul { min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: var(--space-2); }
+.sub-section + .sub-section { margin-top: var(--space-5); }
+.sub-item {
+  width: 100%; height: var(--space-13);
+  display: flex; align-items: center; gap: var(--space-4);
+  padding: var(--space-3) var(--space-6) var(--space-3) var(--space-10);
+  border-radius: var(--radius-4);
+  color: var(--color-text-secondary);
+  transition: background-color var(--class-duration-150) var(--class-ease-out), color var(--class-duration-150) var(--class-ease-out);
+}
+.sub-item:hover { background: var(--color-palette-14); }
+.sub-item[aria-current="true"] { background: var(--color-palette-16); color: var(--color-palette-2); font-weight: var(--font-weight-500); }
+.sub-item > span:first-child { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sub-count { flex: none; font-size: var(--font-size-200); line-height: var(--font-line-height-3); color: var(--color-text-secondary); font-weight: var(--font-weight-400); }
+.sub-empty { padding: var(--space-5) var(--space-10); color: var(--color-text-secondary); font-size: var(--font-size-200); line-height: var(--font-line-height-5); }
+
+/* --- Velo del carril expandido ---------------------------------------- */
+.scrim {
+  position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 45;
+  background: var(--color-palette-1); opacity: 0; pointer-events: none;
+  transition: opacity var(--class-duration-200) var(--class-ease-out);
+}
+.body:has(.rail-slot:not([data-pinned], [data-wide]):is([data-hover-expand], [data-focus-expand], :has([data-state="open"]))) .scrim { opacity: 1; }
+.drawer-scrim { display: none; }
+
+/* --- Menús ------------------------------------------------------------- */
+.menu {
+  position: absolute; z-index: 80; width: var(--layout-menu-width);
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: var(--space-1) solid var(--color-palette-13); border-radius: var(--radius-5);
+  box-shadow: var(--shadow-4);
+}
+.menu[hidden] { display: none; }
+.ws-menu { top: calc(100% + var(--space-3)); left: var(--space-5); }
+.user-menu { position: fixed; }
+.menu-heading {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--font-size-200); line-height: var(--font-line-height-5); color: var(--color-text-secondary);
+}
+.menu-heading strong { display: block; color: var(--color-palette-2); font-size: var(--font-size-300); line-height: var(--font-line-height-6); font-weight: var(--font-weight-500); }
+.menu-item {
+  width: 100%; min-height: var(--space-13);
+  display: flex; align-items: center; gap: var(--space-5);
+  padding: var(--space-3) var(--space-5); border-radius: var(--radius-4);
+  color: var(--color-palette-6);
+}
+.menu-item:hover, .menu-item:focus-visible { background: var(--color-palette-14); color: var(--color-palette-2); }
+.menu-item > span:first-of-type { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.menu-item .check { visibility: hidden; color: var(--color-palette-2); }
+.menu-item[aria-checked="true"] { color: var(--color-palette-2); font-weight: var(--font-weight-500); }
+.menu-item[aria-checked="true"] .check { visibility: visible; }
+.menu-sep { height: var(--space-1); margin: var(--space-3) 0; background: var(--color-palette-14); }
+.mini-badge {
+  flex: none; width: var(--space-11); height: var(--space-11); border-radius: var(--radius-2);
+  display: grid; place-items: center; background: var(--color-palette-16); color: var(--color-palette-6);
+  font-size: var(--font-size-100); line-height: var(--font-line-height-1); font-weight: var(--font-weight-700);
+}
+
+/* ==========================================================================
+   Contenido de relleno
+   ========================================================================== */
+.main { flex: 1; min-width: 0; overflow-y: auto; padding: var(--space-12); }
+.main:focus-visible { box-shadow: none; }
+.main-inner { max-width: var(--layout-content-max); }
+.main h1 {
+  font-size: var(--font-size-500); line-height: var(--font-line-height-9);
+  letter-spacing: var(--font-letter-spacing-1); font-weight: var(--font-weight-600);
+}
+.main-lead { margin-top: var(--space-3); color: var(--color-text-secondary); }
+.card {
+  margin-top: var(--space-9); padding: var(--space-9);
+  border: var(--space-1) solid var(--color-palette-14); border-radius: var(--radius-5);
+}
+.card h2 { font-size: var(--font-size-400); line-height: var(--font-line-height-7); letter-spacing: var(--font-letter-spacing-2); font-weight: var(--font-weight-600); }
+.try { margin-top: var(--space-5); display: grid; gap: var(--space-3); color: var(--color-palette-6); }
+kbd {
+  display: inline-block; padding: 0 var(--space-3);
+  border: var(--space-1) solid var(--color-palette-13); border-radius: var(--radius-2);
+  background: var(--color-palette-17); color: var(--color-palette-2);
+  font-family: inherit; font-size: var(--font-size-200); line-height: var(--font-line-height-5);
+}
+.state { margin-top: var(--space-7); display: flex; flex-wrap: wrap; gap: var(--space-4); }
+.state span {
+  padding: 0 var(--space-5); border-radius: var(--radius-2);
+  background: var(--color-palette-16); color: var(--color-palette-6);
+  font-size: var(--font-size-200); line-height: var(--font-line-height-5);
+}
+.tiles { margin-top: var(--space-9); display: grid; gap: var(--space-9); grid-template-columns: repeat(auto-fill, minmax(var(--layout-card-min), 1fr)); }
+.tile { height: var(--layout-card-height); border-radius: var(--radius-5); background: var(--color-palette-16); border: var(--space-1) solid var(--color-palette-14); padding: var(--space-9); }
+.tile i { display: block; height: var(--space-5); border-radius: var(--radius-1); background: var(--color-palette-14); }
+.tile i + i { margin-top: var(--space-5); width: 60%; }
+
+/* ==========================================================================
+   Procedencia
+   ========================================================================== */
+.legend[hidden] { display: none; }
+.legend-key { margin-top: var(--space-5); display: flex; flex-wrap: wrap; gap: var(--space-5) var(--space-9); color: var(--color-palette-6); }
+.legend-key span { display: inline-flex; align-items: center; gap: var(--space-4); }
+.swatch { flex: none; width: var(--space-12); height: var(--space-9); border-radius: var(--radius-1); }
+.swatch[data-prov="medido"], [data-prov-on] [data-prov="medido"] { outline: var(--space-2) solid var(--color-palette-10); }
+.swatch[data-prov="deducido"], [data-prov-on] [data-prov="deducido"] { outline: var(--space-2) dashed var(--color-palette-7); }
+.swatch[data-prov="inventado"], [data-prov-on] [data-prov="inventado"] { outline: var(--space-2) dotted var(--color-palette-8); }
+[data-prov-on] [data-prov] { outline-offset: calc(var(--space-2) * -1); }
+.swatch[data-prov] { outline-offset: calc(var(--space-2) * -1); }
+[data-prov-on] [data-prov][data-prov-hot] { outline-width: var(--space-3); background-color: var(--color-palette-17); }
+.legend h3 {
+  margin-top: var(--space-9);
+  font-size: var(--font-size-200); line-height: var(--font-line-height-5);
+  letter-spacing: var(--font-letter-spacing-5); font-weight: var(--font-weight-600); text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+.legend-list { margin-top: var(--space-3); }
+.legend-row {
+  display: grid; grid-template-columns: auto 1fr minmax(var(--layout-legend-source-min), 1fr); gap: var(--space-5); align-items: baseline;
+  padding: var(--space-4) var(--space-3); border-top: var(--space-1) solid var(--color-palette-14);
+  border-radius: var(--radius-2);
+}
+.legend-row:hover, .legend-row:focus-visible { background: var(--color-palette-17); }
+.legend-tag {
+  width: var(--space-11); height: var(--space-11); border-radius: var(--radius-2);
+  display: inline-grid; place-items: center; align-self: start;
+  font-size: var(--font-size-100); line-height: var(--font-line-height-1); font-weight: var(--font-weight-700);
+  color: var(--color-palette-2); outline-offset: calc(var(--space-2) * -1);
+}
+.legend-tag[data-tag="medido"] { outline: var(--space-2) solid var(--color-palette-10); }
+.legend-tag[data-tag="deducido"] { outline: var(--space-2) dashed var(--color-palette-7); }
+.legend-tag[data-tag="inventado"] { outline: var(--space-2) dotted var(--color-palette-8); }
+.legend-name { color: var(--color-palette-2); }
+.legend-source { color: var(--color-text-secondary); font-size: var(--font-size-200); line-height: var(--font-line-height-5); }
+
+/* ==========================================================================
+   Móvil: el sidebar entero es una capa deslizante
+   ========================================================================== */
+@media (max-width: 820px) {
+  .drawer-toggle { display: grid; }
+  .body { position: static; } /* la capa se ancla al marco entero y cubre también la cabecera */
+  .ws-badge-cell { width: auto; padding: 0 var(--space-5); }
+  .ws-name { margin-left: 0; }
+  .example-badge { display: none; }
+  .topbar { gap: var(--space-3); padding-right: var(--space-5); }
+  .btn { padding: 0 var(--space-5); }
+  .sidebar {
+    position: absolute; top: 0; bottom: 0; left: 0; z-index: 70;
+    max-width: 100%;
+    background: var(--color-surface);
+    border-top-right-radius: var(--radius-5); border-bottom-right-radius: var(--radius-5);
+    transform: translateX(-100%); visibility: hidden;
+    transition: transform var(--class-duration-200) var(--class-ease-out),
+                visibility 0s linear var(--class-duration-200);
+  }
+  .app[data-drawer="open"] .sidebar { transform: none; visibility: visible; transition-delay: 0s; box-shadow: var(--shadow-4); }
+  .scrim { display: none; }
+  .drawer-scrim {
+    display: block; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 65;
+    width: 100%; height: 100%;
+    background: var(--color-palette-1); opacity: 0; visibility: hidden;
+    transition: opacity var(--class-duration-200) var(--class-ease-out),
+                visibility 0s linear var(--class-duration-200);
+  }
+  .app[data-drawer="open"] .drawer-scrim { opacity: 1; visibility: visible; transition-delay: 0s; }
+  .panel-pin, .rail-pin-row { display: none; } /* en móvil no hay nada que fijar */
+  .main { padding: var(--space-9); }
+  .legend-row { grid-template-columns: auto 1fr; }
+  .legend-source { grid-column: 2; }
+}
+
+/* Clase motion-reduce:transition-none del carril, extendida a toda la vista. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Iconos propios y genéricos, dibujados para esta vista sobre una retícula de 24. -->
+    <symbol id="i-inicio" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v9h12v-9"/></symbol>
+    <symbol id="i-proyectos" viewBox="0 0 24 24"><path d="M3 7h7l2 2h9v10H3z"/></symbol>
+    <symbol id="i-informes" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 20v-7"/><path d="M12 20V5"/><path d="M17 20v-10"/></symbol>
+    <symbol id="i-clientes" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1-4 4-6 8-6s7 2 8 6"/></symbol>
+    <symbol id="i-tareas" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12l3 3 5-6"/></symbol>
+    <symbol id="i-flujos" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M6 8.5V14a4 4 0 0 0 4 4h5.5"/></symbol>
+    <symbol id="i-mensajes" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-5 4v-4H4z"/></symbol>
+    <symbol id="i-fijar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></symbol>
+    <symbol id="i-importar" viewBox="0 0 24 24"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></symbol>
+    <symbol id="i-papelera" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></symbol>
+    <symbol id="i-ayuda" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-ajustes" viewBox="0 0 24 24"><path d="M4 7h10"/><path d="M18 7h2"/><circle cx="16" cy="7" r="2"/><path d="M4 17h2"/><path d="M10 17h10"/><circle cx="8" cy="17" r="2"/></symbol>
+    <symbol id="i-buscar" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></symbol>
+    <symbol id="i-cerrar" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></symbol>
+    <symbol id="i-chincheta" viewBox="0 0 24 24"><path d="M9 4h6l-1 6 3 3H7l3-3z"/><path d="M12 13v7"/></symbol>
+    <symbol id="i-flecha" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5"/></symbol>
+    <symbol id="i-mas" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></symbol>
+    <symbol id="i-capas" viewBox="0 0 24 24"><path d="M12 4l9 5-9 5-9-5z"/><path d="M3 14l9 5 9-5"/></symbol>
+  </defs>
+</svg>
+
+<div class="app" id="app" data-panel="closed" data-panel-pinned data-drawer="closed">
+
+  <header class="topbar" id="topbar">
+    <button class="icon-btn drawer-toggle" id="drawer-toggle" type="button" aria-controls="sidebar" aria-expanded="false" aria-label="Abrir navegación" data-prov-id="movil-boton">
+      <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+    </button>
+    <div class="ws">
+      <button class="ws-trigger" id="ws-trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="ws-menu" data-state="closed" data-prov-id="espacio">
+        <span class="ws-badge-cell"><span class="ws-badge" id="ws-badge" aria-hidden="true">E</span></span>
+        <span class="sr-only">Espacio de trabajo: </span>
+        <span class="ws-name" id="ws-name">Espacio de ejemplo</span>
+        <span class="ws-chevron" aria-hidden="true"><svg class="icon"><use href="#i-flecha"/></svg></span>
+      </button>
+      <div class="menu ws-menu" id="ws-menu" role="menu" aria-label="Cambiar de espacio de trabajo" hidden data-prov-id="menu-espacio">
+        <div class="menu-heading">Espacios de trabajo (ejemplo)</div>
+        <button class="menu-item" type="button" role="menuitemradio" aria-checked="true" tabindex="-1" data-ws="Espacio de ejemplo"><span class="mini-badge" aria-hidden="true">E</span><span>Espacio de ejemplo</span><svg class="icon check" aria-hidden="true"><use href="#i-check"/></svg></button>
+        <button class="menu-item" type="button" role="menuitemradio" aria-checked="false" tabindex="-1" data-ws="Estudio de muestra"><span class="mini-badge" aria-hidden="true">M</span><span>Estudio de muestra</span><svg class="icon check" aria-hidden="true"><use href="#i-check"/></svg></button>
+        <button class="menu-item" type="button" role="menuitemradio" aria-checked="false" tabindex="-1" data-ws="Equipo de pruebas"><span class="mini-badge" aria-hidden="true">P</span><span>Equipo de pruebas</span><svg class="icon check" aria-hidden="true"><use href="#i-check"/></svg></button>
+        <div class="menu-sep" role="separator"></div>
+        <button class="menu-item" type="button" role="menuitem" tabindex="-1" data-action="Crear espacio"><svg class="icon" aria-hidden="true"><use href="#i-mas"/></svg><span>Crear espacio</span></button>
+      </div>
+    </div>
+    <span class="topbar-spacer"></span>
+    <span class="example-badge">Vista de ejemplo</span>
+    <button class="btn" id="prov-toggle" type="button" aria-pressed="false" aria-controls="legend">
+      <svg class="icon" aria-hidden="true"><use href="#i-capas"/></svg>Procedencia
+    </button>
+  </header>
+
+  <div class="body" id="body">
+    <div class="sidebar" id="sidebar">
+      <div class="rail-slot" id="rail-slot">
+        <nav class="rail" id="rail" aria-label="Navegación principal" data-prov-id="carril">
+          <div class="rail-scroll">
+            <ul class="rail-group">
+              <li><button class="rail-item" type="button" data-rail data-section="inicio" data-prov-id="item"><span class="rail-icon"><svg class="icon" aria-hidden="true" data-prov-id="iconos"><use href="#i-inicio"/></svg></span><span class="rail-label"><span>Inicio</span></span></button></li>
+              <li><button class="rail-item" type="button" data-rail data-section="proyectos" data-prov-id="item"><span class="rail-icon"><svg class="icon" aria-hidden="true" data-prov-id="iconos"><use href="#i-proyectos"/></svg></span><span class="rail-label"><span>Proyectos</span></span></button></li>
+              <li><button class="rail-item" type="button" data-rail data-section="informes" data-prov-id="item"><span class="rail-icon"><svg class="icon" aria-hidden="true" data-prov-id="iconos"><use href="#i-informes"/></svg></span><span class="rail-label"><span>Informes</span></span></button></li>
+            </ul>
+            <div class="rail-sep" role="presentation" data-prov-id="separadores"></div>
+            <ul class="rail-group">
+              <li><button class="rail-item" type="button" data-rail data-section="clientes" data-prov-id="item"><span class="rail-icon"><svg class="icon" aria-hidden="true" data-prov-id="iconos"><use href="#i-clientes"/></svg></span><span class="rail-label"><span>Clientes</span></span></button></li>
+              <li><button class="rail-item" type="button" data-rail data-section="tareas" data-prov-id="item"><span class="rail-icon"><svg class="icon" aria-hidden="true" data-prov-id="iconos"><use href="#i-tareas"/></svg></span><span class="rail-label"><span>Tareas</span></span></button></li>
+              <li><button class="rail-item" type="button" data-rail data-section="automatizaciones" data-prov-id="item"><span class="rail-icon"><svg class="icon" aria-hidden="true" data-prov-id="iconos"><use href="#i-flujos"/></svg></span><span class="rail-label"><span>Automatizaciones</span><span class="pill" data-prov-id="insignia">Nuevo</span></span></button></li>
+            </ul>
+            <div class="rail-sep" role="presentation" data-prov-id="separadores"></div>
+            <ul class="rail-group">
+              <li><button class="rail-item" type="button" data-rail data-section="mensajes" data-prov-id="item"><span class="rail-icon"><svg class="icon" aria-hidden="true" data-prov-id="iconos"><use href="#i-mensajes"/></svg></span><span class="rail-label"><span>Mensajes</span></span></button></li>
+            </ul>
+          </div>
+          <ul class="rail-group rail-utils" data-prov-id="utilidades">
+            <li class="rail-pin-row"><button class="rail-item" type="button" data-rail id="rail-pin" aria-pressed="false" data-prov-id="fijar-carril"><span class="rail-icon"><svg class="icon" aria-hidden="true"><use href="#i-fijar"/></svg></span><span class="rail-label"><span>Fijar barra</span></span></button></li>
+            <li><button class="rail-item" type="button" data-rail data-action="Importar" data-prov-id="item"><span class="rail-icon"><svg class="icon" aria-hidden="true" data-prov-id="iconos"><use href="#i-importar"/></svg></span><span class="rail-label"><span>Importar</span></span></button></li>
+            <li><button class="rail-item" type="button" data-rail data-action="Papelera" data-prov-id="item"><span class="rail-icon"><svg class="icon" aria-hidden="true" data-prov-id="iconos"><use href="#i-papelera"/></svg></span><span class="rail-label"><span>Papelera</span></span></button></li>
+            <li><button class="rail-item" type="button" data-rail data-action="Ayuda" data-prov-id="item"><span class="rail-icon"><svg class="icon" aria-hidden="true" data-prov-id="iconos"><use href="#i-ayuda"/></svg></span><span class="rail-label"><span>Ayuda</span></span></button></li>
+            <li><button class="rail-item" type="button" data-rail data-section="ajustes" data-prov-id="item"><span class="rail-icon"><svg class="icon" aria-hidden="true" data-prov-id="iconos"><use href="#i-ajustes"/></svg></span><span class="rail-label"><span>Ajustes</span></span></button></li>
+            <li><button class="rail-item account" type="button" data-rail id="user-trigger" aria-haspopup="menu" aria-expanded="false" aria-controls="user-menu" data-state="closed"><span class="rail-icon"><span class="avatar-box"><span class="avatar-ring"><span class="avatar" aria-hidden="true" data-prov-id="avatar">PE</span></span></span></span><span class="rail-label"><span><span class="sr-only">Cuenta: </span>Persona de ejemplo</span></span></button></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="panel-slot">
+        <aside class="panel" id="panel" aria-labelledby="panel-title" inert data-prov-id="panel">
+          <div class="panel-inner">
+            <div class="panel-head" data-prov-id="panel-cabecera">
+              <h2 class="panel-title" id="panel-title">Sección</h2>
+              <button class="icon-btn panel-pin" id="panel-pin" type="button" aria-pressed="true" aria-label="Mantener el panel fijado"><svg class="icon" aria-hidden="true"><use href="#i-chincheta"/></svg></button>
+              <button class="icon-btn" id="panel-close" type="button" aria-label="Cerrar el panel"><svg class="icon" aria-hidden="true"><use href="#i-cerrar"/></svg></button>
+            </div>
+            <label class="panel-search" data-prov-id="panel-buscador">
+              <svg class="icon" aria-hidden="true"><use href="#i-buscar"/></svg>
+              <span class="sr-only">Buscar en la sección</span>
+              <input id="panel-search" type="search" placeholder="Buscar" autocomplete="off">
+            </label>
+            <div class="panel-body" id="panel-body"></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <div class="scrim" id="scrim" data-prov-id="velo"></div>
+    <button class="drawer-scrim" id="drawer-scrim" type="button" tabindex="-1" aria-label="Cerrar navegación"></button>
+
+    <main class="main" id="contenido" tabindex="-1">
+      <div class="main-inner">
+        <h1 id="main-title">Inicio</h1>
+        <p class="main-lead">Ejemplo generado con tokens extraídos de una aplicación analizada. No es esa aplicación: los nombres, los iconos y el contenido son genéricos y parte del comportamiento es supuesto. Activa «Procedencia» para ver qué es medido, qué deducido y qué inventado.</p>
+
+        <section class="card legend" id="legend" hidden aria-labelledby="legend-title">
+          <h2 id="legend-title">Procedencia</h2>
+          <div class="legend-key">
+            <span><i class="swatch" data-prov="medido"></i><b>M</b> Medido: token o variable CSS del run (<span id="count-medido">0</span>)</span>
+            <span><i class="swatch" data-prov="deducido"></i><b>D</b> Deducido: de una captura o de una clase (<span id="count-deducido">0</span>)</span>
+            <span><i class="swatch" data-prov="inventado"></i><b>I</b> Inventado: convención habitual, sin evidencia (<span id="count-inventado">0</span>)</span>
+          </div>
+          <h3>Partes marcadas sobre el sidebar</h3>
+          <div class="legend-list" id="legend-parts"></div>
+          <h3>Comportamientos</h3>
+          <div class="legend-list" id="legend-behaviours"></div>
+        </section>
+
+        <section class="card" aria-labelledby="try-title">
+          <h2 id="try-title">Qué probar</h2>
+          <div class="try">
+            <p>Deja el ratón sobre el carril: se expande con las etiquetas y oscurece el resto.</p>
+            <p>Pulsa «Proyectos», «Informes», «Clientes» o «Ajustes»: abren el panel secundario. Las demás secciones no tienen panel.</p>
+            <p><kbd>Tab</kbd> entra en el carril; <kbd>↑</kbd> <kbd>↓</kbd> <kbd>Inicio</kbd> <kbd>Fin</kbd> se mueven dentro; <kbd>Esc</kbd> cierra lo último abierto.</p>
+            <p><kbd>Ctrl</kbd> + <kbd>B</kbd> (o <kbd>⌘</kbd> + <kbd>B</kbd>) pliega y despliega el panel; en móvil, la capa entera.</p>
+          </div>
+          <div class="state" id="state" aria-hidden="true"></div>
+        </section>
+
+        <div class="tiles" aria-hidden="true">
+          <div class="tile"><i></i><i></i></div><div class="tile"><i></i><i></i></div><div class="tile"><i></i><i></i></div>
+          <div class="tile"><i></i><i></i></div><div class="tile"><i></i><i></i></div><div class="tile"><i></i><i></i></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="menu user-menu" id="user-menu" role="menu" aria-label="Cuenta" hidden data-prov-id="menu-usuario">
+    <div class="menu-heading"><strong>Persona de ejemplo</strong>persona@ejemplo.invalid</div>
+    <div class="menu-sep" role="separator"></div>
+    <button class="menu-item" type="button" role="menuitem" tabindex="-1" data-action="Perfil"><span>Perfil</span></button>
+    <button class="menu-item" type="button" role="menuitem" tabindex="-1" data-action="Preferencias"><span>Preferencias</span></button>
+    <button class="menu-item" type="button" role="menuitem" tabindex="-1" data-action="Atajos de teclado"><span>Atajos de teclado</span></button>
+    <div class="menu-sep" role="separator"></div>
+    <button class="menu-item" type="button" role="menuitem" tabindex="-1" data-action="Cerrar sesión"><span>Cerrar sesión</span></button>
+  </div>
+
+  <p class="sr-only" id="status" role="status" aria-live="polite"></p>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  // ---------------------------------------------------------------- datos
+  // Secciones genéricas. "panel" indica si la sección tiene panel secundario.
+  const SECTIONS = {
+    inicio: { name: 'Inicio' },
+    proyectos: { name: 'Proyectos', panel: [
+      { title: 'Favoritos', items: [['Lanzamiento de otoño', 12], ['Rediseño web', 8]] },
+      { title: 'Todos los proyectos', items: [['Campaña de ejemplo', 24], ['Catálogo', 31], ['Material de prensa', 6], ['Archivo', 140]] },
+    ] },
+    informes: { name: 'Informes', panel: [
+      { title: 'Paneles', items: [['Resumen', null], ['Actividad', null], ['Uso por equipo', null]] },
+      { title: 'Guardados', items: [['Semanal', null], ['Trimestral', null]] },
+    ] },
+    clientes: { name: 'Clientes', panel: [
+      { title: 'Segmentos', items: [['Activos', 48], ['En prueba', 9], ['Inactivos', 17]] },
+      { title: 'Listas', items: [['Prioritarios', 5], ['Por renovar', 11]] },
+    ] },
+    tareas: { name: 'Tareas' },
+    automatizaciones: { name: 'Automatizaciones' },
+    mensajes: { name: 'Mensajes' },
+    ajustes: { name: 'Ajustes', panel: [
+      { title: 'Cuenta', items: [['Perfil', null], ['Notificaciones', null], ['Seguridad', null]] },
+      { title: 'Espacio', items: [['Miembros', null], ['Facturación', null], ['Integraciones', null]] },
+    ] },
+  };
+
+  // Procedencia: una sola lista alimenta los contornos y la leyenda.
+  // Debe coincidir, fila a fila, con las tablas de COMO-SE-HIZO.md.
+  const PROV = [
+    // partes (se marcan sobre el sidebar)
+    ['carril', 'parte', 'medido', 'Carril de 60 px, fondo blanco y borde derecho', '--main-side-nav-width; color.surface; color.palette.15'],
+    ['item-activo', 'parte', 'medido', 'Elemento activo: fondo gris, texto oscuro, peso 500', 'color.palette.16; color.palette.2; font.weight.500; captura'],
+    ['avatar', 'parte', 'medido', 'Avatar circular con iniciales', 'color.palette.8; font.size.100; font.weight.700; radius.full'],
+    ['espacio', 'parte', 'medido', 'Botón del espacio de trabajo: tipografía y color', 'font.size.300; font.weight.500; color.palette.2; color.palette.9'],
+    ['panel', 'parte', 'medido', 'Panel secundario de 272 px', '--sidebar-content-width; --sidebar-width'],
+    ['velo', 'parte', 'medido', 'Velo sobre el contenido (negro al 10 %)', 'color.palette.1, medido sobre el propio velo'],
+    ['item', 'parte', 'deducido', 'Elemento del carril: alto 36 px, fondo con margen de 12 px y radio 8', 'clases h-9, before:left-3, before:rounded-8; color.text.secondary'],
+    ['separadores', 'parte', 'deducido', 'Separadores finos entre grupos', 'captura; seguridad alta'],
+    ['utilidades', 'parte', 'deducido', 'Grupo de utilidades anclado abajo', 'captura y clases py-2.5, gap-0.5; seguridad alta'],
+    ['insignia', 'parte', 'deducido', 'Insignia en píldora junto a una etiqueta', 'clases rounded-full, h-4, text-10; font.letterSpacing.5'],
+    ['panel-buscador', 'parte', 'deducido', 'Buscador en la cabecera del panel', 'captura; seguridad media'],
+    ['panel-seccion', 'parte', 'deducido', 'Cabeceras de sección del panel', 'captura y clases sub-side-nav-section-header'],
+    ['panel-item', 'parte', 'deducido', 'Elementos del panel: alto 32 px, radio 8, sangría 18 px', 'clases h-8, rounded-8, pl-[18px]; space.10'],
+    ['iconos', 'parte', 'inventado', 'Iconos: dibujos propios y genéricos', 'ninguna; solo el color (color.text.secondary) es del run'],
+    ['fijar-carril', 'parte', 'inventado', 'Botón «Fijar barra» y su posición', 'el estado existe (data-pinned); el control no se ve en el run'],
+    ['panel-cabecera', 'parte', 'inventado', 'Título del panel con botones de fijar y cerrar', 'ninguna'],
+    ['menu-espacio', 'parte', 'inventado', 'Menú del espacio de trabajo: aspecto y contenido', 'ninguna; solo consta que hay un disparador de menú'],
+    ['menu-usuario', 'parte', 'inventado', 'Menú de usuario: aspecto y contenido', 'ninguna; solo consta que hay un disparador de menú'],
+    ['movil-boton', 'parte', 'inventado', 'Botón de navegación en móvil', 'ninguna'],
+    // comportamientos (solo en la leyenda)
+    ['c-expandir-menu', 'comportamiento', 'deducido', 'El carril se expande a 232 px, con etiquetas, sombra y esquinas, cuando hay un menú abierto dentro', 'clases has-[[data-state=open]]:w-58, :rounded-r-12, :shadow-popover; seguridad alta'],
+    ['c-expandir-hover', 'comportamiento', 'deducido', 'El carril se expande al pasar el ratón', 'atributo data-hover-expand en las clases; seguridad media'],
+    ['c-fijar-carril', 'comportamiento', 'deducido', 'El carril puede quedar fijado en su forma expandida', 'atributo data-pinned en las clases; seguridad media'],
+    ['c-velo', 'comportamiento', 'deducido', 'El velo aparece mientras el carril flota expandido', 'clases group-has-[[data-hover-expand]]:opacity-100; seguridad alta'],
+    ['c-transicion', 'comportamiento', 'deducido', 'Transiciones de 200 ms con salida suave en carril, velo y elementos', 'clases duration-200 y ease-out; seguridad alta, curva exacta supuesta'],
+    ['c-movimiento-reducido', 'comportamiento', 'deducido', 'Sin transición con movimiento reducido', 'clase motion-reduce:transition-none; seguridad alta'],
+    ['c-hover', 'comportamiento', 'deducido', 'Hover: fondo #efefef y texto oscuro', 'clase hover:before:bg-hover-subtle + --air-background-hover-subtle; seguridad alta'],
+    ['c-foco', 'comportamiento', 'deducido', 'Foco: anillo interior de 2 px #0563e9', 'clases focus-visible:ring-2, ring-inset, ring-focus + --air-focus-ring; seguridad alta'],
+    ['c-flecha-espacio', 'comportamiento', 'deducido', 'La flecha del espacio de trabajo aparece con hover, foco o menú abierto', 'clases group-hover:w-3.5, group-focus-visible, group-data-[state=open]; seguridad alta'],
+    ['c-anillo-avatar', 'comportamiento', 'deducido', 'Anillo azul al 30 % en el avatar con su menú abierto', 'clase group-data-[state=open]/account:ring-2; seguridad alta'],
+    ['c-panel-seccion', 'comportamiento', 'deducido', 'El panel depende de la sección: unas lo tienen y otras no', '--sidebar-width vale 272 px en 1 página y 0 px en 4; seguridad media'],
+    ['c-panel-animacion', 'comportamiento', 'deducido', 'El panel se abre animando su anchura en 150 ms', 'clases animate-width-in y animation-duration-150 de otro panel; seguridad baja'],
+    ['c-secciones-plegables', 'comportamiento', 'deducido', 'Secciones del panel plegables en 200 ms', 'clases transition-[grid-template-rows], grid-rows-[1fr] y [0fr]; seguridad alta'],
+    ['c-acciones-cabecera', 'comportamiento', 'deducido', 'Las acciones de una cabecera aparecen con hover o foco', 'clases group-hover/sub-side-nav-section-header:opacity-100; seguridad alta'],
+    ['c-retardo-hover', 'comportamiento', 'inventado', 'Espera de 250 ms antes de expandir con el ratón', 'ninguna'],
+    ['c-expandir-foco', 'comportamiento', 'inventado', 'El carril se expande al entrar con el teclado', 'ninguna'],
+    ['c-flechas', 'comportamiento', 'inventado', 'Una sola parada de Tab en el carril; flechas, Inicio y Fin dentro', 'ninguna'],
+    ['c-escape', 'comportamiento', 'inventado', 'Escape cierra lo último abierto', 'ninguna'],
+    ['c-atajo', 'comportamiento', 'inventado', 'Ctrl/⌘ + B pliega el panel', 'ninguna'],
+    ['c-menus-teclado', 'comportamiento', 'inventado', 'Menús: flechas, Inicio, Fin, Escape y clic fuera', 'ninguna en el run; es la convención de este tipo de menú'],
+    ['c-panel-cerrar-fijar', 'comportamiento', 'inventado', 'Cerrar el panel, o soltarlo para que flote y se cierre solo', 'ninguna'],
+    ['c-panel-reabrir', 'comportamiento', 'inventado', 'Pulsar la sección activa pliega o despliega su panel', 'ninguna'],
+    ['c-buscador', 'comportamiento', 'inventado', 'El buscador filtra los elementos del panel', 'ninguna'],
+    ['c-movil', 'comportamiento', 'inventado', 'En móvil, carril y panel son una capa deslizante con velo', 'ninguna'],
+  ];
+
+  const HOVER_DELAY_MS = 250; // inventado: el run no dice cuánto espera el sitio
+  const MOBILE = window.matchMedia('(max-width: 820px)');
+
+  // ---------------------------------------------------------------- nodos
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+  const app = $('#app'), topbar = $('#topbar'), main = $('#contenido');
+  const sidebar = $('#sidebar'), railSlot = $('#rail-slot'), rail = $('#rail');
+  const panel = $('#panel'), panelBody = $('#panel-body'), panelSearch = $('#panel-search');
+  const railItems = $$('[data-rail]', rail);
+  const wsTrigger = $('#ws-trigger'), wsMenu = $('#ws-menu');
+  const userTrigger = $('#user-trigger'), userMenu = $('#user-menu');
+  const drawerToggle = $('#drawer-toggle');
+  const status = $('#status');
+
+  const state = {
+    section: 'inicio',
+    sub: {},              // sección -> elemento elegido
+    collapsed: new Set(), // "seccion/título" plegados
+    panelOpen: false,
+    panelPinned: true,
+    railPinned: false,
+    drawer: false,
+    menu: null,           // 'ws' | 'user' | null
+    prov: false,
+    query: '',
+  };
+
+  const say = (text) => { status.textContent = ''; status.textContent = text; };
+  const hasPanel = (id) => Boolean(SECTIONS[id] && SECTIONS[id].panel);
+
+  // ---------------------------------------------------------------- pintado
+  function renderPanel() {
+    const section = SECTIONS[state.section];
+    $('#panel-title').textContent = section.name;
+    panelBody.textContent = '';
+    if (!section.panel) return;
+    const query = state.query.trim().toLowerCase();
+    let shown = 0;
+    for (const group of section.panel) {
+      const key = `${state.section}/${group.title}`;
+      const items = group.items.filter(([name]) => !query || name.toLowerCase().includes(query));
+      if (query && items.length === 0) continue;
+      shown += items.length;
+      const collapsed = !query && state.collapsed.has(key);
+      const wrap = document.createElement('section');
+      wrap.className = 'sub-section';
+      const listId = `sub-${key.replace(/[^a-z0-9]+/gi, '-')}`;
+      wrap.innerHTML = `
+        <div class="sub-header" data-prov-id="panel-seccion">
+          <button class="sub-toggle" type="button" aria-expanded="${!collapsed}" aria-controls="${listId}">
+            <span></span><svg class="icon" aria-hidden="true"><use href="#i-flecha"/></svg>
+          </button>
+          <div class="sub-actions"><button class="icon-btn" type="button"><svg class="icon" aria-hidden="true"><use href="#i-mas"/></svg></button></div>
+        </div>
+        <div class="sub-collapse"${collapsed ? ' data-collapsed' : ''}><ul id="${listId}"></ul></div>`;
+      $('.sub-toggle span', wrap).textContent = group.title;
+      const add = $('.sub-actions button', wrap);
+      add.setAttribute('aria-label', `Añadir a ${group.title}`);
+      add.addEventListener('click', () => say(`Acción de ejemplo: añadir a ${group.title}`));
+      const list = $('ul', wrap);
+      list.inert = collapsed;
+      for (const [name, count] of items) {
+        const li = document.createElement('li');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'sub-item';
+        button.dataset.provId = 'panel-item';
+        const label = document.createElement('span');
+        label.textContent = name;
+        button.append(label);
+        if (count !== null) {
+          const badge = document.createElement('span');
+          badge.className = 'sub-count';
+          badge.textContent = String(count);
+          button.append(badge);
+        }
+        if (state.sub[state.section] === name) button.setAttribute('aria-current', 'true');
+        button.addEventListener('click', () => {
+          state.sub[state.section] = name;
+          if (MOBILE.matches) { state.drawer = false; }
+          else if (!state.panelPinned) { state.panelOpen = false; }
+          renderPanel(); sync();
+          if (MOBILE.matches) drawerToggle.focus();
+        });
+        li.append(button);
+        list.append(li);
+      }
+      $('.sub-toggle', wrap).addEventListener('click', () => {
+        if (state.collapsed.has(key)) state.collapsed.delete(key); else state.collapsed.add(key);
+        const now = state.collapsed.has(key);
+        $('.sub-toggle', wrap).setAttribute('aria-expanded', String(!now));
+        $('.sub-collapse', wrap).toggleAttribute('data-collapsed', now);
+        list.inert = now;
+      });
+      panelBody.append(wrap);
+    }
+    if (shown === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'sub-empty';
+      empty.textContent = 'Sin resultados.';
+      panelBody.append(empty);
+    }
+    applyProv();
+  }
+
+  function sync() {
+    const mobile = MOBILE.matches;
+    const panelAvailable = hasPanel(state.section);
+    const panelOpen = state.panelOpen && panelAvailable;
+
+    app.dataset.panel = panelOpen ? 'open' : 'closed';
+    app.toggleAttribute('data-panel-pinned', state.panelPinned || mobile);
+    app.dataset.drawer = mobile && state.drawer ? 'open' : 'closed';
+    app.toggleAttribute('data-prov-on', state.prov);
+
+    railSlot.toggleAttribute('data-pinned', state.railPinned && !mobile);
+    // En móvil el carril muestra las etiquetas cuando no comparte la capa con el panel.
+    railSlot.toggleAttribute('data-wide', mobile && !panelOpen);
+    if (mobile) { railSlot.removeAttribute('data-hover-expand'); }
+
+    panel.inert = !panelOpen;
+    sidebar.inert = mobile && !state.drawer;
+    topbar.inert = mobile && state.drawer;
+    main.inert = mobile && state.drawer;
+
+    for (const item of railItems) {
+      if (item.dataset.section) {
+        if (item.dataset.section === state.section) item.setAttribute('aria-current', 'page');
+        else item.removeAttribute('aria-current');
+        if (hasPanel(item.dataset.section)) {
+          item.setAttribute('aria-controls', 'panel');
+          item.setAttribute('aria-expanded', String(item.dataset.section === state.section && panelOpen));
+        }
+      }
+    }
+    $('#rail-pin').setAttribute('aria-pressed', String(state.railPinned));
+    $('#panel-pin').setAttribute('aria-pressed', String(state.panelPinned));
+    $('#prov-toggle').setAttribute('aria-pressed', String(state.prov));
+    drawerToggle.setAttribute('aria-expanded', String(mobile && state.drawer));
+    drawerToggle.setAttribute('aria-label', state.drawer ? 'Cerrar navegación' : 'Abrir navegación');
+    $('#legend').hidden = !state.prov;
+
+    const sub = state.sub[state.section];
+    $('#main-title').textContent = sub ? `${SECTIONS[state.section].name} · ${sub}` : SECTIONS[state.section].name;
+    const chips = [
+      `sección: ${SECTIONS[state.section].name}`,
+      `panel: ${panelAvailable ? (panelOpen ? (state.panelPinned || mobile ? 'abierto y fijado' : 'abierto, flotante') : 'cerrado') : 'no tiene'}`,
+      `carril: ${state.railPinned && !mobile ? 'fijado' : 'plegado'}`,
+    ];
+    if (mobile) chips.push(`capa móvil: ${state.drawer ? 'abierta' : 'cerrada'}`);
+    const box = $('#state');
+    box.textContent = '';
+    for (const chip of chips) { const el = document.createElement('span'); el.textContent = chip; box.append(el); }
+    applyProv();
+  }
+
+  // ---------------------------------------------------------------- procedencia
+  const provById = new Map(PROV.map((row) => [row[0], row]));
+  function applyProv() {
+    for (const el of $$('[data-prov-id]')) {
+      let id = el.dataset.provId;
+      if (id === 'item' && el.getAttribute('aria-current') === 'page') id = 'item-activo';
+      const row = provById.get(id);
+      if (row) { el.dataset.prov = row[2]; el.dataset.provShown = id; }
+    }
+  }
+  function buildLegend() {
+    const counts = { medido: 0, deducido: 0, inventado: 0 };
+    for (const [id, kind, tag, name, source] of PROV) {
+      counts[tag] += 1;
+      const row = document.createElement('div');
+      row.className = 'legend-row';
+      row.dataset.legendId = id;
+      row.dataset.legendTag = tag;
+      row.dataset.legendKind = kind;
+      row.tabIndex = kind === 'parte' ? 0 : -1;
+      const chip = document.createElement('span');
+      chip.className = 'legend-tag';
+      chip.dataset.tag = tag;
+      chip.textContent = tag[0].toUpperCase();
+      chip.title = tag[0].toUpperCase() + tag.slice(1);
+      const label = document.createElement('span');
+      label.className = 'legend-name';
+      label.textContent = name;
+      const sr = document.createElement('span');
+      sr.className = 'sr-only';
+      sr.textContent = ` (${tag})`;
+      label.append(sr);
+      const src = document.createElement('span');
+      src.className = 'legend-source';
+      src.textContent = source;
+      row.append(chip, label, src);
+      if (kind === 'parte') {
+        const hot = (on) => { for (const el of $$(`[data-prov-shown="${id}"]`)) el.toggleAttribute('data-prov-hot', on); };
+        row.addEventListener('mouseenter', () => hot(true));
+        row.addEventListener('mouseleave', () => hot(false));
+        row.addEventListener('focus', () => hot(true));
+        row.addEventListener('blur', () => hot(false));
+      }
+      $(kind === 'parte' ? '#legend-parts' : '#legend-behaviours').append(row);
+    }
+    for (const tag of Object.keys(counts)) $(`#count-${tag}`).textContent = String(counts[tag]);
+  }
+
+  // ---------------------------------------------------------------- secciones y panel
+  function selectSection(id) {
+    const same = id === state.section;
+    state.section = id;
+    state.query = ''; panelSearch.value = '';
+    // Deducido: el panel va ligado a la sección. Inventado: repetir clic lo pliega.
+    state.panelOpen = hasPanel(id) ? (same ? !state.panelOpen : true) : false;
+    if (MOBILE.matches && !hasPanel(id)) state.drawer = false;
+    renderPanel(); sync();
+    say(`${SECTIONS[id].name}${hasPanel(id) ? (state.panelOpen ? ', panel abierto' : ', panel cerrado') : ''}`);
+    if (MOBILE.matches && !state.drawer) drawerToggle.focus();
+  }
+  function togglePanel() {
+    if (!hasPanel(state.section)) { say('Esta sección no tiene panel'); return; }
+    const hadFocus = panel.contains(document.activeElement);
+    state.panelOpen = !state.panelOpen;
+    sync();
+    if (!state.panelOpen && hadFocus) currentRailItem().focus();
+    say(state.panelOpen ? 'Panel abierto' : 'Panel cerrado');
+  }
+  const currentRailItem = () => railItems.find((item) => item.dataset.section === state.section) || railItems[0];
+
+  rail.addEventListener('click', (event) => {
+    const item = event.target.closest('[data-rail]');
+    if (!item) return;
+    if (item.dataset.section) selectSection(item.dataset.section);
+    else if (item.id === 'rail-pin') { state.railPinned = !state.railPinned; sync(); say(state.railPinned ? 'Barra fijada' : 'Barra plegada'); }
+    else if (item.id === 'user-trigger') toggleMenu('user');
+    else if (item.dataset.action) say(`Acción de ejemplo: ${item.dataset.action}`);
+  });
+  $('#panel-close').addEventListener('click', () => { state.panelOpen = false; sync(); currentRailItem().focus(); say('Panel cerrado'); });
+  $('#panel-pin').addEventListener('click', () => { state.panelPinned = !state.panelPinned; sync(); say(state.panelPinned ? 'Panel fijado' : 'Panel flotante'); });
+  panelSearch.addEventListener('input', () => { state.query = panelSearch.value; renderPanel(); });
+
+  // Panel flotante: se cierra al pulsar fuera.
+  document.addEventListener('pointerdown', (event) => {
+    if (state.menu && !event.target.closest('.menu') && !event.target.closest('[aria-haspopup="menu"]')) closeMenu(false);
+    if (!MOBILE.matches && state.panelOpen && !state.panelPinned && !event.target.closest('#sidebar') && !event.target.closest('.menu')) {
+      state.panelOpen = false; sync();
+    }
+  });
+
+  // ---------------------------------------------------------------- carril: hover, foco y flechas
+  let hoverTimer = 0;
+  railSlot.addEventListener('pointerenter', (event) => {
+    if (MOBILE.matches || event.pointerType === 'touch') return;
+    clearTimeout(hoverTimer);
+    hoverTimer = setTimeout(() => railSlot.setAttribute('data-hover-expand', ''), HOVER_DELAY_MS);
+  });
+  railSlot.addEventListener('pointerleave', () => {
+    clearTimeout(hoverTimer);
+    railSlot.removeAttribute('data-hover-expand');
+  });
+  rail.addEventListener('focusin', (event) => {
+    if (!MOBILE.matches && event.target.matches(':focus-visible')) railSlot.setAttribute('data-focus-expand', '');
+  });
+  rail.addEventListener('focusout', (event) => {
+    if (!rail.contains(event.relatedTarget)) railSlot.removeAttribute('data-focus-expand');
+  });
+
+  function setRoving(target) {
+    for (const item of railItems) item.tabIndex = item === target ? 0 : -1;
+  }
+  setRoving(railItems[0]);
+  rail.addEventListener('focusin', (event) => { const item = event.target.closest('[data-rail]'); if (item) setRoving(item); });
+  rail.addEventListener('keydown', (event) => {
+    const items = railItems.filter((item) => item.offsetParent !== null); // sin los ocultos en móvil
+    const index = items.indexOf(document.activeElement);
+    if (index < 0) return;
+    let next = -1;
+    if (event.key === 'ArrowDown') next = (index + 1) % items.length;
+    else if (event.key === 'ArrowUp') next = (index - 1 + items.length) % items.length;
+    else if (event.key === 'Home') next = 0;
+    else if (event.key === 'End') next = items.length - 1;
+    if (next < 0) return;
+    event.preventDefault();
+    items[next].focus();
+  });
+
+  // ---------------------------------------------------------------- menús
+  const MENUS = { ws: [wsTrigger, wsMenu], user: [userTrigger, userMenu] };
+  const menuItems = (menu) => $$('[role^="menuitem"]', menu);
+  function placeUserMenu() {
+    const box = userTrigger.getBoundingClientRect();
+    const railBox = railSlot.getBoundingClientRect();
+    userMenu.style.left = `${Math.round(railBox.left + 12)}px`;
+    userMenu.style.bottom = `${Math.round(window.innerHeight - box.top + 4)}px`;
+  }
+  function openMenu(name, focusLast = false) {
+    if (state.menu) closeMenu(false);
+    const [trigger, menu] = MENUS[name];
+    state.menu = name;
+    trigger.dataset.state = 'open';
+    trigger.setAttribute('aria-expanded', 'true');
+    menu.hidden = false;
+    if (name === 'user') placeUserMenu();
+    const items = menuItems(menu);
+    const checked = items.find((item) => item.getAttribute('aria-checked') === 'true');
+    (focusLast ? items[items.length - 1] : checked || items[0]).focus();
+  }
+  function closeMenu(refocus = true) {
+    if (!state.menu) return;
+    const [trigger, menu] = MENUS[state.menu];
+    state.menu = null;
+    trigger.dataset.state = 'closed';
+    trigger.setAttribute('aria-expanded', 'false');
+    menu.hidden = true;
+    if (refocus) trigger.focus();
+  }
+  function toggleMenu(name) { if (state.menu === name) closeMenu(); else openMenu(name); }
+
+  wsTrigger.addEventListener('click', () => toggleMenu('ws'));
+  for (const name of Object.keys(MENUS)) {
+    const [trigger, menu] = MENUS[name];
+    trigger.addEventListener('keydown', (event) => {
+      if (state.menu === name) return;
+      if (event.key === 'ArrowDown' && name === 'ws') { event.preventDefault(); openMenu(name); }
+      if (event.key === 'ArrowRight' && name === 'user') { event.preventDefault(); openMenu(name); }
+    });
+    menu.addEventListener('keydown', (event) => {
+      const items = menuItems(menu);
+      const index = items.indexOf(document.activeElement);
+      let next = -1;
+      if (event.key === 'ArrowDown') next = (index + 1) % items.length;
+      else if (event.key === 'ArrowUp') next = (index - 1 + items.length) % items.length;
+      else if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = items.length - 1;
+      else if (event.key === 'Tab') { closeMenu(); return; }
+      if (next < 0) return;
+      event.preventDefault(); event.stopPropagation();
+      items[next].focus();
+    });
+    menu.addEventListener('click', (event) => {
+      const item = event.target.closest('[role^="menuitem"]');
+      if (!item) return;
+      if (item.dataset.ws) {
+        for (const other of menuItems(menu)) if (other.dataset.ws) other.setAttribute('aria-checked', String(other === item));
+        $('#ws-name').textContent = item.dataset.ws;
+        $('#ws-badge').textContent = $('.mini-badge', item).textContent;
+        say(`Espacio de trabajo: ${item.dataset.ws}`);
+      } else {
+        say(`Acción de ejemplo: ${item.dataset.action}`);
+      }
+      closeMenu();
+    });
+  }
+
+  // ---------------------------------------------------------------- capa móvil
+  function setDrawer(open) {
+    state.drawer = open;
+    sync();
+    if (open) currentRailItem().focus(); else drawerToggle.focus();
+    say(open ? 'Navegación abierta' : 'Navegación cerrada');
+  }
+  drawerToggle.addEventListener('click', () => setDrawer(!state.drawer));
+  $('#drawer-scrim').addEventListener('click', () => setDrawer(false));
+  MOBILE.addEventListener('change', () => { closeMenu(false); state.drawer = false; sync(); });
+  window.addEventListener('resize', () => { if (state.menu === 'user') placeUserMenu(); });
+
+  // ---------------------------------------------------------------- teclado global
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      if (state.menu) { closeMenu(); event.preventDefault(); return; }
+      if (MOBILE.matches && state.drawer) { setDrawer(false); event.preventDefault(); return; }
+      if (!MOBILE.matches && state.panelOpen && !state.panelPinned) {
+        const hadFocus = panel.contains(document.activeElement);
+        state.panelOpen = false; sync();
+        if (hadFocus) currentRailItem().focus();
+        event.preventDefault(); return;
+      }
+      if (railSlot.hasAttribute('data-hover-expand') || railSlot.hasAttribute('data-focus-expand')) {
+        clearTimeout(hoverTimer);
+        railSlot.removeAttribute('data-hover-expand');
+        railSlot.removeAttribute('data-focus-expand');
+        event.preventDefault();
+      }
+      return;
+    }
+    if ((event.ctrlKey || event.metaKey) && !event.altKey && !event.shiftKey && event.key.toLowerCase() === 'b') {
+      event.preventDefault();
+      if (MOBILE.matches) setDrawer(!state.drawer); else togglePanel();
+    }
+  });
+
+  $('#prov-toggle').addEventListener('click', () => {
+    state.prov = !state.prov; sync();
+    say(state.prov ? 'Procedencia visible' : 'Procedencia oculta');
+  });
+
+  buildLegend();
+  renderPanel();
+  sync();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+/* GENERADO por build-tokens.mjs. No editar a mano.
+ * Run: 20261110-210731-c9b707
+ * Tokens: 155
+ */
+:root {
+  /* color */
+  --color-palette-1: #000000; /* color.palette.1 · 3 usos */
+  --color-palette-2: #10142709; /* color.palette.2 · 2 usos */
+  --color-palette-3: #1014270a; /* color.palette.3 · 1 uso */
+  --color-palette-4: #4f46e5; /* color.palette.4 · 49 usos */
+  --color-palette-5: #6366f10d; /* color.palette.5 · 1 uso */
+  --color-palette-6: #6366f114; /* color.palette.6 · 1 uso */
+  --color-palette-7: #6366f117; /* color.palette.7 · 3 usos */
+  --color-palette-8: #6366f138; /* color.palette.8 · 4 usos */
+  --color-palette-9: #6366f140; /* color.palette.9 · 6 usos */
+  --color-palette-10: #6366f159; /* color.palette.10 · 8 usos */
+  --color-palette-11: #6366f18c; /* color.palette.11 · 4 usos */
+  --color-palette-12: #808080; /* color.palette.12 · 5 usos */
+  --color-palette-13: #059669; /* color.palette.13 · 13 usos */
+  --color-palette-14: #05966914; /* color.palette.14 · 2 usos */
+  --color-palette-15: #05966959; /* color.palette.15 · 4 usos */
+  --color-palette-16: #05966966; /* color.palette.16 · 4 usos */
+  --color-palette-17: #dfe3f0; /* color.palette.17 · 28 usos */
+  --color-palette-18: #e4e7f2; /* color.palette.18 · 301 usos */
+  --color-palette-19: #eef0f9; /* color.palette.19 · 8 usos */
+  --color-palette-20: #fbfbfe; /* color.palette.20 · 30 usos */
+  --color-palette-21: #ffffffc7; /* color.palette.21 · 1 uso */
+  --color-primary: #ffffff; /* color.primary · 45 usos */
+  --color-surface: #f6f7fc; /* color.surface · 4 usos */
+  --color-text-primary: #101427; /* color.text.primary · 374 usos */
+  --color-text-secondary: #5a6379; /* color.text.secondary · 293 usos */
+
+  /* font */
+  --font-family-1: Arial; /* font.family.1 · 18 usos */
+  --font-family-body: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* font.family.body · 640 usos */
+  --font-family-heading: Sora, Inter, ui-sans-serif, system-ui, sans-serif; /* font.family.heading · 81 usos */
+  --font-letter-spacing-1: -1.3px; /* font.letterSpacing.1 · 1 uso */
+  --font-letter-spacing-2: -0.8px; /* font.letterSpacing.2 · 2 usos */
+  --font-letter-spacing-3: -0.7px; /* font.letterSpacing.3 · 2 usos */
+  --font-letter-spacing-4: -0.6px; /* font.letterSpacing.4 · 14 usos */
+  --font-letter-spacing-5: -0.5px; /* font.letterSpacing.5 · 12 usos */
+  --font-letter-spacing-6: -0.4px; /* font.letterSpacing.6 · 14 usos */
+  --font-letter-spacing-7: -0.3px; /* font.letterSpacing.7 · 33 usos */
+  --font-letter-spacing-8: -0.1px; /* font.letterSpacing.8 · 1 uso */
+  --font-letter-spacing-9: 0.1px; /* font.letterSpacing.9 · 13 usos */
+  --font-letter-spacing-10: 0.6px; /* font.letterSpacing.10 · 1 uso */
+  --font-letter-spacing-11: 0.7px; /* font.letterSpacing.11 · 10 usos */
+  --font-letter-spacing-12: 0.9px; /* font.letterSpacing.12 · 17 usos */
+  --font-letter-spacing-13: 1px; /* font.letterSpacing.13 · 1 uso */
+  --font-letter-spacing-14: 1.5px; /* font.letterSpacing.14 · 1 uso */
+  --font-line-height-1: 12px; /* font.lineHeight.1 · 3 usos */
+  --font-line-height-2: 14px; /* font.lineHeight.2 · 1 uso */
+  --font-line-height-3: 16px; /* font.lineHeight.3 · 1 uso */
+  --font-line-height-4: 16.2px; /* font.lineHeight.4 · 1 uso */
+  --font-line-height-5: 16.5px; /* font.lineHeight.5 · 1 uso */
+  --font-line-height-6: 17.3px; /* font.lineHeight.6 · 1 uso */
+  --font-line-height-7: 18px; /* font.lineHeight.7 · 2 usos */
+  --font-line-height-8: 18.2px; /* font.lineHeight.8 · 13 usos */
+  --font-line-height-9: 19.2px; /* font.lineHeight.9 · 1 uso */
+  --font-line-height-10: 19.8px; /* font.lineHeight.10 · 52 usos */
+  --font-line-height-11: 20.2px; /* font.lineHeight.11 · 25 usos */
+  --font-line-height-12: 20.6px; /* font.lineHeight.12 · 18 usos */
+  --font-line-height-13: 21px; /* font.lineHeight.13 · 1 uso */
+  --font-line-height-14: 21.5px; /* font.lineHeight.14 · 163 usos */
+  --font-line-height-15: 22.4px; /* font.lineHeight.15 · 16 usos */
+  --font-line-height-16: 23.1px; /* font.lineHeight.16 · 12 usos */
+  --font-line-height-17: 23.4px; /* font.lineHeight.17 · 1 uso */
+  --font-line-height-18: 24.8px; /* font.lineHeight.18 · 166 usos */
+  --font-line-height-19: 26.3px; /* font.lineHeight.19 · 19 usos */
+  --font-line-height-20: 26.4px; /* font.lineHeight.20 · 1 uso */
+  --font-line-height-21: 27px; /* font.lineHeight.21 · 10 usos */
+  --font-line-height-22: 27.2px; /* font.lineHeight.22 · 1 uso */
+  --font-line-height-23: 28px; /* font.lineHeight.23 · 70 usos */
+  --font-line-height-24: 28.3px; /* font.lineHeight.24 · 12 usos */
+  --font-line-height-25: 33px; /* font.lineHeight.25 · 1 uso */
+  --font-line-height-26: 39.6px; /* font.lineHeight.26 · 14 usos */
+  --font-line-height-27: 44.8px; /* font.lineHeight.27 · 2 usos */
+  --font-line-height-28: 44.9px; /* font.lineHeight.28 · 2 usos */
+  --font-line-height-29: 48.7px; /* font.lineHeight.29 · 1 uso */
+  --font-size-100: 10px; /* font.size.100 · 6 usos */
+  --font-size-200: 10.5px; /* font.size.200 · 1 uso */
+  --font-size-300: 11px; /* font.size.300 · 24 usos */
+  --font-size-400: 12px; /* font.size.400 · 60 usos */
+  --font-size-500: 12.5px; /* font.size.500 · 18 usos */
+  --font-size-600: 13px; /* font.size.600 · 194 usos */
+  --font-size-700: 13.3px; /* font.size.700 · 9 usos */
+  --font-size-800: 13.5px; /* font.size.800 · 30 usos */
+  --font-size-900: 14px; /* font.size.900 · 38 usos */
+  --font-size-1000: 15px; /* font.size.1000 · 185 usos */
+  --font-size-1100: 16px; /* font.size.1100 · 128 usos */
+  --font-size-1200: 16.5px; /* font.size.1200 · 1 uso */
+  --font-size-1300: 18px; /* font.size.1300 · 3 usos */
+  --font-size-1400: 20px; /* font.size.1400 · 11 usos */
+  --font-size-1500: 23.2px; /* font.size.1500 · 12 usos */
+  --font-size-1600: 24px; /* font.size.1600 · 14 usos */
+  --font-size-1700: 36.8px; /* font.size.1700 · 2 usos */
+  --font-size-1800: 38px; /* font.size.1800 · 2 usos */
+  --font-size-1900: 42px; /* font.size.1900 · 1 uso */
+  --font-weight-400: 400; /* font.weight.400 · 532 usos */
+  --font-weight-500: 500; /* font.weight.500 · 53 usos */
+  --font-weight-600: 600; /* font.weight.600 · 49 usos */
+  --font-weight-700: 700; /* font.weight.700 · 80 usos */
+  --font-weight-800: 800; /* font.weight.800 · 25 usos */
+
+  /* radius */
+  --radius-1: 8px; /* radius.1 · 31 usos */
+  --radius-2: 9px; /* radius.2 · 1 uso */
+  --radius-3: 10px; /* radius.3 · 5 usos */
+  --radius-4: 11px; /* radius.4 · 12 usos */
+  --radius-5: 12px; /* radius.5 · 6 usos */
+  --radius-6: 13px; /* radius.6 · 2 usos */
+  --radius-7: 14px; /* radius.7 · 34 usos */
+  --radius-8: 16px; /* radius.8 · 1 uso */
+  --radius-9: 18px; /* radius.9 · 14 usos */
+  --radius-10: 999px; /* radius.10 · 14 usos */
+  --radius-full: 9999px; /* radius.full · 3 usos */
+
+  /* shadow */
+  --shadow-1: 0px 0px 0px 1px #6366f18c inset; /* shadow.1 · 1 uso */
+  --shadow-2: 0px 1px 2px 0px #1014270a; /* shadow.2 · 8 usos */
+  --shadow-3: 0px 2px 8px 0px #4f46e524; /* shadow.3 · 1 uso */
+  --shadow-4: 0px 2px 12px 0px #1014270f; /* shadow.4 · 1 uso */
+  --shadow-5: 0px 2px 6px 0px #0d94884d, 0px 10px 22px -10px #0d948880; /* shadow.5 · 1 uso */
+  --shadow-6: 0px 2px 6px 0px #4f46e547, 0px 10px 24px -10px #4f46e573; /* shadow.6 · 5 usos */
+  --shadow-7: 0px 1px 2px 0px #1014270a, 0px 10px 28px -16px #1014271a; /* shadow.7 · 7 usos */
+  --shadow-8: 0px 1px 2px 0px #1014270a, 0px 20px 44px -24px #4f46e529; /* shadow.8 · 4 usos */
+  --shadow-9: 0px 2px 8px 0px #1014270d, 0px 24px 48px -24px #1014272e; /* shadow.9 · 4 usos */
+
+  /* space */
+  --space-1: 1px; /* space.1 · 6 usos */
+  --space-2: 2px; /* space.2 · 83 usos */
+  --space-3: 4px; /* space.3 · 28 usos */
+  --space-4: 5px; /* space.4 · 13 usos */
+  --space-5: 5.6px; /* space.5 · 27 usos */
+  --space-6: 6px; /* space.6 · 70 usos */
+  --space-7: 7px; /* space.7 · 68 usos */
+  --space-8: 8px; /* space.8 · 65 usos */
+  --space-9: 9px; /* space.9 · 7 usos */
+  --space-10: 9.1px; /* space.10 · 2 usos */
+  --space-11: 10px; /* space.11 · 140 usos */
+  --space-12: 11px; /* space.12 · 16 usos */
+  --space-13: 12px; /* space.13 · 205 usos */
+  --space-14: 13px; /* space.14 · 4 usos */
+  --space-15: 14px; /* space.15 · 141 usos */
+  --space-16: 15px; /* space.16 · 8 usos */
+  --space-17: 16px; /* space.17 · 148 usos */
+  --space-18: 18px; /* space.18 · 7 usos */
+  --space-19: 19.2px; /* space.19 · 6 usos */
+  --space-20: 19.3px; /* space.20 · 6 usos */
+  --space-21: 20px; /* space.21 · 18 usos */
+  --space-22: 22px; /* space.22 · 15 usos */
+  --space-23: 24px; /* space.23 · 21 usos */
+  --space-24: 24.7px; /* space.24 · 1 uso */
+  --space-25: 26px; /* space.25 · 13 usos */
+  --space-26: 30px; /* space.26 · 3 usos */
+  --space-27: 32px; /* space.27 · 2 usos */
+  --space-28: 34px; /* space.28 · 20 usos */
+  --space-29: 36px; /* space.29 · 2 usos */
+  --space-30: 38px; /* space.30 · 2 usos */
+  --space-31: 40px; /* space.31 · 3 usos */
+  --space-32: 44.8px; /* space.32 · 6 usos */
+  --space-33: 48px; /* space.33 · 4 usos */
+  --space-34: 52px; /* space.34 · 1 uso */
+  --space-35: 56px; /* space.35 · 2 usos */
+  --space-36: 64px; /* space.36 · 2 usos */
+  --space-37: 72px; /* space.37 · 1 uso */
+  --space-38: 80px; /* space.38 · 1 uso */
+  --space-39: 184px; /* space.39 · 2 usos */
+  --space-40: 320px; /* space.40 · 8 usos */
+}

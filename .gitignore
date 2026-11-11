@@ -3,3 +3,9 @@ runs/*
 !runs/.gitkeep
 reports/
 .stryker-tmp/
+.claude/worktrees/
+.auth/
+.env
+.env.*
+*.log
+.DS_Store

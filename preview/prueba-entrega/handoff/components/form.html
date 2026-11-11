@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formulario · referencia</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* Cada referencia parte de cero: solo cuentan los estilos escritos en cada elemento. */
+.ref, .ref * { all: unset; }
+.ref { display: block; }
+.ref .ref-media { outline: 1px dashed currentColor; outline-offset: -1px; }
+body { margin: 0; padding: 24px; font-family: system-ui, sans-serif; background: #fff; color: #111; }
+.sheet-title { font-size: 20px; margin: 0 0 4px; }
+.sheet-note { font-size: 13px; color: #555; margin: 0 0 24px; }
+.variant { margin: 0 0 32px; }
+.variant-title { font-size: 13px; font-weight: 600; margin: 0 0 8px; color: #333; }
+.stage { padding: 16px; border: 1px dashed #bbb; overflow: auto; }
+/* Estados leídos de las hojas de estilo del sitio. */
+[data-ref="form-1-p1"]:disabled {
+  color: var(--color-palette-11) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="form-1-p1"]:focus {
+  border-bottom-color: var(--color-palette-7) !important;
+  border-left-color: var(--color-palette-7) !important;
+  border-right-color: var(--color-palette-7) !important;
+  border-top-color: var(--color-palette-7) !important;
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="form-1-p2"]:active {
+  background-color: var(--color-palette-5) !important;
+}
+[data-ref="form-1-p2"]:hover {
+  background-color: var(--color-palette-5) !important;
+  color: var(--color-surface) !important;
+}
+</style>
+</head>
+<body>
+<h1 class="sheet-title">Formulario</h1>
+<p class="sheet-note">Referencia generada con estilos medidos. Los recuadros punteados sustituyen a iconos e imágenes.</p>
+<section class="variant">
+<h2 class="variant-title">form-1 · 1 usos · 448 × 66 px</h2>
+<div class="stage"><div class="ref">
+  <form data-ref="form-1" style="box-sizing: border-box; color: var(--color-text-primary); cursor: auto; display: block; font-family: var(--font-family-body); font-size: var(--font-size-400); font-style: normal; font-weight: var(--font-weight-400); height: 66px; letter-spacing: normal; line-height: var(--font-line-height-7); text-align: center; text-transform: none; white-space: normal; width: 448px">
+    <div style="bottom: 0px; box-sizing: border-box; display: flex; flex-direction: column; gap: var(--space-5); height: 66px; left: 0px; position: relative; right: 0px; top: 0px; width: 448px">
+      <label style="box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: block; font-size: var(--font-size-200); font-weight: var(--font-weight-500); height: 18px; line-height: var(--font-line-height-5); text-align: left; width: 448px">
+        Lorem ipsum do
+      </label>
+      <div style="box-sizing: border-box; display: flex; gap: var(--space-5); height: 40px; width: 448px">
+        <input data-ref="form-1-p1" placeholder="Lorem ipsum do" type="text" style="background-color: var(--color-surface); border-bottom-color: var(--color-palette-13); border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-bottom-style: solid; border-bottom-width: 1px; border-left-color: var(--color-palette-13); border-left-style: solid; border-left-width: 1px; border-right-color: var(--color-palette-13); border-right-style: solid; border-right-width: 1px; border-top-color: var(--color-palette-13); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); border-top-style: solid; border-top-width: 1px; box-sizing: border-box; color: var(--color-palette-2); cursor: text; display: block; flex-basis: 0%; flex-grow: 1; font-size: var(--font-size-300); height: 40px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: clip; overflow-y: clip; padding-left: var(--space-5); padding-right: var(--space-5); text-align: start; width: 348.672px">
+        <button data-ref="form-1-p2" disabled="" type="submit" style="align-items: center; background-color: var(--color-palette-16); border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); bottom: 0px; box-sizing: border-box; color: var(--color-palette-2); cursor: not-allowed; display: flex; flex-shrink: 0; font-size: var(--font-size-300); font-weight: var(--font-weight-600); height: 40px; justify-content: center; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); padding-left: var(--space-7); padding-right: var(--space-7); position: relative; right: 0px; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 91.3281px">
+          Lorem ip
+        </button>
+      </div>
+    </div>
+  </form>
+</div></div>
+</section>
+</body>
+</html>

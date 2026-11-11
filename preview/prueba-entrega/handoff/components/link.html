@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enlace · referencia</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* Cada referencia parte de cero: solo cuentan los estilos escritos en cada elemento. */
+.ref, .ref * { all: unset; }
+.ref { display: block; }
+.ref .ref-media { outline: 1px dashed currentColor; outline-offset: -1px; }
+body { margin: 0; padding: 24px; font-family: system-ui, sans-serif; background: #fff; color: #111; }
+.sheet-title { font-size: 20px; margin: 0 0 4px; }
+.sheet-note { font-size: 13px; color: #555; margin: 0 0 24px; }
+.variant { margin: 0 0 32px; }
+.variant-title { font-size: 13px; font-weight: 600; margin: 0 0 8px; color: #333; }
+.stage { padding: 16px; border: 1px dashed #bbb; overflow: auto; }
+/* Estados leídos de las hojas de estilo del sitio. */
+[data-ref="link-1"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="link-1"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="link-1"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="link-1"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="link-1"]:hover {
+  color: var(--color-palette-2) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="link-2"]:focus {
+  left: 12px !important;
+}
+[data-ref="link-2"]:hover {
+  text-decoration-line: underline !important;
+}
+[data-ref="link-3"][data-selected="true"] {
+  background-color: var(--color-palette-16) !important;
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="link-3"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="link-3"]:hover {
+  background-color: var(--color-palette-17) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="link-4"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="link-4"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="link-4"]:hover {
+  text-decoration-line: underline !important;
+}
+[data-ref="link-5"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="link-5"]:hover {
+  text-decoration-line: underline !important;
+}
+[data-ref="link-6"][data-selected="true"] {
+  background-color: var(--color-palette-16) !important;
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="link-6"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="link-6"]:hover {
+  background-color: var(--color-palette-17) !important;
+  text-decoration-line: underline !important;
+}
+</style>
+</head>
+<body>
+<h1 class="sheet-title">Enlace</h1>
+<p class="sheet-note">Referencia generada con estilos medidos. Los recuadros punteados sustituyen a iconos e imágenes.</p>
+<section class="variant">
+<h2 class="variant-title">link-1 · 40 usos · 60 × 36 px</h2>
+<div class="stage"><div class="ref">
+  <a data-ref="link-1" data-selected="false" href="#" style="align-items: center; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-family: var(--font-family-body); font-size: var(--font-size-300); font-style: normal; font-weight: var(--font-weight-400); height: 36px; justify-content: flow-start; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; text-align: left; text-transform: none; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); white-space: normal; width: 60px">
+    <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+      <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+        <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+      </span>
+    </span>
+  </a>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">link-2 · 5 usos · 157.3 × 32 px</h2>
+<div class="stage"><div class="ref">
+  <a data-ref="link-2" href="#" style="align-items: center; background-color: var(--color-surface); border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-shadow: var(--shadow-4); box-sizing: border-box; color: var(--color-palette-2); cursor: pointer; display: flex; font-family: var(--font-family-1); font-size: var(--font-size-300); font-style: normal; font-weight: var(--font-weight-400); height: 32px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); padding-left: var(--space-6); padding-right: var(--space-6); position: relative; text-align: start; text-transform: none; white-space: nowrap; width: 157.328px">
+    Lorem ipsum dolor si
+  </a>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">link-3 · 5 usos · 252 × 32 px</h2>
+<div class="stage"><div class="ref">
+  <a data-ref="link-3" data-selected="false" href="#" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; font-family: var(--font-family-body); font-size: var(--font-size-300); font-style: normal; font-weight: var(--font-weight-400); gap: var(--space-4); height: 32px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; padding-bottom: var(--space-3); padding-left: var(--space-10); padding-right: var(--space-6); padding-top: var(--space-3); text-align: left; text-overflow: ellipsis; text-transform: none; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 252px">
+    <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px">
+      <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+    </span>
+    <span style="box-sizing: border-box; display: block; flex-basis: 0%; flex-grow: 1; height: 20px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; width: 198px">
+      Lorem ipsum do
+    </span>
+  </a>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">link-4 · 5 usos · 60 × 36 px</h2>
+<div class="stage"><div class="ref">
+  <a data-ref="link-4" data-selected="true" href="#" style="align-items: center; box-sizing: border-box; color: var(--color-palette-2); cursor: pointer; display: flex; flex-shrink: 0; font-family: var(--font-family-body); font-size: var(--font-size-300); font-style: normal; font-weight: var(--font-weight-500); height: 36px; justify-content: flow-start; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; text-align: left; text-transform: none; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); white-space: normal; width: 60px">
+    <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+      <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+        <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+      </span>
+    </span>
+  </a>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">link-5 · 1 usos · 202 × 20 px</h2>
+<div class="stage"><div class="ref">
+  <a data-ref="link-5" data-selected="false" href="#" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-basis: 0%; flex-grow: 1; font-family: var(--font-family-body); font-size: var(--font-size-300); font-style: normal; font-weight: var(--font-weight-400); gap: var(--space-4); height: 20px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); text-align: left; text-transform: none; white-space: nowrap; width: 202px">
+    <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px">
+      <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+    </span>
+    <span style="box-sizing: border-box; display: block; flex-basis: 0%; flex-grow: 1; height: 20px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; width: 176px">
+      Lorem ipsu
+    </span>
+  </a>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">link-6 · 1 usos · 252 × 32 px</h2>
+<div class="stage"><div class="ref">
+  <a data-ref="link-6" data-selected="false" href="#" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; font-family: var(--font-family-body); font-size: var(--font-size-300); font-style: normal; font-weight: var(--font-weight-400); gap: var(--space-4); height: 32px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; padding-bottom: var(--space-3); padding-left: var(--space-6); padding-right: var(--space-6); padding-top: var(--space-3); text-align: left; text-overflow: ellipsis; text-transform: none; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 252px">
+    <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px">
+      <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+    </span>
+    <span style="box-sizing: border-box; display: block; flex-basis: 0%; flex-grow: 1; height: 20px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; width: 206px">
+      Lorem ipsum dolo
+    </span>
+  </a>
+</div></div>
+</section>
+</body>
+</html>

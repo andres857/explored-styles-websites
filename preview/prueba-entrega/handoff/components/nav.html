@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Navegación · referencia</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* Cada referencia parte de cero: solo cuentan los estilos escritos en cada elemento. */
+.ref, .ref * { all: unset; }
+.ref { display: block; }
+.ref .ref-media { outline: 1px dashed currentColor; outline-offset: -1px; }
+body { margin: 0; padding: 24px; font-family: system-ui, sans-serif; background: #fff; color: #111; }
+.sheet-title { font-size: 20px; margin: 0 0 4px; }
+.sheet-note { font-size: 13px; color: #555; margin: 0 0 24px; }
+.variant { margin: 0 0 32px; }
+.variant-title { font-size: 13px; font-weight: 600; margin: 0 0 8px; color: #333; }
+.stage { padding: 16px; border: 1px dashed #bbb; overflow: auto; }
+/* Estados leídos de las hojas de estilo del sitio. */
+[data-ref="nav-1-p1"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p1"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p1"]:hover {
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-1-p2"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p2"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-1-p2"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p2"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p2"]:hover {
+  color: var(--color-palette-2) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-1-p3"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p3"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-1-p3"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p3"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p3"]:hover {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p4"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p4"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-1-p4"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p4"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p4"]:hover {
+  color: var(--color-palette-2) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-1-p5"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p5"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-1-p5"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p5"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p5"]:hover {
+  color: var(--color-palette-2) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-1-p6"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p6"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-1-p6"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p6"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p6"]:hover {
+  color: var(--color-palette-2) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-1-p7"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p7"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-1-p7"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p7"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p7"]:hover {
+  color: var(--color-palette-2) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-1-p8"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p8"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-1-p8"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p8"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p8"]:hover {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p9"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p9"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-1-p9"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p9"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p9"]:hover {
+  color: var(--color-palette-2) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-1-p10"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p10"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-1-p10"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p10"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p10"]:hover {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p11"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p11"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-1-p11"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p11"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p11"]:hover {
+  color: var(--color-palette-2) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-1-p12"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p12"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-1-p12"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p12"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p12"]:hover {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p13"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p13"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-1-p13"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p13"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p13"]:hover {
+  color: var(--color-palette-2) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-1-p14"][data-pinned] {
+  width: 0px !important;
+}
+[data-ref="nav-1-p14"][data-selected="true"] {
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-1-p14"][data-state="open"] {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p14"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p14"]:hover {
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-1-p15"]:active {
+  background-color: var(--color-palette-17) !important;
+}
+[data-ref="nav-1-p15"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-1-p15"]:hover {
+  background-color: var(--color-palette-17) !important;
+  color: var(--color-palette-2) !important;
+}
+[data-ref="nav-2-p1"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-2-p1"]:hover {
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-2-p2"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="nav-2-p2"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="nav-2-p3"][data-selected="true"] {
+  background-color: var(--color-palette-16) !important;
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-2-p3"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-2-p3"]:hover {
+  background-color: var(--color-palette-17) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-2-p4"][data-selected="true"] {
+  background-color: var(--color-palette-16) !important;
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-2-p4"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-2-p4"]:hover {
+  background-color: var(--color-palette-17) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-2-p5"][data-selected="true"] {
+  background-color: var(--color-palette-16) !important;
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-2-p5"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-2-p5"]:hover {
+  background-color: var(--color-palette-17) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-2-p6"][data-selected="true"] {
+  background-color: var(--color-palette-16) !important;
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-2-p6"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-2-p6"]:hover {
+  background-color: var(--color-palette-17) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-2-p7"][data-selected="true"] {
+  background-color: var(--color-palette-16) !important;
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-2-p7"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-2-p7"]:hover {
+  background-color: var(--color-palette-17) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-2-p8"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-2-p8"]:hover {
+  background-color: var(--color-palette-17) !important;
+}
+[data-ref="nav-2-p9"][data-selected="true"] {
+  background-color: var(--color-palette-16) !important;
+  color: var(--color-palette-2) !important;
+  font-weight: 500 !important;
+}
+[data-ref="nav-2-p9"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-2-p9"]:hover {
+  background-color: var(--color-palette-17) !important;
+  text-decoration-line: underline !important;
+}
+[data-ref="nav-2-p10"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="nav-2-p10"]:hover {
+  background-color: var(--color-palette-17) !important;
+}
+[data-ref="nav-2-p11"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="nav-2-p11"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="nav-2-p11"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+[data-ref="nav-2-p12"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="nav-2-p12"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="nav-2-p12"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+[data-ref="nav-2-p13"]:hover {
+  text-decoration-line: underline !important;
+}
+</style>
+</head>
+<body>
+<h1 class="sheet-title">Navegación</h1>
+<p class="sheet-note">Referencia generada con estilos medidos. Los recuadros punteados sustituyen a iconos e imágenes.</p>
+<section class="variant">
+<h2 class="variant-title">nav-1 · 5 usos · 60 × 836 px</h2>
+<div class="stage"><div class="ref">
+  <nav data-ref="nav-1" aria-label="Lorem ipsum dol" style="background-color: var(--color-surface); border-right-color: var(--color-palette-15); border-right-style: solid; border-right-width: 1px; box-shadow: var(--shadow-1); box-sizing: border-box; color: var(--color-text-primary); cursor: auto; display: flex; flex-direction: column; font-family: var(--font-family-body); font-size: var(--font-size-400); font-style: normal; font-weight: var(--font-weight-400); height: 836px; letter-spacing: normal; line-height: var(--font-line-height-7); overflow-x: hidden; overflow-y: hidden; padding-top: var(--space-7); position: relative; text-align: start; text-transform: none; transition-duration: 0.2s; transition-property: none; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); white-space: normal; width: 60px">
+    <div style="box-sizing: border-box; display: flex; flex-direction: column; flex-grow: 1; height: 550px; overflow-x: hidden; overflow-y: auto; width: 232px">
+      <section aria-label="Lore" style="box-sizing: border-box; display: flex; flex-direction: column; height: 108px; width: 232px">
+        <a data-ref="nav-1-p1" data-selected="true" href="#" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-palette-2); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); font-weight: var(--font-weight-500); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+            <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+            </span>
+          </span>
+        </a>
+        <a data-ref="nav-1-p2" data-selected="false" href="#" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+            <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+            </span>
+          </span>
+        </a>
+        <button data-ref="nav-1-p3" type="button" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+            <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+              <span style="bottom: 0px; box-sizing: border-box; display: block; height: 16px; left: 0px; position: relative; right: 0px; top: 0px; width: 16px">
+                <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+              </span>
+            </span>
+          </span>
+        </button>
+      </section>
+      <section aria-label="Lorem" style="box-sizing: border-box; display: flex; flex-direction: column; height: 121px; width: 232px">
+        <div style="box-sizing: border-box; display: block; flex-shrink: 0; height: 13px; padding-bottom: var(--space-4); padding-top: var(--space-4); width: 232px">
+          <div style="background-color: var(--color-palette-14); box-sizing: border-box; display: block; height: 1px; margin-left: var(--space-9); width: 28px"></div>
+        </div>
+        <a data-ref="nav-1-p4" data-selected="false" href="#" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+            <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+            </span>
+          </span>
+        </a>
+        <a data-ref="nav-1-p5" data-selected="false" href="#" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+            <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+            </span>
+          </span>
+        </a>
+        <a data-ref="nav-1-p6" data-selected="false" href="#" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+            <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+            </span>
+          </span>
+          <div style="align-items: center; background-color: var(--color-palette-14); border-bottom-left-radius: var(--radius-full); border-bottom-right-radius: var(--radius-full); border-top-left-radius: var(--radius-full); border-top-right-radius: var(--radius-full); box-sizing: border-box; display: flex; flex-shrink: 0; font-size: var(--font-size-100); font-weight: var(--font-weight-700); gap: var(--space-3); height: 16px; justify-content: space-between; letter-spacing: var(--font-letter-spacing-5); line-height: var(--font-line-height-1); padding-left: var(--space-4); padding-right: var(--space-4); text-transform: uppercase; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 40px">
+            Lore
+          </div>
+        </a>
+      </section>
+      <section aria-label="Lorem" style="box-sizing: border-box; display: flex; flex-direction: column; height: 49px; width: 232px">
+        <div style="box-sizing: border-box; display: block; flex-shrink: 0; height: 13px; padding-bottom: var(--space-4); padding-top: var(--space-4); width: 232px">
+          <div style="background-color: var(--color-palette-14); box-sizing: border-box; display: block; height: 1px; margin-left: var(--space-9); width: 28px"></div>
+        </div>
+        <a data-ref="nav-1-p7" data-selected="false" href="#" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+            <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+            </span>
+          </span>
+        </a>
+      </section>
+    </div>
+    <section aria-label="Lorem ips" style="box-sizing: border-box; display: flex; flex-direction: column; flex-shrink: 0; gap: var(--space-2); height: 274px; padding-bottom: var(--space-6); padding-top: var(--space-6); width: 232px">
+      <div style="box-sizing: border-box; display: flex; flex-direction: column; height: 216px; width: 232px">
+        <button data-ref="nav-1-p8" aria-expanded="false" aria-label="Lorem i" type="button" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+            <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+              <span style="bottom: 0px; box-sizing: border-box; display: block; height: 14px; left: 0px; position: relative; right: 0px; top: 0px; width: 14px">
+                <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 14px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 14px"></span>
+              </span>
+            </span>
+          </span>
+        </button>
+        <a data-ref="nav-1-p9" data-selected="false" href="#" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+            <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 14px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 14px"></span>
+            </span>
+          </span>
+        </a>
+        <button data-ref="nav-1-p10" aria-expanded="false" data-state="closed" type="button" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+            <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 14px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 14px"></span>
+            </span>
+          </span>
+        </button>
+        <a data-ref="nav-1-p11" data-selected="false" href="#" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+            <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 14px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 14px"></span>
+            </span>
+          </span>
+        </a>
+        <button data-ref="nav-1-p12" aria-expanded="false" data-state="closed" type="button" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+            <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 14px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 14px"></span>
+            </span>
+          </span>
+        </button>
+        <a data-ref="nav-1-p13" data-selected="false" href="#" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+            <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 14px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 14px"></span>
+            </span>
+          </span>
+        </a>
+      </div>
+      <div style="align-items: center; box-sizing: border-box; display: grid; gap: var(--space-5); grid-template-columns: 176px 36px; grid-template-rows: 36px; height: 36px; padding-right: var(--space-7); width: 232px">
+        <div style="box-sizing: border-box; display: block; height: 36px; overflow-x: hidden; overflow-y: hidden; width: 176px">
+          <button data-ref="nav-1-p14" aria-expanded="false" data-state="closed" type="button" style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); height: 36px; justify-content: flow-start; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.2s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 60px">
+            <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; width: 60px">
+              <span style="align-items: center; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 36px; justify-content: center; left: 0px; position: relative; right: 0px; top: 0px; width: 36px">
+                <span style="border-bottom-left-radius: var(--radius-full); border-bottom-right-radius: var(--radius-full); border-top-left-radius: var(--radius-full); border-top-right-radius: var(--radius-full); box-sizing: border-box; display: block; height: 24px; width: 24px">
+                  <div aria-label="Lorem ipsum dolor sita" role="img" style="align-items: center; background-color: var(--color-palette-8); border-bottom-left-radius: var(--radius-full); border-bottom-right-radius: var(--radius-full); border-top-left-radius: var(--radius-full); border-top-right-radius: var(--radius-full); bottom: 0px; box-sizing: border-box; color: var(--color-surface); display: flex; flex-shrink: 0; height: 24px; justify-content: center; left: 0px; overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; top: 0px; width: 24px">
+                    <p style="box-sizing: border-box; display: block; font-size: var(--font-size-100); font-weight: var(--font-weight-700); height: 12px; letter-spacing: var(--font-letter-spacing-4); line-height: var(--font-line-height-1); text-transform: uppercase; width: 15.2031px">
+                      Lo
+                    </p>
+                  </div>
+                </span>
+              </span>
+            </span>
+          </button>
+        </div>
+        <button data-ref="nav-1-p15" aria-label="Lorem ipsuma" aria-pressed="false" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; flex-shrink: 0; height: 36px; justify-content: center; text-align: center; width: 36px">
+          <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+        </button>
+      </div>
+    </section>
+  </nav>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">nav-2 · 5 usos · 272 × 836 px</h2>
+<div class="stage"><div class="ref">
+  <nav data-ref="nav-2" aria-label="Lorema" style="box-sizing: border-box; color: var(--color-text-primary); cursor: auto; display: flex; flex-direction: column; flex-shrink: 0; font-family: var(--font-family-body); font-size: var(--font-size-400); font-style: normal; font-weight: var(--font-weight-400); height: 836px; letter-spacing: normal; line-height: var(--font-line-height-7); text-align: start; text-transform: none; white-space: normal; width: 272px">
+    <div style="box-sizing: border-box; display: flex; flex-direction: column; flex-grow: 1; height: 836px; width: 272px">
+      <section style="border-bottom-color: var(--color-palette-15); border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; display: flex; flex-direction: column; flex-shrink: 0; height: 49px; overflow-x: hidden; overflow-y: hidden; width: 272px">
+        <div style="box-sizing: border-box; display: block; height: 48px; padding-bottom: var(--space-5); padding-left: var(--space-6); padding-right: var(--space-6); padding-top: var(--space-5); width: 272px">
+          <div data-selected="false" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-sizing: border-box; color: var(--color-text-secondary); display: flex; font-size: var(--font-size-300); gap: var(--space-4); height: 32px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; padding-bottom: var(--space-3); padding-left: var(--space-6); padding-right: var(--space-6); padding-top: var(--space-3); text-align: left; text-overflow: ellipsis; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 252px">
+            <a data-ref="nav-2-p1" data-selected="false" href="#" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-sizing: border-box; cursor: pointer; display: flex; flex-basis: 0%; flex-grow: 1; gap: var(--space-4); height: 20px; width: 202px">
+              <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px">
+                <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+              </span>
+              <span style="box-sizing: border-box; display: block; flex-basis: 0%; flex-grow: 1; height: 20px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; width: 176px">
+                Lorem ipsu
+              </span>
+            </a>
+            <button data-ref="nav-2-p2" aria-expanded="false" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 24px; justify-content: center; left: 0px; letter-spacing: normal; line-height: var(--font-line-height-5); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 24px">
+              <span style="bottom: 12.5px; box-sizing: border-box; display: block; height: 1px; left: 12.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 12.5px; top: 12.5px; width: 1px">
+                Lorem ipsum dolor s
+              </span>
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; transition-duration: 0.15s; transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); vertical-align: middle; width: 16px"></span>
+            </button>
+          </div>
+        </div>
+        <div style="box-sizing: border-box; display: flex; flex-basis: 0%; flex-direction: column; flex-grow: 1; height: 8px; overflow-x: hidden; overflow-y: auto; padding-bottom: var(--space-5); padding-left: var(--space-6); padding-right: var(--space-6); width: 272px">
+          <div style="box-sizing: border-box; display: flex; flex-direction: column; height: 160px; width: 252px">
+            <a data-ref="nav-2-p3" data-selected="false" href="#" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; font-size: var(--font-size-300); gap: var(--space-4); height: 32px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; padding-bottom: var(--space-3); padding-left: var(--space-10); padding-right: var(--space-6); padding-top: var(--space-3); text-align: left; text-overflow: ellipsis; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 252px">
+              <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px">
+                <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+              </span>
+              <span style="box-sizing: border-box; display: block; flex-basis: 0%; flex-grow: 1; height: 20px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; width: 198px">
+                Lorem ipsum do
+              </span>
+            </a>
+            <a data-ref="nav-2-p4" data-selected="false" href="#" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; font-size: var(--font-size-300); gap: var(--space-4); height: 32px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; padding-bottom: var(--space-3); padding-left: var(--space-10); padding-right: var(--space-6); padding-top: var(--space-3); text-align: left; text-overflow: ellipsis; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 252px">
+              <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px">
+                <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+              </span>
+              <span style="box-sizing: border-box; display: block; flex-basis: 0%; flex-grow: 1; height: 20px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; width: 198px">
+                Lorem ipsu
+              </span>
+            </a>
+            <a data-ref="nav-2-p5" data-selected="false" href="#" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; font-size: var(--font-size-300); gap: var(--space-4); height: 32px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; padding-bottom: var(--space-3); padding-left: var(--space-10); padding-right: var(--space-6); padding-top: var(--space-3); text-align: left; text-overflow: ellipsis; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 252px">
+              <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px">
+                <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+              </span>
+              <span style="box-sizing: border-box; display: block; flex-basis: 0%; flex-grow: 1; height: 20px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; width: 198px">
+                Lorem ipsum dolor
+              </span>
+            </a>
+            <a data-ref="nav-2-p6" data-selected="false" href="#" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; font-size: var(--font-size-300); gap: var(--space-4); height: 32px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; padding-bottom: var(--space-3); padding-left: var(--space-10); padding-right: var(--space-6); padding-top: var(--space-3); text-align: left; text-overflow: ellipsis; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 252px">
+              <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px">
+                <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+              </span>
+              <span style="box-sizing: border-box; display: block; flex-basis: 0%; flex-grow: 1; height: 20px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; width: 198px">
+                Lorem ipsuma
+              </span>
+            </a>
+            <a data-ref="nav-2-p7" data-selected="false" href="#" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; font-size: var(--font-size-300); gap: var(--space-4); height: 32px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; padding-bottom: var(--space-3); padding-left: var(--space-10); padding-right: var(--space-6); padding-top: var(--space-3); text-align: left; text-overflow: ellipsis; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 252px">
+              <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px">
+                <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+              </span>
+              <span style="box-sizing: border-box; display: block; flex-basis: 0%; flex-grow: 1; height: 20px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; width: 198px">
+                Lorem ipsum do
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+      <div style="box-sizing: border-box; display: flex; flex-direction: column; flex-grow: 1; height: 787px; overflow-x: hidden; overflow-y: auto; padding-bottom: var(--space-6); padding-left: var(--space-6); padding-right: var(--space-6); padding-top: var(--space-6); width: 272px">
+        <section style="box-sizing: border-box; display: flex; flex-direction: column; flex-shrink: 0; height: 64px; width: 252px">
+          <div style="align-items: center; box-sizing: border-box; display: flex; gap: var(--space-3); height: 32px; padding-bottom: var(--space-3); padding-right: var(--space-3); padding-top: var(--space-3); width: 252px">
+            <button data-ref="nav-2-p8" aria-expanded="true" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; font-size: var(--font-size-200); font-weight: var(--font-weight-500); gap: 0px; height: 24px; left: 0px; line-height: var(--font-line-height-5); padding-left: var(--space-4); padding-right: var(--space-4); position: relative; right: 0px; text-align: center; top: 0px; width: 98px">
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; color: var(--color-palette-9); display: block; height: 12px; margin-right: var(--space-3); overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 12px"></span>
+              Lorem ips
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 12px; overflow-x: hidden; overflow-y: hidden; transition-duration: 0.15s; transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); vertical-align: middle; width: 12px"></span>
+            </button>
+          </div>
+          <div style="box-sizing: border-box; display: grid; grid-template-columns: 252px; grid-template-rows: 32px; height: 32px; transition-duration: 0.2s; transition-property: grid-template-rows; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 252px">
+            <div style="box-sizing: border-box; display: block; height: 32px; overflow-x: hidden; overflow-y: hidden; width: 252px">
+              <a data-ref="nav-2-p9" data-selected="false" href="#" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: flex; font-size: var(--font-size-300); gap: var(--space-4); height: 32px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; padding-bottom: var(--space-3); padding-left: var(--space-6); padding-right: var(--space-6); padding-top: var(--space-3); text-align: left; text-overflow: ellipsis; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 252px">
+                <span style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 20px; justify-content: center; width: 20px">
+                  <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+                </span>
+                <span style="box-sizing: border-box; display: block; flex-basis: 0%; flex-grow: 1; height: 20px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; width: 206px">
+                  Lorem ipsum dolo
+                </span>
+              </a>
+            </div>
+          </div>
+        </section>
+        <div style="align-items: center; box-sizing: border-box; display: flex; gap: var(--space-3); height: 32px; padding-bottom: var(--space-3); padding-right: var(--space-3); padding-top: var(--space-3); width: 252px">
+          <button data-ref="nav-2-p10" aria-expanded="true" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; font-size: var(--font-size-200); font-weight: var(--font-weight-500); gap: 0px; height: 24px; left: 0px; line-height: var(--font-line-height-5); padding-left: var(--space-4); padding-right: var(--space-4); position: relative; right: 0px; text-align: center; top: 0px; width: 83px">
+            <span class="ref-media" data-media="svg" style="box-sizing: border-box; color: var(--color-palette-9); display: block; height: 12px; margin-right: var(--space-3); overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 12px"></span>
+            Lorema
+            <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 12px; overflow-x: hidden; overflow-y: hidden; transition-duration: 0.15s; transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); vertical-align: middle; width: 12px"></span>
+          </button>
+          <div style="align-items: center; box-sizing: border-box; display: flex; gap: var(--space-2); height: 24px; margin-left: var(--space-21); opacity: 0; transition-duration: 0.15s; transition-property: opacity; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 52px">
+            <div style="align-items: center; box-sizing: border-box; display: flex; gap: var(--space-3); height: 24px; width: 52px">
+              <button data-ref="nav-2-p11" aria-expanded="false" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 24px; justify-content: center; left: 0px; line-height: var(--font-line-height-5); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 24px">
+                <span style="bottom: 12.5px; box-sizing: border-box; display: block; height: 1px; left: 12.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 12.5px; top: 12.5px; white-space: nowrap; width: 1px">
+                  Lorem ipsum dolor
+                </span>
+                <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 12px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 12px"></span>
+              </button>
+              <button data-ref="nav-2-p12" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 24px; justify-content: center; left: 0px; line-height: var(--font-line-height-5); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 24px">
+                <span style="bottom: 12.5px; box-sizing: border-box; display: block; height: 1px; left: 12.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 12.5px; top: 12.5px; white-space: nowrap; width: 1px">
+                  Lorem ipsum dolo
+                </span>
+                <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 12px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 12px"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div style="box-sizing: border-box; display: grid; grid-template-columns: 252px; grid-template-rows: 32px; height: 32px; transition-duration: 0.2s; transition-property: grid-template-rows; transition-timing-function: cubic-bezier(0, 0, 0.2, 1); width: 252px">
+          <div style="box-sizing: border-box; display: block; height: 32px; overflow-x: hidden; overflow-y: hidden; width: 252px">
+            <div style="bottom: 0px; box-sizing: border-box; display: block; flex-shrink: 0; height: 32px; left: 0px; position: relative; right: 0px; top: 0px; width: 252px">
+              <div style="bottom: 0px; box-sizing: border-box; display: flex; flex-direction: column; height: 32px; left: 0px; position: absolute; right: 0px; top: 0px; width: 252px">
+                <div style="bottom: 0px; box-sizing: border-box; display: block; height: 32px; left: 0px; position: relative; right: 0px; top: 0px; width: 252px">
+                  <div style="bottom: 0px; box-sizing: border-box; display: block; height: 32px; left: 0px; position: relative; right: 0px; top: 0px; width: 252px">
+                    <div style="align-items: center; bottom: 28px; box-sizing: border-box; display: flex; height: 8px; left: 0px; position: absolute; right: 0px; top: -4px; width: 252px"></div>
+                    <div style="bottom: 0px; box-sizing: border-box; display: block; height: 32px; left: 0px; position: relative; right: 0px; top: 0px; width: 252px">
+                      <div data-state="closed" style="box-sizing: border-box; display: block; height: 32px; width: 252px">
+                        <div data-active="true" data-open="false" style="align-items: center; background-color: var(--color-palette-16); border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); bottom: 0px; box-sizing: border-box; color: var(--color-palette-2); cursor: pointer; display: flex; font-size: var(--font-size-300); font-weight: var(--font-weight-500); gap: var(--space-3); height: 32px; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-5); padding-bottom: var(--space-3); padding-left: var(--space-8); padding-right: var(--space-3); padding-top: var(--space-3); position: relative; right: 0px; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 252px">
+                          <a data-ref="nav-2-p13" href="#" style="bottom: 0px; box-sizing: border-box; color: var(--color-palette-7); display: block; height: 32px; left: 0px; position: absolute; right: 0px; top: 0px; width: 252px">
+                            <span style="bottom: 33px; box-sizing: border-box; display: block; height: 1px; left: 0px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 253px; top: 0px; white-space: nowrap; width: 1px">
+                              Lorem
+                              Lorem ipsum dolor si
+                            </span>
+                          </a>
+                          <span style="align-items: center; box-sizing: border-box; color: var(--color-palette-12); display: flex; flex-shrink: 0; height: 24px; justify-content: center; width: 24px">
+                            <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+                          </span>
+                          <span style="box-sizing: border-box; display: block; flex-grow: 1; height: 18px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; white-space: nowrap; width: 206px">
+                            Lorem ipsum dolor si
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="align-items: center; bottom: -4px; box-sizing: border-box; display: flex; height: 8px; left: 0px; position: absolute; right: 0px; top: 28px; width: 252px"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div></div>
+</section>
+</body>
+</html>

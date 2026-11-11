@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Título · referencia</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* Cada referencia parte de cero: solo cuentan los estilos escritos en cada elemento. */
+.ref, .ref * { all: unset; }
+.ref { display: block; }
+.ref .ref-media { outline: 1px dashed currentColor; outline-offset: -1px; }
+body { margin: 0; padding: 24px; font-family: system-ui, sans-serif; background: #fff; color: #111; }
+.sheet-title { font-size: 20px; margin: 0 0 4px; }
+.sheet-note { font-size: 13px; color: #555; margin: 0 0 24px; }
+.variant { margin: 0 0 32px; }
+.variant-title { font-size: 13px; font-weight: 600; margin: 0 0 8px; color: #333; }
+.stage { padding: 16px; border: 1px dashed #bbb; overflow: auto; }
+/* Estados leídos de las hojas de estilo del sitio. */
+
+</style>
+</head>
+<body>
+<h1 class="sheet-title">Título</h1>
+<p class="sheet-note">Referencia generada con estilos medidos. Los recuadros punteados sustituyen a iconos e imágenes.</p>
+<section class="variant">
+<h2 class="variant-title">heading-1 · 3 usos · 936 × 40 px</h2>
+<div class="stage"><div class="ref">
+  <h1 data-ref="heading-1" style="box-sizing: border-box; color: var(--color-palette-2); cursor: auto; display: block; font-family: var(--font-family-body); font-size: var(--font-size-500); font-style: normal; font-weight: var(--font-weight-600); height: 40px; letter-spacing: var(--font-letter-spacing-1); line-height: var(--font-line-height-9); padding-bottom: var(--space-3); padding-left: var(--space-5); padding-right: var(--space-5); padding-top: var(--space-3); text-align: start; text-transform: none; white-space: normal; width: 936px">
+    Lorem ip
+  </h1>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">heading-2 · 1 usos · 147.8 × 24 px</h2>
+<div class="stage"><div class="ref">
+  <h1 data-ref="heading-2" style="box-sizing: border-box; color: var(--color-palette-2); cursor: auto; display: block; font-family: var(--font-family-body); font-size: var(--font-size-400); font-style: normal; font-weight: var(--font-weight-500); height: 24px; letter-spacing: var(--font-letter-spacing-2); line-height: var(--font-line-height-7); text-align: center; text-transform: none; white-space: normal; width: 147.844px">
+    Lorem ipsum dolora
+  </h1>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">heading-3 · 1 usos · 448 × 28.8 px</h2>
+<div class="stage"><div class="ref">
+  <h1 data-ref="heading-3" style="box-sizing: border-box; color: var(--color-palette-2); cursor: auto; display: block; font-family: var(--font-family-body); font-size: var(--font-size-500); font-style: normal; font-weight: var(--font-weight-500); height: 28.7969px; letter-spacing: var(--font-letter-spacing-1); line-height: var(--font-line-height-8); text-align: center; text-transform: none; white-space: normal; width: 448px">
+    Lorem ipsum dolor sit
+  </h1>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">heading-4 · 1 usos · 920 × 32 px</h2>
+<div class="stage"><div class="ref">
+  <h1 data-ref="heading-4" style="box-sizing: border-box; color: var(--color-palette-2); cursor: auto; display: block; font-family: var(--font-family-body); font-size: var(--font-size-500); font-style: normal; font-weight: var(--font-weight-600); height: 32px; letter-spacing: var(--font-letter-spacing-1); line-height: var(--font-line-height-9); text-align: start; text-transform: none; white-space: normal; width: 920px">
+    Lorem ipsum
+  </h1>
+</div></div>
+</section>
+</body>
+</html>

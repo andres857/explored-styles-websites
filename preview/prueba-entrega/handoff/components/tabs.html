@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pestañas · referencia</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* Cada referencia parte de cero: solo cuentan los estilos escritos en cada elemento. */
+.ref, .ref * { all: unset; }
+.ref { display: block; }
+.ref .ref-media { outline: 1px dashed currentColor; outline-offset: -1px; }
+body { margin: 0; padding: 24px; font-family: system-ui, sans-serif; background: #fff; color: #111; }
+.sheet-title { font-size: 20px; margin: 0 0 4px; }
+.sheet-note { font-size: 13px; color: #555; margin: 0 0 24px; }
+.variant { margin: 0 0 32px; }
+.variant-title { font-size: 13px; font-weight: 600; margin: 0 0 8px; color: #333; }
+.stage { padding: 16px; border: 1px dashed #bbb; overflow: auto; }
+/* Estados leídos de las hojas de estilo del sitio. */
+[data-ref="tabs-1-p1"][data-disabled] {
+  cursor: not-allowed !important;
+  opacity: 0.45 !important;
+}
+[data-ref="tabs-1-p2"][data-disabled] {
+  cursor: not-allowed !important;
+  opacity: 0.45 !important;
+}
+[data-ref="tabs-1-p2"][data-state="active"] {
+  border-bottom-color: var(--color-palette-7) !important;
+}
+[data-ref="tabs-1-p3"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="tabs-1-p3"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="tabs-1-p3"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+[data-ref="tabs-2-p1"][data-disabled] {
+  cursor: not-allowed !important;
+  opacity: 0.45 !important;
+}
+[data-ref="tabs-2-p1"][data-state="inactive"] {
+  color: var(--color-text-secondary) !important;
+}
+[data-ref="tabs-2-p2"][data-disabled] {
+  cursor: not-allowed !important;
+  opacity: 0.45 !important;
+}
+[data-ref="tabs-2-p2"][data-state="active"] {
+  border-bottom-color: var(--color-palette-7) !important;
+  color: var(--color-palette-2) !important;
+}
+</style>
+</head>
+<body>
+<h1 class="sheet-title">Pestañas</h1>
+<p class="sheet-note">Referencia generada con estilos medidos. Los recuadros punteados sustituyen a iconos e imágenes.</p>
+<section class="variant">
+<h2 class="variant-title">tabs-1 · 3 usos · 968 × 34 px</h2>
+<div class="stage"><div class="ref">
+  <div data-ref="tabs-1" role="tablist" style="align-items: center; border-bottom-color: var(--color-palette-14); border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; color: var(--color-text-primary); cursor: auto; display: flex; font-family: var(--font-family-body); font-size: var(--font-size-400); font-style: normal; font-weight: var(--font-weight-400); height: 34px; justify-content: space-between; letter-spacing: normal; line-height: var(--font-line-height-7); padding-left: var(--space-12); padding-right: var(--space-9); text-align: start; text-transform: none; white-space: normal; width: 968px">
+    <div style="box-sizing: border-box; display: flex; gap: var(--space-11); height: 33px; width: 177px">
+      <button data-ref="tabs-1-p1" aria-selected="true" data-state="active" role="tab" type="button" style="border-bottom-color: var(--color-palette-7); border-bottom-style: solid; border-bottom-width: 2px; border-top-color: rgba(0, 0, 0, 0); border-top-style: solid; border-top-width: 2px; box-sizing: border-box; color: var(--color-palette-2); cursor: pointer; display: block; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 34px; line-height: var(--font-line-height-5); margin-bottom: -1px; text-align: center; width: 80px">
+        <div style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); box-sizing: border-box; display: flex; gap: var(--space-3); height: 26px; margin-bottom: var(--space-3); margin-left: -8px; margin-right: -8px; padding-bottom: var(--space-3); padding-left: var(--space-5); padding-right: var(--space-5); padding-top: var(--space-3); width: 96px">
+          Lorem ipsum
+        </div>
+      </button>
+      <button data-ref="tabs-1-p2" aria-selected="false" data-state="inactive" role="tab" type="button" style="border-bottom-color: rgba(0, 0, 0, 0); border-bottom-style: solid; border-bottom-width: 2px; border-top-color: rgba(0, 0, 0, 0); border-top-style: solid; border-top-width: 2px; box-sizing: border-box; color: var(--color-palette-2); cursor: pointer; display: block; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 34px; line-height: var(--font-line-height-5); margin-bottom: -1px; text-align: center; width: 77px">
+        <div style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); box-sizing: border-box; display: flex; gap: var(--space-3); height: 26px; margin-bottom: var(--space-3); margin-left: -8px; margin-right: -8px; padding-bottom: var(--space-3); padding-left: var(--space-5); padding-right: var(--space-5); padding-top: var(--space-3); width: 93px">
+          Lorem ipsuma
+        </div>
+      </button>
+    </div>
+    <div data-state="closed" style="box-sizing: border-box; display: block; height: 24px; width: 102px">
+      <button data-ref="tabs-1-p3" aria-expanded="false" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 24px; justify-content: center; left: 0px; line-height: var(--font-line-height-5); padding-left: var(--space-5); padding-right: var(--space-5); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 102px">
+        Lorem ipsu
+        <div style="box-sizing: border-box; display: block; flex-shrink: 0; height: 12px; margin-left: var(--space-3); width: 12px">
+          <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 12px; overflow-x: hidden; overflow-y: hidden; transition-duration: 0.15s; transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); vertical-align: middle; width: 12px"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">tabs-2 · 1 usos · 130 × 33 px</h2>
+<div class="stage"><div class="ref">
+  <div data-ref="tabs-2" role="tablist" style="box-sizing: border-box; color: var(--color-text-primary); cursor: auto; display: flex; font-family: var(--font-family-body); font-size: var(--font-size-400); font-style: normal; font-weight: var(--font-weight-400); height: 33px; justify-content: space-between; letter-spacing: normal; line-height: var(--font-line-height-7); text-align: start; text-transform: none; white-space: normal; width: 130px">
+    <div style="box-sizing: border-box; display: flex; gap: var(--space-11); height: 33px; width: 130px">
+      <button data-ref="tabs-2-p1" aria-selected="true" data-state="active" role="tab" type="button" style="border-bottom-color: var(--color-palette-7); border-bottom-style: solid; border-bottom-width: 2px; border-top-color: rgba(0, 0, 0, 0); border-top-style: solid; border-top-width: 2px; box-sizing: border-box; color: var(--color-palette-2); cursor: pointer; display: block; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 34px; line-height: var(--font-line-height-5); margin-bottom: -1px; text-align: center; width: 51px">
+        <div style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); box-sizing: border-box; display: flex; gap: var(--space-3); height: 26px; margin-bottom: var(--space-3); margin-left: -8px; margin-right: -8px; padding-bottom: var(--space-3); padding-left: var(--space-5); padding-right: var(--space-5); padding-top: var(--space-3); width: 67px">
+          Lorem i
+        </div>
+      </button>
+      <button data-ref="tabs-2-p2" aria-selected="false" data-state="inactive" role="tab" type="button" style="border-bottom-color: rgba(0, 0, 0, 0); border-bottom-style: solid; border-bottom-width: 2px; border-top-color: rgba(0, 0, 0, 0); border-top-style: solid; border-top-width: 2px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: block; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 34px; line-height: var(--font-line-height-5); margin-bottom: -1px; text-align: center; width: 59px">
+        <div style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); box-sizing: border-box; display: flex; gap: var(--space-3); height: 26px; margin-bottom: var(--space-3); margin-left: -8px; margin-right: -8px; padding-bottom: var(--space-3); padding-left: var(--space-5); padding-right: var(--space-5); padding-top: var(--space-3); width: 75px">
+          <span style="align-items: center; box-sizing: border-box; display: flex; gap: var(--space-4); height: 18px; width: 59px">
+            Lorem ip
+          </span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div></div>
+</section>
+</body>
+</html>

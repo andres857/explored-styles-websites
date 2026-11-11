@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cabecera · referencia</title>
+<link rel="stylesheet" href="../tokens.css">
+<style>
+/* Cada referencia parte de cero: solo cuentan los estilos escritos en cada elemento. */
+.ref, .ref * { all: unset; }
+.ref { display: block; }
+.ref .ref-media { outline: 1px dashed currentColor; outline-offset: -1px; }
+body { margin: 0; padding: 24px; font-family: system-ui, sans-serif; background: #fff; color: #111; }
+.sheet-title { font-size: 20px; margin: 0 0 4px; }
+.sheet-note { font-size: 13px; color: #555; margin: 0 0 24px; }
+.variant { margin: 0 0 32px; }
+.variant-title { font-size: 13px; font-weight: 600; margin: 0 0 8px; color: #333; }
+.stage { padding: 16px; border: 1px dashed #bbb; overflow: auto; }
+/* Estados leídos de las hojas de estilo del sitio. */
+[data-ref="header-1-p1"][data-state="open"] {
+  background-color: var(--color-palette-17) !important;
+}
+[data-ref="header-1-p1"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 2px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="header-1-p1"]:hover {
+  background-color: var(--color-palette-17) !important;
+}
+[data-ref="header-1-p2"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="header-1-p2"]:hover {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-1-p3"]:focus-visible {
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px, rgba(59, 130, 246, 0.5) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px !important;
+}
+[data-ref="header-1-p4"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-1-p4"]:disabled {
+  background-color: var(--color-palette-16) !important;
+  border-bottom-width: 0px !important;
+  border-left-width: 0px !important;
+  border-right-width: 0px !important;
+  border-top-width: 0px !important;
+  color: var(--color-palette-2) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-1-p4"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+[data-ref="header-1-p5"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-1-p5"]:disabled {
+  color: var(--color-palette-2) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-1-p5"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+[data-ref="header-1-p6"]:disabled {
+  background-color: var(--color-palette-16) !important;
+  color: var(--color-palette-2) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-1-p7"]:active {
+  background-color: var(--color-palette-3) !important;
+}
+[data-ref="header-1-p7"]:disabled {
+  background-color: var(--color-palette-16) !important;
+  color: var(--color-palette-2) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-1-p7"]:hover {
+  background-color: var(--color-palette-3) !important;
+}
+[data-ref="header-2"]:active {
+  cursor: grabbing !important;
+}
+[data-ref="header-2-p1"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-2-p1"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-2-p1"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+[data-ref="header-2-p2"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-2-p2"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-2-p2"]:hover {
+  background-color: var(--color-palette-13) !important;
+  transition-duration: 0.15s !important;
+  transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+[data-ref="header-2-p3"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-2-p3"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-2-p3"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+[data-ref="header-5-p1"]:hover {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-5-p2"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-5-p2"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-5-p2"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+[data-ref="header-5-p3"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-5-p3"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-5-p3"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+[data-ref="header-5-p4"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-5-p4"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-5-p4"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+[data-ref="header-5-p5"][data-disabled] {
+  cursor: not-allowed !important;
+  opacity: 0.45 !important;
+}
+[data-ref="header-5-p5"][data-state="inactive"] {
+  color: var(--color-text-secondary) !important;
+}
+[data-ref="header-5-p6"][data-disabled] {
+  cursor: not-allowed !important;
+  opacity: 0.45 !important;
+}
+[data-ref="header-5-p6"][data-state="active"] {
+  border-bottom-color: var(--color-palette-7) !important;
+  color: var(--color-palette-2) !important;
+}
+[data-ref="header-5-p7"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-5-p7"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-5-p7"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+[data-ref="header-5-p8"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-5-p8"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-5-p8"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+[data-ref="header-5-p9"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-5-p9"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-5-p9"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+[data-ref="header-5-p10"]:active {
+  background-color: var(--color-palette-14) !important;
+}
+[data-ref="header-5-p10"]:disabled {
+  color: var(--color-text-secondary) !important;
+  cursor: not-allowed !important;
+}
+[data-ref="header-5-p10"]:hover {
+  background-color: var(--color-palette-13) !important;
+}
+</style>
+</head>
+<body>
+<h1 class="sheet-title">Cabecera</h1>
+<p class="sheet-note">Referencia generada con estilos medidos. Los recuadros punteados sustituyen a iconos e imágenes.</p>
+<section class="variant">
+<h2 class="variant-title">header-1 · 5 usos · 1028 × 56 px</h2>
+<div class="stage"><div class="ref">
+  <header data-ref="header-1" style="align-items: center; background-color: var(--color-surface); border-bottom-color: var(--color-palette-15); border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; color: var(--color-text-primary); cursor: auto; display: grid; flex-shrink: 0; font-family: var(--font-family-body); font-size: var(--font-size-400); font-style: normal; font-weight: var(--font-weight-400); grid-template-columns: 304px 420px 304px; grid-template-rows: 55px; height: 56px; letter-spacing: normal; line-height: var(--font-line-height-7); text-align: start; text-transform: none; white-space: normal; width: 1028px">
+    <div style="box-sizing: border-box; display: flex; flex-shrink: 0; height: 55px; justify-content: flow-start; width: 118.672px">
+      <div style="align-items: stretch; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 55px; left: 0px; overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; top: 0px; width: 118.672px">
+        <div style="align-items: stretch; box-sizing: border-box; display: flex; height: 55px; width: 100.672px">
+          <button data-ref="header-1-p1" aria-expanded="false" data-state="closed" type="button" style="align-items: center; border-top-left-radius: var(--radius-5); box-sizing: border-box; color: var(--color-palette-2); cursor: pointer; display: flex; font-size: var(--font-size-300); font-weight: var(--font-weight-500); gap: var(--space-5); height: 55px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; padding-left: var(--space-7); padding-right: var(--space-7); text-align: center; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 100.672px">
+            <span style="align-items: center; background-color: var(--color-surface); border-bottom-color: var(--color-palette-14); border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-bottom-style: solid; border-bottom-width: 1px; border-left-color: var(--color-palette-14); border-left-style: solid; border-left-width: 1px; border-right-color: var(--color-palette-14); border-right-style: solid; border-right-width: 1px; border-top-color: var(--color-palette-14); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); border-top-style: solid; border-top-width: 1px; bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 32px; justify-content: center; left: 0px; overflow-x: hidden; overflow-y: hidden; position: relative; right: 0px; top: 0px; width: 32px">
+              <span class="ref-media" data-media="img" style="bottom: 0px; box-sizing: border-box; color: rgba(0, 0, 0, 0); display: block; height: 30px; left: 0px; overflow-x: clip; overflow-y: clip; position: absolute; right: 0px; top: 0px; vertical-align: middle; width: 30px"></span>
+            </span>
+            <span style="box-sizing: border-box; display: block; height: 20px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; transition-duration: 0.15s; transition-property: opacity; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 28.6719px">
+              Lore
+            </span>
+            <span class="ref-media" data-media="svg" style="box-sizing: border-box; color: var(--color-palette-9); display: block; flex-shrink: 0; height: 14px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 14px"></span>
+          </button>
+        </div>
+        <span style="box-sizing: border-box; display: block; flex-shrink: 0; height: 55px; margin-left: var(--space-3); transition-duration: 0.15s; transition-property: margin, width; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 14px"></span>
+      </div>
+    </div>
+    <div style="align-items: center; box-sizing: border-box; display: flex; flex-basis: 0%; flex-grow: 1; height: 40px; justify-content: center; padding-left: var(--space-5); padding-right: var(--space-5); width: 420px">
+      <div style="box-sizing: border-box; display: block; height: 40px; width: 404px">
+        <div style="box-sizing: border-box; display: block; height: 40px; width: 404px">
+          <label style="bottom: 885.5px; box-sizing: border-box; cursor: default; display: block; height: 1px; left: 312px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 717px; top: 7.5px; white-space: nowrap; width: 1px"></label>
+          <div style="bottom: 0px; box-sizing: border-box; display: block; height: 40px; left: 0px; position: relative; right: 0px; top: 0px; width: 404px">
+            <div style="align-items: stretch; background-color: var(--color-surface); border-bottom-color: var(--color-palette-13); border-bottom-left-radius: var(--radius-full); border-bottom-right-radius: var(--radius-full); border-bottom-style: solid; border-bottom-width: 1px; border-left-color: var(--color-palette-13); border-left-style: solid; border-left-width: 1px; border-right-color: var(--color-palette-13); border-right-style: solid; border-right-width: 1px; border-top-color: var(--color-palette-13); border-top-left-radius: var(--radius-full); border-top-right-radius: var(--radius-full); border-top-style: solid; border-top-width: 1px; bottom: 0px; box-shadow: var(--shadow-3); box-sizing: border-box; cursor: pointer; display: flex; gap: var(--space-3); height: 40px; left: 0px; overflow-x: hidden; overflow-y: hidden; padding-left: var(--space-3); padding-right: var(--space-3); position: relative; right: 0px; text-align: left; top: 0px; transition-duration: 0.15s; transition-property: background-color, box-shadow; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 404px">
+              <span style="align-items: center; align-self: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 32px; width: 46px">
+                <button data-ref="header-1-p2" aria-expanded="false" aria-label="Lorem ipsuma" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-full); border-bottom-right-radius: var(--radius-full); border-top-left-radius: var(--radius-full); border-top-right-radius: var(--radius-full); box-sizing: border-box; color: var(--color-palette-9); display: flex; gap: var(--space-2); height: 32px; justify-content: center; padding-left: var(--space-5); padding-right: var(--space-5); text-align: center; width: 46px">
+                  <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+                  <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; flex-shrink: 0; height: 12px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 12px"></span>
+                </button>
+              </span>
+              <button data-ref="header-1-p3" aria-expanded="false" aria-label="Lorem ipsum dolor sit ameta" data-state="closed" type="button" style="align-items: center; align-self: stretch; box-sizing: border-box; display: flex; flex-basis: 0%; flex-grow: 1; gap: var(--space-3); height: 38px; overflow-x: hidden; overflow-y: hidden; padding-bottom: var(--space-3); padding-right: var(--space-3); padding-top: var(--space-3); width: 340px">
+                <span style="align-items: center; box-sizing: border-box; color: var(--color-text-secondary); display: flex; flex-basis: 0%; flex-grow: 1; font-size: var(--font-size-300); height: 20px; justify-content: flow-start; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); overflow-x: hidden; overflow-y: hidden; width: 336px">
+                  <span style="box-sizing: border-box; display: block; height: 20px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; width: 180.734px">
+                    Lorem ipsum dolor sit ameta
+                  </span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="box-sizing: border-box; display: flex; flex-shrink: 0; height: 32px; justify-content: flow-end; width: 303.672px">
+      <div style="box-sizing: border-box; display: flex; gap: var(--space-5); height: 32px; padding-left: var(--space-7); padding-right: var(--space-7); width: 303.672px">
+        <div style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; gap: var(--space-3); height: 32px; width: 279.672px">
+          <button data-ref="header-1-p4" aria-expanded="false" data-state="closed" type="button" style="align-items: center; border-bottom-color: var(--color-palette-13); border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-bottom-style: solid; border-bottom-width: 1px; border-left-color: var(--color-palette-13); border-left-style: solid; border-left-width: 1px; border-right-color: var(--color-palette-13); border-right-style: solid; border-right-width: 1px; border-top-color: var(--color-palette-13); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); border-top-style: solid; border-top-width: 1px; bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); font-weight: var(--font-weight-600); height: 32px; justify-content: center; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 32px">
+            <span style="bottom: 15.5px; box-sizing: border-box; display: block; height: 1px; left: 15.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 15.5px; top: 15.5px; white-space: nowrap; width: 1px">
+              Lorema
+            </span>
+            <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+          </button>
+          <button data-ref="header-1-p5" aria-expanded="false" data-state="closed" type="button" style="align-items: center; background-color: var(--color-palette-16); border-bottom-color: var(--color-palette-13); border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-bottom-style: solid; border-bottom-width: 1px; border-left-color: var(--color-palette-13); border-left-style: solid; border-left-width: 1px; border-right-color: var(--color-palette-13); border-right-style: solid; border-right-width: 1px; border-top-color: var(--color-palette-13); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); border-top-style: solid; border-top-width: 1px; bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); font-weight: var(--font-weight-600); height: 32px; justify-content: center; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); padding-left: var(--space-6); padding-right: var(--space-6); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 95.5px">
+            <div style="box-sizing: border-box; display: block; flex-shrink: 0; height: 16px; margin-right: var(--space-5); width: 16px">
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+            </div>
+            Lorema
+          </button>
+          <div style="border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); bottom: 0px; box-sizing: border-box; display: flex; flex-shrink: 0; height: 32px; left: 0px; position: relative; right: 0px; top: 0px; width: 144.172px">
+            <button data-ref="header-1-p6" aria-expanded="true" type="button" style="align-items: center; background-color: var(--color-palette-3); border-bottom-left-radius: var(--radius-4); border-right-color: var(--color-palette-18); border-right-style: solid; border-right-width: 1px; border-top-left-radius: var(--radius-4); bottom: 0px; box-sizing: border-box; color: var(--color-surface); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); font-weight: var(--font-weight-600); gap: var(--space-4); height: 32px; justify-content: center; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); padding-left: var(--space-6); padding-right: var(--space-6); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 112.172px">
+              <div style="box-sizing: border-box; display: block; flex-shrink: 0; height: 16px; width: 16px">
+                <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+              </div>
+              Lorem ipsu
+            </button>
+            <button data-ref="header-1-p7" aria-pressed="false" data-state="closed" type="button" style="align-items: center; background-color: var(--color-primary); border-bottom-right-radius: var(--radius-4); border-top-right-radius: var(--radius-4); bottom: 0px; box-sizing: border-box; color: var(--color-surface); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); font-weight: var(--font-weight-600); height: 32px; justify-content: center; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 32px">
+              <span style="bottom: 16.5px; box-sizing: border-box; display: block; height: 1px; left: 16.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 16.5px; top: 16.5px; white-space: nowrap; width: 1px">
+                Lorem
+              </span>
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">header-2 · 4 usos · 400 × 56 px</h2>
+<div class="stage"><div class="ref">
+  <header data-ref="header-2" style="align-items: center; border-bottom-color: var(--color-palette-14); border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; color: var(--color-text-primary); cursor: grab; display: flex; flex-shrink: 0; font-family: var(--font-family-1); font-size: var(--font-size-400); font-style: normal; font-weight: var(--font-weight-400); gap: var(--space-5); height: 56px; letter-spacing: normal; line-height: var(--font-line-height-7); padding-left: var(--space-3); padding-right: var(--space-9); text-align: start; text-transform: none; white-space: normal; width: 400px">
+    <div style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; height: 55px; justify-content: center; width: 24px">
+      <span class="ref-media" data-media="svg" style="box-sizing: border-box; color: var(--color-palette-11); display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+    </div>
+    <span style="background-color: var(--color-palette-10); border-bottom-left-radius: var(--radius-full); border-bottom-right-radius: var(--radius-full); border-top-left-radius: var(--radius-full); border-top-right-radius: var(--radius-full); box-sizing: border-box; display: block; flex-shrink: 0; height: 6px; width: 6px"></span>
+    <output style="bottom: 865px; box-sizing: border-box; display: block; height: 1px; left: 4px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 397px; top: 28px; white-space: nowrap; width: 1px">
+      Lore
+    </output>
+    <div style="align-items: center; bottom: 0px; box-sizing: border-box; color: var(--color-palette-2); display: flex; flex-basis: 0%; flex-grow: 1; font-size: var(--font-size-300); font-weight: var(--font-weight-600); gap: var(--space-5); height: 20px; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); position: relative; right: 0px; top: 0px; width: 238px">
+      <span style="box-sizing: border-box; display: block; height: 20px; overflow-x: hidden; overflow-y: hidden; text-overflow: ellipsis; white-space: nowrap; width: 64.3281px">
+        Lorem ip
+      </span>
+      <div style="align-items: center; background-color: var(--color-palette-14); border-bottom-left-radius: var(--radius-1); border-bottom-right-radius: var(--radius-1); border-top-left-radius: var(--radius-1); border-top-right-radius: var(--radius-1); box-sizing: border-box; color: var(--color-text-secondary); display: flex; flex-shrink: 0; font-size: var(--font-size-100); font-weight: var(--font-weight-700); gap: var(--space-3); height: 16px; justify-content: space-between; letter-spacing: var(--font-letter-spacing-5); line-height: var(--font-line-height-1); padding-left: var(--space-4); padding-right: var(--space-4); text-transform: uppercase; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 40px">
+        Lore
+      </div>
+    </div>
+    <div style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; gap: var(--space-5); height: 24px; width: 88px">
+      <button data-ref="header-2-p1" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 24px; justify-content: center; left: 0px; line-height: var(--font-line-height-5); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 24px">
+        <span style="bottom: 12.5px; box-sizing: border-box; display: block; height: 1px; left: 12.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 12.5px; top: 12.5px; white-space: nowrap; width: 1px">
+          Lorem ipsu
+        </span>
+        <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+      </button>
+      <button data-ref="header-2-p2" aria-pressed="false" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 24px; justify-content: center; left: 0px; line-height: var(--font-line-height-5); position: relative; right: 0px; text-align: center; top: 0px; width: 24px">
+        <span style="bottom: 12.5px; box-sizing: border-box; display: block; height: 1px; left: 12.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 12.5px; top: 12.5px; white-space: nowrap; width: 1px">
+          Lorem ipsu
+        </span>
+        <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+      </button>
+      <button data-ref="header-2-p3" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 24px; justify-content: center; left: 0px; line-height: var(--font-line-height-5); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 24px">
+        <span style="bottom: 12.5px; box-sizing: border-box; display: block; height: 1px; left: 12.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 12.5px; top: 12.5px; white-space: nowrap; width: 1px">
+          Lorem ip
+        </span>
+        <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+      </button>
+    </div>
+  </header>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">header-3 · 3 usos · 968 × 86 px</h2>
+<div class="stage"><div class="ref">
+  <header data-ref="header-3" style="box-sizing: border-box; color: var(--color-text-primary); cursor: auto; display: block; font-family: var(--font-family-body); font-size: var(--font-size-400); font-style: normal; font-weight: var(--font-weight-400); height: 86px; letter-spacing: normal; line-height: var(--font-line-height-7); padding-bottom: var(--space-9); padding-left: var(--space-9); padding-right: var(--space-9); padding-top: var(--space-7); text-align: start; text-transform: none; white-space: normal; width: 968px">
+    <h1 style="box-sizing: border-box; color: var(--color-palette-2); display: block; font-size: var(--font-size-500); font-weight: var(--font-weight-600); height: 40px; letter-spacing: var(--font-letter-spacing-1); line-height: var(--font-line-height-9); padding-bottom: var(--space-3); padding-left: var(--space-5); padding-right: var(--space-5); padding-top: var(--space-3); width: 936px">
+      Lorem ip
+    </h1>
+    <p style="box-sizing: border-box; color: var(--color-text-secondary); display: block; font-size: var(--font-size-200); height: 18px; line-height: var(--font-line-height-5); padding-left: var(--space-5); width: 936px">
+      Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor Lorem ipsum dolor si
+    </p>
+  </header>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">header-4 · 1 usos · 968 × 85 px</h2>
+<div class="stage"><div class="ref">
+  <header data-ref="header-4" style="border-bottom-color: var(--color-palette-14); border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; color: var(--color-text-primary); cursor: auto; display: block; flex-shrink: 0; font-family: var(--font-family-body); font-size: var(--font-size-400); font-style: normal; font-weight: var(--font-weight-400); height: 85px; letter-spacing: normal; line-height: var(--font-line-height-7); padding-bottom: var(--space-9); padding-left: var(--space-12); padding-right: var(--space-12); padding-top: var(--space-7); text-align: start; text-transform: none; white-space: normal; width: 968px">
+    <h1 style="box-sizing: border-box; color: var(--color-palette-2); display: block; font-size: var(--font-size-500); font-weight: var(--font-weight-600); height: 32px; letter-spacing: var(--font-letter-spacing-1); line-height: var(--font-line-height-9); width: 920px">
+      Lorem ipsum
+    </h1>
+    <p style="box-sizing: border-box; color: var(--color-text-secondary); display: block; font-size: var(--font-size-300); height: 20px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); margin-top: var(--space-3); width: 750px">
+      Lorem ipsum dolor sit amet consectetur adipiscing e
+    </p>
+  </header>
+</div></div>
+</section>
+<section class="variant">
+<h2 class="variant-title">header-5 · 1 usos · 696 × 98.8 px</h2>
+<div class="stage"><div class="ref">
+  <header data-ref="header-5" style="box-sizing: border-box; color: var(--color-text-primary); cursor: auto; display: flex; flex-direction: column; font-family: var(--font-family-body); font-size: var(--font-size-400); font-style: normal; font-weight: var(--font-weight-400); gap: var(--space-7); height: 98.7969px; letter-spacing: normal; line-height: var(--font-line-height-7); padding-left: var(--space-9); padding-right: var(--space-9); padding-top: var(--space-9); text-align: start; text-transform: none; white-space: normal; width: 696px">
+    <div style="align-items: flow-start; box-sizing: border-box; display: flex; gap: var(--space-7); height: 36.7969px; width: 664px">
+      <div style="box-sizing: border-box; display: block; flex-grow: 1; height: 36.7969px; padding-left: var(--space-5); width: 664px">
+        <div style="align-items: center; box-sizing: border-box; display: flex; gap: var(--space-3); height: 36.7969px; width: 656px">
+          <div style="box-sizing: border-box; color: var(--color-palette-2); display: block; font-size: var(--font-size-500); font-weight: var(--font-weight-600); height: 36.7969px; letter-spacing: var(--font-letter-spacing-1); line-height: var(--font-line-height-8); width: 223.891px">
+            <div style="bottom: 0px; box-sizing: border-box; display: block; height: 36.7969px; left: 0px; position: relative; right: 0px; top: 0px; width: 223.891px">
+              <button data-ref="header-5-p1" type="button" style="border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); cursor: pointer; display: inline-block; height: 28.7969px; margin-left: -8px; overflow-x: hidden; overflow-y: hidden; padding-bottom: var(--space-3); padding-left: var(--space-5); padding-right: var(--space-3); padding-top: var(--space-3); text-align: left; text-overflow: ellipsis; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap; width: 223.891px">
+                Lorem ipsum dolor si
+              </button>
+            </div>
+          </div>
+          <div style="align-items: center; box-sizing: border-box; display: flex; gap: 0px; height: 32px; width: 96px">
+            <button data-ref="header-5-p2" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); font-weight: var(--font-weight-600); height: 32px; justify-content: center; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 32px">
+              <span style="bottom: 16.5px; box-sizing: border-box; display: block; height: 1px; left: 16.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 16.5px; top: 16.5px; white-space: nowrap; width: 1px">
+                Lorem ipsum dolo
+              </span>
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+            </button>
+            <button data-ref="header-5-p3" aria-expanded="false" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); font-weight: var(--font-weight-600); height: 32px; justify-content: center; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 32px">
+              <span style="bottom: 16.5px; box-sizing: border-box; display: block; height: 1px; left: 16.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 16.5px; top: 16.5px; white-space: nowrap; width: 1px">
+                Lorem ipsum d
+              </span>
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+            </button>
+            <button data-ref="header-5-p4" aria-expanded="false" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-4); border-bottom-right-radius: var(--radius-4); border-top-left-radius: var(--radius-4); border-top-right-radius: var(--radius-4); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-300); font-weight: var(--font-weight-600); height: 32px; justify-content: center; left: 0px; letter-spacing: var(--font-letter-spacing-3); line-height: var(--font-line-height-6); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 32px">
+              <span style="bottom: 16.5px; box-sizing: border-box; display: block; height: 1px; left: 16.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 16.5px; top: 16.5px; white-space: nowrap; width: 1px">
+                Lorem ipsum dolora
+              </span>
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; color: var(--color-text-secondary); display: block; height: 16px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 16px"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="align-items: center; border-bottom-color: var(--color-palette-14); border-bottom-style: solid; border-bottom-width: 1px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 8px 12px; height: 34px; justify-content: space-between; margin-left: -16px; margin-right: -16px; width: 696px">
+      <div style="box-sizing: border-box; display: block; flex-shrink: 0; height: 33px; padding-left: var(--space-12); width: 154px">
+        <div style="box-sizing: border-box; display: block; height: 33px; width: 130px">
+          <div role="tablist" style="box-sizing: border-box; display: flex; height: 33px; justify-content: space-between; width: 130px">
+            <div style="box-sizing: border-box; display: flex; gap: var(--space-11); height: 33px; width: 130px">
+              <button data-ref="header-5-p5" aria-selected="true" data-state="active" role="tab" type="button" style="border-bottom-color: var(--color-palette-7); border-bottom-style: solid; border-bottom-width: 2px; border-top-color: rgba(0, 0, 0, 0); border-top-style: solid; border-top-width: 2px; box-sizing: border-box; color: var(--color-palette-2); cursor: pointer; display: block; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 34px; line-height: var(--font-line-height-5); margin-bottom: -1px; text-align: center; width: 51px">
+                <div style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); box-sizing: border-box; display: flex; gap: var(--space-3); height: 26px; margin-bottom: var(--space-3); margin-left: -8px; margin-right: -8px; padding-bottom: var(--space-3); padding-left: var(--space-5); padding-right: var(--space-5); padding-top: var(--space-3); width: 67px">
+                  Lorem i
+                </div>
+              </button>
+              <button data-ref="header-5-p6" aria-selected="false" data-state="inactive" role="tab" type="button" style="border-bottom-color: rgba(0, 0, 0, 0); border-bottom-style: solid; border-bottom-width: 2px; border-top-color: rgba(0, 0, 0, 0); border-top-style: solid; border-top-width: 2px; box-sizing: border-box; color: var(--color-text-secondary); cursor: pointer; display: block; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 34px; line-height: var(--font-line-height-5); margin-bottom: -1px; text-align: center; width: 59px">
+                <div style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); box-sizing: border-box; display: flex; gap: var(--space-3); height: 26px; margin-bottom: var(--space-3); margin-left: -8px; margin-right: -8px; padding-bottom: var(--space-3); padding-left: var(--space-5); padding-right: var(--space-5); padding-top: var(--space-3); width: 75px">
+                  <span style="align-items: center; box-sizing: border-box; display: flex; gap: var(--space-4); height: 18px; width: 59px">
+                    Lorem ip
+                  </span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="box-sizing: border-box; display: block; height: 24px; margin-left: var(--space-23); padding-right: var(--space-9); width: 308px">
+        <div style="align-items: center; box-sizing: border-box; display: flex; height: 24px; width: 292px">
+          <div style="align-items: center; box-sizing: border-box; display: flex; flex-shrink: 0; gap: var(--space-2); height: 24px; width: 111px">
+            <span aria-label="Lorem ipsum d" role="img" style="align-items: center; box-sizing: border-box; color: var(--color-palette-9); display: flex; font-size: var(--font-size-200); font-weight: var(--font-weight-500); height: 24px; line-height: var(--font-line-height-3); white-space: nowrap; width: 85px">
+              <span style="box-sizing: border-box; display: block; height: 16px; width: 85px">
+                Lorem ipsum do
+              </span>
+            </span>
+            <button data-ref="header-5-p7" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); bottom: 0px; box-sizing: border-box; color: var(--color-palette-2); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 24px; justify-content: center; left: 0px; line-height: var(--font-line-height-5); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 24px">
+              <span style="bottom: 12.5px; box-sizing: border-box; display: block; height: 1px; left: 12.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 12.5px; top: 12.5px; white-space: nowrap; width: 1px">
+                Lorem ipsuma
+              </span>
+              <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 12px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 12px"></span>
+            </button>
+          </div>
+          <hr style="background-color: var(--color-palette-14); display: block; flex-shrink: 0; height: 16px; margin-left: var(--space-3); margin-right: var(--space-5); width: 1px">
+          <div data-state="closed" style="box-sizing: border-box; display: block; height: 24px; width: 120px">
+            <button data-ref="header-5-p8" aria-expanded="false" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 24px; justify-content: center; left: 0px; line-height: var(--font-line-height-5); padding-left: var(--space-5); padding-right: var(--space-5); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 120px">
+              Lorem ipsum d
+              <div style="box-sizing: border-box; display: block; flex-shrink: 0; height: 12px; margin-left: var(--space-3); width: 12px">
+                <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 12px; overflow-x: hidden; overflow-y: hidden; transition-duration: 0.15s; transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); vertical-align: middle; width: 12px"></span>
+              </div>
+            </button>
+          </div>
+          <button data-ref="header-5-p9" aria-expanded="false" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 24px; justify-content: center; left: 0px; line-height: var(--font-line-height-5); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 24px">
+            <span style="bottom: 12.5px; box-sizing: border-box; display: block; height: 1px; left: 12.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 12.5px; top: 12.5px; white-space: nowrap; width: 1px">
+              Lorem i
+            </span>
+            <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 12px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 12px"></span>
+          </button>
+          <button data-ref="header-5-p10" aria-expanded="false" data-state="closed" type="button" style="align-items: center; border-bottom-left-radius: var(--radius-2); border-bottom-right-radius: var(--radius-2); border-top-left-radius: var(--radius-2); border-top-right-radius: var(--radius-2); bottom: 0px; box-sizing: border-box; color: var(--color-palette-6); cursor: pointer; display: flex; flex-shrink: 0; font-size: var(--font-size-200); font-weight: var(--font-weight-600); height: 24px; justify-content: center; left: 0px; line-height: var(--font-line-height-5); position: relative; right: 0px; text-align: center; top: 0px; transition-duration: 0.15s; transition-property: color, background-color, border-color, -webkit-text-decoration-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); width: 24px">
+            <span style="bottom: 12.5px; box-sizing: border-box; display: block; height: 1px; left: 12.5px; margin-bottom: -1px; margin-left: -1px; margin-right: -1px; margin-top: -1px; overflow-x: hidden; overflow-y: hidden; position: absolute; right: 12.5px; top: 12.5px; white-space: nowrap; width: 1px">
+              Lorem ipsum dolora
+            </span>
+            <span class="ref-media" data-media="svg" style="box-sizing: border-box; display: block; height: 12px; overflow-x: hidden; overflow-y: hidden; vertical-align: middle; width: 12px"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+</div></div>
+</section>
+</body>
+</html>

@@ -1,0 +1,972 @@
+<!doctype html>
+<html lang="es" data-sample-pages="5">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visor de PDF · vista de ejemplo</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+/* Todos los valores visuales vienen de tokens.css.
+   Lo único escrito a mano es maquetación (las tres variables --layout-*,
+   el punto de corte del @media, 0, 100%, fr, dvh), duraciones y palabras
+   clave sin valor propio (transparent, currentColor, none, inherit). */
+:root {
+  --layout-sidebar: 270px;
+  --layout-card: 560px;
+  --layout-list-max: 40dvh;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+
+body {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-600);
+  font-weight: var(--font-weight-400);
+  line-height: var(--font-line-height-14);
+}
+
+h1, h2, p, ol { margin: 0; padding: 0; }
+ol { list-style: none; }
+button, a, input { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+
+.sr-only {
+  position: absolute;
+  width: var(--space-1);
+  height: var(--space-1);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+:focus-visible {
+  outline: var(--space-2) solid var(--color-palette-4);
+  outline-offset: var(--space-2);
+}
+h2[tabindex="-1"]:focus-visible { outline: none; }
+
+svg.icon {
+  width: var(--space-17);
+  height: var(--space-17);
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: var(--space-2);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Estructura ---------- */
+.app {
+  display: grid;
+  grid-template-columns: var(--layout-sidebar) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas: "side bar" "side stage";
+  height: 100dvh;
+}
+.app[data-panel="closed"] { grid-template-columns: minmax(0, 1fr); grid-template-areas: "bar" "stage"; }
+.app[data-panel="closed"] .side { display: none; }
+
+/* ---------- Panel lateral ---------- */
+.side {
+  grid-area: side;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--color-primary);
+  border-right: var(--space-1) solid var(--color-palette-18);
+}
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0 var(--space-15);
+  padding: var(--space-23) var(--space-8) var(--space-17);
+  border-bottom: var(--space-1) solid var(--color-palette-18);
+}
+.brand-name {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-900);
+  font-weight: var(--font-weight-700);
+  letter-spacing: var(--font-letter-spacing-7);
+}
+.brand-sub {
+  font-size: var(--font-size-300);
+  line-height: var(--font-line-height-8);
+  color: var(--color-text-secondary);
+}
+.side-label {
+  padding: var(--space-17) var(--space-22) var(--space-8);
+  font-size: var(--font-size-300);
+  font-weight: var(--font-weight-600);
+  line-height: var(--font-line-height-8);
+  letter-spacing: var(--font-letter-spacing-12);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+.pages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-15) var(--space-15);
+}
+.page-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-13);
+  width: 100%;
+  padding: var(--space-11) var(--space-15);
+  border: 0;
+  border-radius: var(--radius-4);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-600);
+  font-weight: var(--font-weight-500);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+.page-item:hover { background: var(--color-palette-2); color: var(--color-text-primary); }
+.page-item[aria-current="page"] {
+  background: var(--color-palette-7);
+  color: var(--color-palette-4);
+  font-weight: var(--font-weight-700);
+}
+.page-item[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: var(--space-11);
+  bottom: var(--space-11);
+  width: var(--space-3);
+  border-radius: var(--radius-10);
+  background: var(--color-palette-4);
+}
+.side-empty, .side-note {
+  margin: 0 var(--space-15);
+  padding: var(--space-13) var(--space-8);
+  font-size: var(--font-size-400);
+  line-height: var(--font-line-height-10);
+  color: var(--color-text-secondary);
+}
+.side-note { border-top: var(--space-1) solid var(--color-palette-18); }
+
+/* ---------- Barra superior ---------- */
+.bar {
+  grid-area: bar;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-11) var(--space-13);
+  padding: var(--space-15) var(--space-23);
+  background: var(--color-primary);
+  border-bottom: var(--space-1) solid var(--color-palette-18);
+}
+.doc {
+  flex: 1 1 var(--space-39);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.eyebrow {
+  font-size: var(--font-size-300);
+  font-weight: var(--font-weight-700);
+  line-height: var(--font-line-height-8);
+  letter-spacing: var(--font-letter-spacing-12);
+  text-transform: uppercase;
+  color: var(--color-palette-4);
+}
+.doc-name {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-1100);
+  font-weight: var(--font-weight-700);
+  line-height: var(--font-line-height-15);
+  letter-spacing: var(--font-letter-spacing-7);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8) var(--space-11);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  min-height: var(--space-28);
+  padding: var(--space-6) var(--space-15);
+  border: var(--space-1) solid var(--color-palette-18);
+  border-radius: var(--radius-10);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-2);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-600);
+  font-weight: var(--font-weight-600);
+  line-height: var(--font-line-height-14);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+.btn:hover { background: var(--color-palette-19); border-color: var(--color-palette-17); }
+.btn-icon { width: var(--space-28); padding: 0; }
+.btn-cta {
+  border-color: var(--color-palette-4);
+  background: var(--color-palette-4);
+  box-shadow: var(--shadow-6);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-700);
+}
+.btn-cta:hover {
+  background: var(--color-palette-4);
+  border-color: var(--color-palette-4);
+  box-shadow: var(--shadow-6), var(--shadow-1);
+}
+.btn-tint, .btn[aria-pressed="true"] {
+  border-color: var(--color-palette-10);
+  background: var(--color-palette-7);
+  box-shadow: none;
+  color: var(--color-palette-4);
+  font-weight: var(--font-weight-700);
+}
+.btn-tint:hover, .btn[aria-pressed="true"]:hover {
+  background: var(--color-palette-7);
+  border-color: var(--color-palette-11);
+}
+.btn:disabled, .btn[aria-disabled="true"] {
+  border-color: var(--color-palette-18);
+  background: var(--color-palette-19);
+  box-shadow: none;
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+}
+
+.group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border: var(--space-1) solid var(--color-palette-18);
+  border-radius: var(--radius-10);
+  background: var(--color-palette-20);
+}
+.group .btn {
+  min-height: var(--space-26);
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+.group .btn-icon { width: var(--space-26); }
+.group .btn:hover:not(:disabled) { background: var(--color-palette-19); }
+.group .btn:disabled { background: transparent; }
+.group .btn[aria-pressed="true"] { background: var(--color-palette-7); border-color: var(--color-palette-10); }
+.readout {
+  padding: 0 var(--space-8);
+  font-size: var(--font-size-600);
+  font-weight: var(--font-weight-600);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  text-align: center;
+}
+.readout .total { color: var(--color-text-secondary); font-weight: var(--font-weight-400); }
+
+/* ---------- Área del documento ---------- */
+.stage {
+  grid-area: stage;
+  position: relative;
+  min-height: 0;
+  display: flex;
+  padding: var(--space-23);
+  background: var(--color-surface);
+}
+.sheet {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: var(--space-1) solid var(--color-palette-18);
+  border-radius: var(--radius-9);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-9);
+}
+.frame { flex: 1; min-height: 0; display: flex; background: var(--color-palette-19); }
+.frame iframe { flex: 1; width: 100%; height: 100%; border: 0; }
+.caption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-13);
+  justify-content: space-between;
+  padding: var(--space-13) var(--space-17);
+  border-top: var(--space-1) solid var(--color-palette-18);
+  background: var(--color-palette-20);
+  font-size: var(--font-size-400);
+  line-height: var(--font-line-height-10);
+  color: var(--color-text-secondary);
+}
+
+.state {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+.card {
+  width: 100%;
+  max-width: var(--layout-card);
+  padding: var(--space-28);
+  border: var(--space-1) solid var(--color-palette-18);
+  border-radius: var(--radius-9);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-8);
+}
+.mark {
+  width: var(--space-28);
+  height: var(--space-3);
+  margin-bottom: var(--space-15);
+  border-radius: var(--radius-10);
+  background: var(--color-palette-4);
+}
+.card h2 {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-1600);
+  font-weight: var(--font-weight-800);
+  line-height: var(--font-line-height-23);
+  letter-spacing: var(--font-letter-spacing-5);
+}
+.card p {
+  margin-top: var(--space-11);
+  font-size: var(--font-size-1000);
+  line-height: var(--font-line-height-18);
+  color: var(--color-text-secondary);
+}
+.card p strong { color: var(--color-text-primary); font-weight: var(--font-weight-600); overflow-wrap: anywhere; }
+.dropzone {
+  margin-top: var(--space-21);
+  padding: var(--space-23) var(--space-17);
+  border: var(--space-1) dashed var(--color-palette-17);
+  border-radius: var(--radius-7);
+  background: var(--color-palette-20);
+  font-size: var(--font-size-600);
+  line-height: var(--font-line-height-14);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-11); margin-top: var(--space-21); }
+.badge {
+  display: inline-flex;
+  margin-bottom: var(--space-13);
+  padding: var(--space-3) var(--space-11);
+  border: var(--space-1) solid var(--color-palette-17);
+  border-radius: var(--radius-10);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-2);
+  font-size: var(--font-size-400);
+  font-weight: var(--font-weight-700);
+  line-height: var(--font-line-height-10);
+  color: var(--color-text-primary);
+}
+.state-loading { position: absolute; inset: 0; z-index: 1; padding: var(--space-23); background: var(--color-surface); }
+.state-loading .card { display: flex; align-items: center; gap: var(--space-15); box-shadow: var(--shadow-7); }
+.state-loading .card p { margin: 0; }
+.spinner {
+  flex: none;
+  width: var(--space-23);
+  height: var(--space-23);
+  border: var(--space-2) solid var(--color-palette-9);
+  border-top-color: var(--color-palette-4);
+  border-radius: var(--radius-full);
+  animation: spin 800ms linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation-duration: 4s; }
+  .btn, .page-item { transition: none; }
+}
+
+.drop-overlay {
+  position: absolute;
+  inset: var(--space-13);
+  z-index: 2;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-17);
+  border: var(--space-2) dashed var(--color-palette-4);
+  border-radius: var(--radius-9);
+  background: var(--color-primary);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-1400);
+  font-weight: var(--font-weight-700);
+  line-height: var(--font-line-height-23);
+  color: var(--color-palette-4);
+  text-align: center;
+}
+.app[data-drag="on"] .drop-overlay { display: flex; }
+
+/* ---------- Móvil ---------- */
+@media (max-width: 820px) {
+  .app,
+  .app[data-panel="closed"] {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr);
+    grid-template-areas: "bar" "side" "stage";
+  }
+  .side { border-right: 0; border-bottom: var(--space-1) solid var(--color-palette-18); max-height: var(--layout-list-max); }
+  .brand { display: none; }
+  .bar { padding: var(--space-13) var(--space-17); }
+  .doc { flex-basis: 0; }
+  .controls { flex: 1 1 100%; order: 3; }
+  #open { order: 2; }
+  .btn { min-height: var(--space-31); }
+  .btn-icon { width: var(--space-31); }
+  .group .btn { min-height: var(--space-29); }
+  .group .btn-icon { width: var(--space-29); }
+  .optional { display: none; }
+  .stage { padding: var(--space-13); }
+  .card { padding: var(--space-23); }
+  .card h2 { font-size: var(--font-size-1400); }
+}
+</style>
+</head>
+<body>
+<div class="app" id="app" data-state="loading" data-panel="open">
+
+  <aside class="side" id="panel" aria-label="Páginas del documento">
+    <div class="brand">
+      <span class="brand-name">CatScribe Translate</span>
+      <span class="brand-sub">Visor de PDF — vista de ejemplo</span>
+    </div>
+    <h2 class="side-label" id="pages-label">Páginas</h2>
+    <ol class="pages" id="pages" aria-labelledby="pages-label"></ol>
+    <p class="side-empty" id="pages-empty" hidden></p>
+    <p class="side-note" id="pages-note" hidden>La página marcada es la última a la que saltaste desde aquí. El visor nativo del navegador no informa de su desplazamiento, así que no se actualiza al hacer scroll dentro del documento.</p>
+  </aside>
+
+  <header class="bar">
+    <button class="btn btn-icon" id="toggle-panel" type="button" aria-controls="panel" aria-expanded="true" aria-label="Ocultar el panel de páginas" title="Panel de páginas">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></svg>
+    </button>
+
+    <div class="doc">
+      <span class="eyebrow">Visor · PDF</span>
+      <h1 class="doc-name" id="doc-name">Sin documento</h1>
+    </div>
+
+    <div class="controls">
+      <div class="group" id="pager" role="group" aria-label="Página" hidden>
+        <button class="btn btn-icon" id="prev" type="button" aria-label="Página anterior" title="Página anterior">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <span class="readout" id="page-readout"></span>
+        <button class="btn btn-icon" id="next" type="button" aria-label="Página siguiente" title="Página siguiente">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+
+      <div class="group" id="zoom" role="group" aria-label="Zoom" hidden>
+        <button class="btn btn-icon" id="zoom-out" type="button" aria-label="Reducir zoom" title="Reducir zoom">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg>
+        </button>
+        <span class="readout" id="zoom-readout"></span>
+        <button class="btn btn-icon" id="zoom-in" type="button" aria-label="Aumentar zoom" title="Aumentar zoom">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <button class="btn" id="zoom-fit" type="button" aria-pressed="true" aria-label="Ajustar al ancho" title="Ajustar al ancho">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg>
+          <span class="optional">Ajustar al ancho</span>
+        </button>
+      </div>
+
+      <a class="btn" id="download" target="_blank" rel="noopener" aria-label="Descargar el PDF" title="Descargar el PDF" hidden>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>
+        <span class="optional" id="download-label">Descargar</span>
+      </a>
+      <button class="btn btn-icon" id="close" type="button" aria-label="Cerrar el documento" title="Cerrar el documento" hidden>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <button class="btn btn-cta" id="open" type="button">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/></svg>
+      Abrir PDF
+    </button>
+    <input class="sr-only" id="file" type="file" accept="application/pdf,.pdf" tabindex="-1" aria-hidden="true">
+  </header>
+
+  <main class="stage" id="stage">
+    <section class="state state-empty" id="state-empty" aria-labelledby="empty-title" hidden>
+      <div class="card">
+        <div class="mark"></div>
+        <h2 id="empty-title" tabindex="-1">Abre un PDF para empezar</h2>
+        <p>El archivo se lee en este navegador y no sale de tu equipo.</p>
+        <div class="dropzone">Arrastra un PDF a esta ventana, o elígelo con el botón.</div>
+        <div class="actions">
+          <button class="btn btn-cta" type="button" data-action="open">Elegir un PDF</button>
+          <button class="btn" type="button" data-action="sample">Abrir el ejemplo</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="state state-loading" id="state-loading" role="status">
+      <div class="card">
+        <div class="spinner" aria-hidden="true"></div>
+        <p id="loading-text">Cargando el documento…</p>
+      </div>
+    </section>
+
+    <section class="state state-error" id="state-error" aria-labelledby="error-title" hidden>
+      <div class="card" role="alert">
+        <span class="badge">No se pudo abrir</span>
+        <h2 id="error-title" tabindex="-1">Ese archivo no es un PDF</h2>
+        <p id="error-text"></p>
+        <div class="actions">
+          <button class="btn btn-cta" type="button" data-action="open">Elegir otro archivo</button>
+          <button class="btn" type="button" id="error-back" data-action="back">Volver al documento</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="sheet" aria-label="Documento" hidden>
+      <div class="frame" id="frame"></div>
+      <div class="caption"><span id="caption-name"></span><span id="caption-meta"></span></div>
+    </section>
+
+    <div class="drop-overlay" id="drop-overlay" aria-hidden="true">Suelta el PDF para abrirlo</div>
+  </main>
+
+  <div class="sr-only" id="live" aria-live="polite"></div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  const SAMPLE = {
+    url: 'ejemplo.pdf',
+    name: 'ejemplo.pdf',
+    // Con file:// la página no puede leer los bytes de ejemplo.pdf (fetch está
+    // bloqueado), así que el total del ejemplo viene declarado en <html>.
+    pages: Number(document.documentElement.dataset.samplePages) || null,
+  };
+  const ZOOM_STEPS = [50, 75, 100, 125, 150, 200, 300];
+  const LOAD_FALLBACK_MS = 4000;
+
+  const $ = (id) => document.getElementById(id);
+  const app = $('app');
+  const el = {
+    panel: $('panel'), togglePanel: $('toggle-panel'), pages: $('pages'),
+    pagesEmpty: $('pages-empty'), pagesNote: $('pages-note'), docName: $('doc-name'),
+    pager: $('pager'), prev: $('prev'), next: $('next'), pageReadout: $('page-readout'),
+    zoom: $('zoom'), zoomOut: $('zoom-out'), zoomIn: $('zoom-in'), zoomFit: $('zoom-fit'),
+    zoomReadout: $('zoom-readout'), download: $('download'), close: $('close'), open: $('open'),
+    file: $('file'), empty: $('state-empty'), loading: $('state-loading'), error: $('state-error'),
+    sheet: $('sheet'), frame: $('frame'), loadingText: $('loading-text'), errorText: $('error-text'),
+    errorBack: $('error-back'), captionName: $('caption-name'), captionMeta: $('caption-meta'),
+    live: $('live'),
+  };
+
+  /** doc: { name, url, size|null, pages|null, isBlob } */
+  const view = { state: 'loading', doc: null, page: 1, zoom: 'fit', job: 0 };
+
+  // ---------- Lectura del PDF (solo para validar y contar páginas) ----------
+
+  function isPdf(bytes) {
+    const head = new TextDecoder('latin1').decode(bytes.subarray(0, 1024));
+    return head.includes('%PDF-');
+  }
+
+  // Diccionario << ... >> que contiene la posición dada.
+  function enclosingDict(text, index) {
+    let depth = 0;
+    let start = -1;
+    for (let i = index; i >= 1; i -= 1) {
+      const pair = text[i - 1] + text[i];
+      if (pair === '>>') { depth += 1; i -= 1; } else if (pair === '<<') {
+        if (depth === 0) { start = i - 1; break; }
+        depth -= 1; i -= 1;
+      }
+    }
+    if (start < 0) return null;
+    depth = 0;
+    for (let i = start; i < text.length - 1; i += 1) {
+      const pair = text[i] + text[i + 1];
+      if (pair === '<<') { depth += 1; i += 1; } else if (pair === '>>') {
+        depth -= 1; i += 1;
+        if (depth === 0) return text.slice(start, i + 1);
+      }
+    }
+    return null;
+  }
+
+  function pageTreeCount(text) {
+    let best = null;
+    const marker = /\/Type\s*\/Pages\b/g;
+    let match;
+    while ((match = marker.exec(text)) !== null) {
+      const dict = enclosingDict(text, match.index);
+      const count = dict && /\/Count\s+(\d+)/.exec(dict);
+      if (count) best = Math.max(best ?? 0, Number(count[1]));
+    }
+    return best;
+  }
+
+  async function inflate(bytes) {
+    const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate'));
+    return new Uint8Array(await new Response(stream).arrayBuffer());
+  }
+
+  // Los PDF 1.5+ pueden guardar el árbol de páginas en flujos comprimidos.
+  async function objectStreamsText(bytes, text) {
+    if (typeof DecompressionStream !== 'function') return '';
+    const latin1 = new TextDecoder('latin1');
+    const parts = [];
+    let from = 0;
+    for (let guard = 0; guard < 5000; guard += 1) {
+      const at = text.indexOf('/ObjStm', from);
+      if (at < 0) break;
+      const keyword = text.indexOf('stream', at);
+      if (keyword < 0) break;
+      from = keyword + 6;
+      const dict = text.slice(text.lastIndexOf('obj', at), keyword);
+      if (!dict.includes('/FlateDecode')) continue;
+      let start = keyword + 6;
+      if (text[start] === '\r') start += 1;
+      if (text[start] === '\n') start += 1;
+      const length = /\/Length\s+(\d+)(?!\s+\d+\s+R)/.exec(dict);
+      let end = length ? start + Number(length[1]) : text.indexOf('endstream', start);
+      if (end < 0 || end > bytes.length) continue;
+      if (!length) while (end > start && (bytes[end - 1] === 10 || bytes[end - 1] === 13)) end -= 1;
+      try {
+        parts.push(latin1.decode(await inflate(bytes.subarray(start, end))));
+      } catch {
+        // Flujo cifrado o con otro filtro: se ignora.
+      }
+      from = end;
+    }
+    return parts.join('\n');
+  }
+
+  async function countPages(bytes) {
+    const text = new TextDecoder('latin1').decode(bytes);
+    const direct = pageTreeCount(text);
+    if (direct) return direct;
+    const packed = await objectStreamsText(bytes, text);
+    const fromStreams = pageTreeCount(packed);
+    if (fromStreams) return fromStreams;
+    const loose = (text + packed).match(/\/Type\s*\/Page(?![A-Za-z])/g);
+    return loose ? loose.length : null;
+  }
+
+  // ---------- Pintado ----------
+
+  function formatSize(bytes) {
+    if (bytes == null) return null;
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+    return `${(bytes / 1024 / 1024).toFixed(1).replace('.', ',')} MB`;
+  }
+
+  function announce(message) { el.live.textContent = message; }
+
+  function setState(state) {
+    view.state = state;
+    app.dataset.state = state;
+    el.empty.hidden = state !== 'empty';
+    el.loading.hidden = state !== 'loading';
+    el.error.hidden = state !== 'error';
+    // Mientras carga, el iframe ya está montado y con tamaño detrás del aviso.
+    el.sheet.hidden = state !== 'ready' && state !== 'loading';
+    render();
+  }
+
+  function render() {
+    const { doc } = view;
+    const ready = view.state === 'ready' && doc !== null;
+    const paged = ready && doc.pages !== null;
+
+    el.docName.textContent = doc ? doc.name : 'Sin documento';
+    el.docName.title = doc ? doc.name : '';
+    document.title = doc ? `${doc.name} · Visor de PDF` : 'Visor de PDF · vista de ejemplo';
+
+    // Sin total de páginas no se muestran controles de página: no habría
+    // forma de saber cuándo "siguiente" deja de tener efecto.
+    el.pager.hidden = !paged;
+    el.zoom.hidden = !ready;
+    el.download.hidden = !ready;
+    el.close.hidden = !doc || view.state === 'loading';
+
+    if (paged) {
+      const word = document.createElement('span');
+      word.className = 'optional';
+      word.textContent = 'Página ';
+      const total = document.createElement('span');
+      total.className = 'total';
+      total.textContent = `de ${doc.pages}`;
+      el.pageReadout.replaceChildren(word, `${view.page} `, total);
+      el.pageReadout.setAttribute('aria-label', `Página ${view.page} de ${doc.pages}`);
+      el.prev.disabled = view.page <= 1;
+      el.next.disabled = view.page >= doc.pages;
+    }
+    if (ready) {
+      const fit = view.zoom === 'fit';
+      el.zoomReadout.textContent = fit ? 'Ancho' : `${view.zoom} %`;
+      el.zoomFit.setAttribute('aria-pressed', String(fit));
+      el.zoomOut.disabled = !fit && view.zoom <= ZOOM_STEPS[0];
+      el.zoomIn.disabled = !fit && view.zoom >= ZOOM_STEPS[ZOOM_STEPS.length - 1];
+      // Un PDF abierto por URL file:// no se puede descargar desde la página
+      // (el navegador ignora "download"): se ofrece abrirlo en otra pestaña.
+      const label = doc.isBlob || location.protocol !== 'file:' ? 'Descargar' : 'Abrir aparte';
+      const hint = label === 'Descargar' ? 'Descargar el PDF' : 'Abrir el PDF en otra pestaña para guardarlo desde ahí';
+      el.download.href = doc.url;
+      if (label === 'Descargar') el.download.download = doc.name; else el.download.removeAttribute('download');
+      el.download.title = hint;
+      el.download.setAttribute('aria-label', hint);
+      $('download-label').textContent = label;
+      el.captionName.textContent = doc.name;
+      el.captionMeta.textContent = [
+        doc.pages !== null ? `${doc.pages} ${doc.pages === 1 ? 'página' : 'páginas'}` : null,
+        formatSize(doc.size),
+      ].filter(Boolean).join(' · ');
+    }
+
+    el.pages.hidden = !paged;
+    el.pagesNote.hidden = !paged;
+    el.pagesEmpty.hidden = paged;
+    if (!paged) {
+      if (ready) el.pagesEmpty.textContent = 'No se pudo leer cuántas páginas tiene este PDF, así que aquí no hay lista ni controles de página. Usa el desplazamiento del propio documento.';
+      else if (view.state === 'loading') el.pagesEmpty.textContent = 'Cargando…';
+      else if (view.state === 'error' && doc) el.pagesEmpty.textContent = 'La lista de páginas vuelve cuando regreses al documento o abras otro.';
+      else el.pagesEmpty.textContent = 'Aquí aparecerán las páginas cuando abras un documento.';
+      el.pages.replaceChildren();
+      return;
+    }
+    if (el.pages.childElementCount !== doc.pages) {
+      const items = [];
+      for (let number = 1; number <= doc.pages; number += 1) {
+        const item = document.createElement('li');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'page-item';
+        button.dataset.page = String(number);
+        button.innerHTML = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v4h4"/></svg>';
+        button.append(`Página ${number}`);
+        item.append(button);
+        items.push(item);
+      }
+      el.pages.replaceChildren(...items);
+    }
+    for (const button of el.pages.querySelectorAll('.page-item')) {
+      if (Number(button.dataset.page) === view.page) button.setAttribute('aria-current', 'page');
+      else button.removeAttribute('aria-current');
+    }
+  }
+
+  // ---------- Visor nativo ----------
+
+  // El visor nativo solo se controla con el fragmento de la URL (#page, #zoom,
+  // #view), y solo lo lee al cargar: cada cambio vuelve a montar el iframe.
+  function frameUrl() {
+    const zoom = view.zoom === 'fit' ? 'view=FitH' : `zoom=${view.zoom}`;
+    return `${view.doc.url}#page=${view.page}&${zoom}&toolbar=0&navpanes=0`;
+  }
+
+  function mountFrame(onLoad) {
+    const frame = document.createElement('iframe');
+    frame.title = `Documento: ${view.doc.name}`;
+    if (onLoad) frame.addEventListener('load', onLoad, { once: true });
+    frame.src = frameUrl();
+    el.frame.replaceChildren(frame);
+  }
+
+  function releaseDoc(doc) {
+    if (doc && doc.isBlob) URL.revokeObjectURL(doc.url);
+  }
+
+  function showDoc(doc) {
+    const previous = view.doc;
+    view.doc = doc;
+    view.page = 1;
+    view.zoom = 'fit';
+    view.job += 1;
+    const job = view.job;
+    el.loadingText.textContent = `Cargando ${doc.name}…`;
+    setState('loading');
+    const done = () => {
+      if (job !== view.job || view.state !== 'loading') return;
+      setState('ready');
+      announce(`${doc.name} abierto${doc.pages ? `, ${doc.pages} páginas` : ''}.`);
+    };
+    mountFrame(done);
+    setTimeout(done, LOAD_FALLBACK_MS);
+    releaseDoc(previous);
+  }
+
+  function showError(name) {
+    view.job += 1;
+    el.errorText.replaceChildren();
+    const strong = document.createElement('strong');
+    strong.textContent = name;
+    el.errorText.append(strong, ' no tiene formato PDF. Elige un archivo .pdf.');
+    el.errorBack.hidden = view.doc === null;
+    setState('error');
+    $('error-title').focus();
+  }
+
+  async function openFile(file) {
+    view.job += 1;
+    const job = view.job;
+    el.loadingText.textContent = `Leyendo ${file.name}…`;
+    setState('loading');
+    let bytes;
+    try {
+      bytes = new Uint8Array(await file.arrayBuffer());
+    } catch {
+      if (job === view.job) showError(file.name);
+      return;
+    }
+    if (job !== view.job) return;
+    if (!isPdf(bytes)) { showError(file.name); return; }
+    let pages = null;
+    try { pages = await countPages(bytes); } catch { pages = null; }
+    if (job !== view.job) return;
+    const url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+    showDoc({ name: file.name, url, size: bytes.length, pages, isBlob: true });
+  }
+
+  async function openSample() {
+    if (location.protocol !== 'file:') {
+      // Servido por HTTP sí se pueden leer los bytes: mismo camino que un archivo local.
+      try {
+        const response = await fetch(SAMPLE.url);
+        if (response.ok) {
+          await openFile(new File([await response.blob()], SAMPLE.name, { type: 'application/pdf' }));
+          return;
+        }
+      } catch {
+        // Se sigue con la URL directa.
+      }
+    }
+    showDoc({ name: SAMPLE.name, url: SAMPLE.url, size: null, pages: SAMPLE.pages, isBlob: false });
+  }
+
+  function closeDoc() {
+    view.job += 1;
+    releaseDoc(view.doc);
+    view.doc = null;
+    el.frame.replaceChildren();
+    setState('empty');
+    announce('Documento cerrado.');
+    $('empty-title').focus();
+  }
+
+  function goToPage(page) {
+    const { doc } = view;
+    if (view.state !== 'ready' || !doc || doc.pages === null) return;
+    const target = Math.min(doc.pages, Math.max(1, page));
+    if (target === view.page) return;
+    view.page = target;
+    mountFrame();
+    render();
+    announce(`Página ${target} de ${doc.pages}.`);
+  }
+
+  function setZoom(zoom) {
+    if (view.state !== 'ready' || zoom === view.zoom) return;
+    view.zoom = zoom;
+    mountFrame();
+    render();
+    announce(zoom === 'fit' ? 'Zoom ajustado al ancho.' : `Zoom ${zoom} %.`);
+  }
+
+  function stepZoom(direction) {
+    // "Ajustar al ancho" no tiene un porcentaje conocido: se parte de 100 %.
+    const current = view.zoom === 'fit' ? 100 : view.zoom;
+    const index = ZOOM_STEPS.indexOf(current) + direction;
+    if (index < 0 || index >= ZOOM_STEPS.length) return;
+    setZoom(ZOOM_STEPS[index]);
+  }
+
+  function setPanel(open) {
+    app.dataset.panel = open ? 'open' : 'closed';
+    el.togglePanel.setAttribute('aria-expanded', String(open));
+    el.togglePanel.setAttribute('aria-label', open ? 'Ocultar el panel de páginas' : 'Mostrar el panel de páginas');
+  }
+
+  // ---------- Eventos ----------
+
+  el.togglePanel.addEventListener('click', () => setPanel(app.dataset.panel !== 'open'));
+  el.open.addEventListener('click', () => el.file.click());
+  el.close.addEventListener('click', closeDoc);
+  el.prev.addEventListener('click', () => goToPage(view.page - 1));
+  el.next.addEventListener('click', () => goToPage(view.page + 1));
+  el.zoomOut.addEventListener('click', () => stepZoom(-1));
+  el.zoomIn.addEventListener('click', () => stepZoom(1));
+  el.zoomFit.addEventListener('click', () => setZoom('fit'));
+  el.pages.addEventListener('click', (event) => {
+    const button = event.target.closest('.page-item');
+    if (button) goToPage(Number(button.dataset.page));
+  });
+  el.file.addEventListener('change', () => {
+    const [file] = el.file.files;
+    el.file.value = '';
+    if (file) openFile(file);
+  });
+  $('stage').addEventListener('click', (event) => {
+    const action = event.target.closest('[data-action]')?.dataset.action;
+    if (action === 'open') el.file.click();
+    if (action === 'sample') openSample();
+    if (action === 'back' && view.doc) { setState('ready'); el.open.focus(); }
+  });
+
+  // Arrastrar y soltar. La capa cubre el iframe para que el visor nativo no
+  // se quede con el archivo soltado.
+  let dragDepth = 0;
+  const hasFiles = (event) => Array.from(event.dataTransfer?.types ?? []).includes('Files');
+  const endDrag = () => { dragDepth = 0; delete app.dataset.drag; };
+  window.addEventListener('dragenter', (event) => {
+    if (!hasFiles(event)) return;
+    event.preventDefault();
+    dragDepth += 1;
+    app.dataset.drag = 'on';
+  });
+  window.addEventListener('dragover', (event) => {
+    if (!hasFiles(event)) return;
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'copy';
+  });
+  window.addEventListener('dragleave', (event) => {
+    if (!hasFiles(event)) return;
+    dragDepth -= 1;
+    if (dragDepth <= 0) endDrag();
+  });
+  window.addEventListener('drop', (event) => {
+    if (!hasFiles(event)) return;
+    event.preventDefault();
+    endDrag();
+    const [file] = event.dataTransfer.files;
+    if (file) openFile(file);
+  });
+
+  // En móvil el panel empieza plegado para dejar sitio al documento.
+  if (window.matchMedia('(max-width: 820px)').matches) setPanel(false);
+  openSample();
+})();
+</script>
+</body>
+</html>
